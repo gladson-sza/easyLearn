@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f94916</color>
+    <color name="corLaranja">#f94916</color>
+    <color name="colorPrimaryDark">#b13f17</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="corCinza">#403f41</color>
+    <color name="corTitulo">#2c2c2d</color>
+    <color name="corInativo">#757575</color>
+    <color name="corSubtitulo">#868488</color>
+    <color name="corDescricao">#535155</color>
+    <color name="corLida">#98acb4</color>
+</resources>
