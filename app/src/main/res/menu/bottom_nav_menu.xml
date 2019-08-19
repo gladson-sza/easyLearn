@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_destaques"
+        android:icon="@drawable/ic_star_border_primary_24dp"
+        android:title="@string/destaques"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_meus_cursos"
+        android:icon="@drawable/ic_play_circle_outline_primary_24dp"
+        android:title="@string/meus_cursos"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_disciplinas"
+        android:icon="@drawable/ic_library_books_primary_24dp"
+        android:title="@string/disciplinas"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/navigation_mensagens"
+        android:icon="@drawable/ic_email_primary_24dp"
+        android:title="@string/mensagens"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/navigation_minha_conta"
+        android:icon="@drawable/ic_person_primary_24dp"
+        android:title="@string/minha_conta"
+        app:showAsAction="always" />
+
+</menu>
