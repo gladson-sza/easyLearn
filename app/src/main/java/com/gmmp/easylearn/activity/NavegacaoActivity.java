@@ -62,6 +62,15 @@ public class NavegacaoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navegacao);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        init();
+    }
+
+    private void init() {
+        // Inicia o primeiro fragment para exibição.
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frameContainer, new DestaquesFragment());
+        transaction.commit();
     }
 
 }
