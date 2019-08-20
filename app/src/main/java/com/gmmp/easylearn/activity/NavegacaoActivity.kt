@@ -60,10 +60,10 @@ class NavegacaoActivity : AppCompatActivity() {
         val navView = findViewById<BottomNavigationView>(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        init()
+        inicializar()
     }
 
-    private fun init() {
+    private fun inicializar() {
         // Inicia o primeiro fragment para exibição.
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.frameContainer, DestaquesFragment())
