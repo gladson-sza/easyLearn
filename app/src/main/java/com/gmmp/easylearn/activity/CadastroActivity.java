@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gmmp.easylearn.R;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText textNome;
@@ -29,6 +32,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText textConfirmarSenha;
     private CheckBox checkTermos;
     private Button buttonContinuar;
+    private TextView textLogin;
     private LinearLayout layoutGoogle;
     private FirebaseAuth firebaseAuth;
 
@@ -80,7 +84,18 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Inicializa o texto "clique aqui"
+        textLogin = findViewById(R.id.textLogin);
+        textLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_login);
+            }
+        });
     }
+
+
 
     public void registrarUsuario(String email, String senha) {
         firebaseAuth = FirebaseAuth.getInstance();
