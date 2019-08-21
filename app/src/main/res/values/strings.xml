@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">easyLearn</string>
+    <string name="app_name">easyLearning</string>
     <string name="title_activity_navegacao">NavegacaoActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
