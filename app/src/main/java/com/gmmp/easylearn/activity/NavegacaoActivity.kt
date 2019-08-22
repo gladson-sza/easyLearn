@@ -64,6 +64,9 @@ class NavegacaoActivity : AppCompatActivity() {
     }
 
     private fun inicializar() {
+        //Esconde a actionBar
+        supportActionBar?.hide()
+
         // Inicia o primeiro fragment para exibição.
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.frameContainer, DestaquesFragment())

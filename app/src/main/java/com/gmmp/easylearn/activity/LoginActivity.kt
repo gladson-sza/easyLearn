@@ -19,11 +19,12 @@ class LoginActivity : AppCompatActivity(){
     }
 
     fun inicializar() {
+        supportActionBar?.hide()
         //Inicializa o botão
         btnIniciarSessao = findViewById(R.id.buttonEntrar)
         btnIniciarSessao!!.setOnClickListener {
             //Abre tela de destaque
-            startActivity(Intent(applicationContext, DestaquesFragment::class.java))
+            startActivity(Intent(applicationContext, NavegacaoActivity::class.java))
         }
     }
 }

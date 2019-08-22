@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         buttonComecar = findViewById(R.id.buttonComecar)
         buttonComecar!!.setOnClickListener {
             //Abre tela de cadastro
-            startActivity(Intent(applicationContext, CadastroActivity::class.java))
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
         }
     }
 }
