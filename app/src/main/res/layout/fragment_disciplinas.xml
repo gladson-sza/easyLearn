@@ -93,18 +93,18 @@
                 android:textSize="26sp"
                 android:textColor="@color/colorTitulo"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
-
-            <ListView
-                android:id="@+id/listDisciplinas"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
 
-        </LinearLayout>
+                <ListView
+                    android:id="@+id/listDisciplinas"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
