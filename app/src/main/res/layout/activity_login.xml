@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:hint="Endereço de email"
                 android:background="@color/colorEditText"
-                android:inputType="textPassword"/>
+                android:inputType="textEmailAddress"/>
 
             <TextView
                 android:layout_width="match_parent"
