@@ -24,6 +24,8 @@ class MensagensAdapter(private val mensagenList: List<Mensagen>, private val con
     override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
         val (id, titulo, descricao, dataAtividade) = mensagenList[i]
 
+        myViewHolder.textViewDataAtividade.text = dataAtividade.toString()
+        myViewHolder.textViewAtividadeCanal.text = titulo
     }
 
     override fun getItemCount(): Int {
@@ -32,10 +34,10 @@ class MensagensAdapter(private val mensagenList: List<Mensagen>, private val con
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val thumbCanal: CircleImageView
-        private val textViewNomeCanal: TextView
-        private val textViewAtividadeCanal: TextView
-        private val textViewDataAtividade: TextView
+        val thumbCanal: CircleImageView
+        val textViewNomeCanal: TextView
+        val textViewAtividadeCanal: TextView
+        val textViewDataAtividade: TextView
 
         init {
             thumbCanal = itemView.findViewById(R.id.circleImageViewMensagemThumbCanal)

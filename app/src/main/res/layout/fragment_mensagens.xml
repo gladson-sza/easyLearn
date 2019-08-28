@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MensagensFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -93,22 +89,14 @@
                 android:textSize="26sp" />
 
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewMensagens"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
-
-                <ListView
-                    android:id="@+id/listMensagens"
-                    android:layout_width="match_parent"
-                    android:layout_height="500dp" />
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp" />
 
         </LinearLayout>
-
-
-    </ScrollView>
 
 </FrameLayout>
