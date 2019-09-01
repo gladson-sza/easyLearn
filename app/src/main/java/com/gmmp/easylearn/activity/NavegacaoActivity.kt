@@ -72,5 +72,4 @@ class NavegacaoActivity : AppCompatActivity() {
         transaction.add(R.id.frameContainer, DestaquesFragment())
         transaction.commit()
     }
-
 }

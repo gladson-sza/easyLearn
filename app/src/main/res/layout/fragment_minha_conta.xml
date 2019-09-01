@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragment.MinhaContaFragment">
 
     <LinearLayout
@@ -13,24 +14,66 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/bottomHeader"
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="178dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/bottomIcon"
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="188dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="205dp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageHeader"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:src="@color/colorCheck"
+                android:layout_height="130dp"
+                android:layout_gravity="center"
+                android:background="@color/colorCinza"
+                android:contentDescription="TODO"
+                android:tint="@color/colorCinza"
+                app:layout_constraintBottom_toTopOf="@+id/imageProfile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_gear" />
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_default_avatar"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="5dp"
+                app:layout_constraintBottom_toTopOf="@id/bottomIcon"
+                app:layout_constraintEnd_toStartOf="@id/middle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <Button
                 android:id="@+id/buttonPreferencias"
                 android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/button_primary_outline"
@@ -42,9 +85,11 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/imageHeader"
+                app:layout_constraintVertical_bias="0.35000002" />
 
             <ImageView
+                android:id="@+id/imageSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -54,25 +99,14 @@
                 app:layout_constraintTop_toTopOf="@+id/buttonPreferencias"
                 app:srcCompat="@drawable/ic_gear" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_photo_camera"
-                android:tint="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </android.support.constraint.ConstraintLayout>
 
+
         <LinearLayout
+            android:id="@+id/layoutContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp">
 
@@ -83,11 +117,6 @@
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:textSize="26sp"
                 android:textColor="@color/colorTitulo"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="2000"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -145,7 +174,7 @@
                     android:textSize="26sp" />
 
             </LinearLayout>
-            
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewCursosDisponibilizados"
                 android:layout_width="wrap_content"

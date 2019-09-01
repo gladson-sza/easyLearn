@@ -10,18 +10,17 @@ import android.widget.TextView
 import android.widget.Toast
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.DestaquesFragment
+import com.gmmp.easylearn.model.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(){
 
     private var btnIniciarSessao: Button? = null
     private var txtCadastro: TextView? = null
-
     private var editEmail: EditText? = null
     private var editSenha: EditText? = null
-
     private var firebaseAuth: FirebaseAuth? = null
-
+    private var viewDialog : ViewDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +34,8 @@ class LoginActivity : AppCompatActivity(){
         editEmail = findViewById(R.id.textEmail)
         editSenha = findViewById(R.id.textSenha)
 
+        viewDialog = ViewDialog(this@LoginActivity)
+
         supportActionBar?.hide()
         //Inicializa o botão
         btnIniciarSessao = findViewById(R.id.buttonEntrar)
@@ -44,10 +45,15 @@ class LoginActivity : AppCompatActivity(){
             val senha = editSenha!!.text.toString()
 
             if (email.isNotEmpty() && senha.isNotEmpty()) {
+                viewDialog!!.showDialog("Autenticando", "Por favor, aguarde enquanto validamos os dados")
                 firebaseAuth = FirebaseAuth.getInstance()
                 firebaseAuth!!.signInWithEmailAndPassword(email, senha).addOnCompleteListener(this) { task ->
+                    viewDialog!!.hideDialog()
                     if (task.isSuccessful) {
-                        startActivity(Intent(applicationContext, NavegacaoActivity::class.java))
+                        val intent = Intent(this@LoginActivity, NavegacaoActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(this@LoginActivity, "Credenciais inválidas", Toast.LENGTH_SHORT).show()
                     }
@@ -56,8 +62,6 @@ class LoginActivity : AppCompatActivity(){
                 Toast.makeText(this@LoginActivity, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
 
-            
-            
         }
 
         txtCadastro = findViewById(R.id.textCadastro)
