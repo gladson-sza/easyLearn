@@ -19,10 +19,9 @@ import com.gmmp.easylearn.model.Aula
  */
 class DestaquesFragment : Fragment() {
 
-    private var recyclerViewPrincipais: RecyclerView? = null;
-    private var recyclerViewRecomendados: RecyclerView? = null;
-    private var listEmAlta : ArrayList<Aula>? = null;
-    private var listRecomendados : ArrayList<Aula>? = null;
+    private var listEmAlta : ArrayList<Aula>? = null
+    private var listRecomendados : ArrayList<Aula>? = null
+    private var listPrincipais: ArrayList<Aula>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,20 +36,23 @@ class DestaquesFragment : Fragment() {
         encherRecomendados()
 
         val recyclerViewEmAlta = view.findViewById<RecyclerView>(R.id.recyclerViewEmAlta)
-        recyclerViewPrincipais = view.findViewById(R.id.recyclerViewPrincipais)
-        recyclerViewRecomendados = view.findViewById(R.id.recyclerViewRecomendados)
+        val recyclerViewPrincipais = view.findViewById<RecyclerView>(R.id.recyclerViewPrincipais)
+        val recyclerViewRecomendados = view.findViewById<RecyclerView>(R.id.recyclerViewRecomendados)
 
         //Inicializa Aulas em Alta
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewEmAlta.layoutManager = layoutManager
-        val adapterEmAlta = HorizontalAdapter(context!!, listEmAlta!!)
+        recyclerViewEmAlta.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val adapterEmAlta = HorizontalAdapter(activity!!, listEmAlta!!)
         recyclerViewEmAlta.adapter = adapterEmAlta
 
         //Inicializa Canais Recomendados
-        val layoutManager2 = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewEmAlta.layoutManager = layoutManager
-        val adapterRecomendados = HorizontalAdapter(context!!, listRecomendados!!)
-        recyclerViewEmAlta.adapter = adapterRecomendados
+        recyclerViewRecomendados.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val adapterRecomendados = HorizontalAdapter(activity!!, listRecomendados!!)
+        recyclerViewRecomendados.adapter = adapterRecomendados
+
+        // Inicializa Principais
+        recyclerViewPrincipais.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val adapterPrincipais = HorizontalAdapter(activity!!, listRecomendados!!)
+        recyclerViewPrincipais.adapter = adapterPrincipais
     }
 
     fun encherEmAlta(){
@@ -70,7 +72,7 @@ class DestaquesFragment : Fragment() {
     }
 
     fun encherRecomendados(){
-        listEmAlta = ArrayList<Aula>()
+        listRecomendados = ArrayList<Aula>()
 
         val aula1 = Aula("1","Prof. Olda","Biologia","https://www.jovensestudantes.com.br/wp-content/uploads/2018/07/gratis-metodo-cientifico-e-alfab.jpg","25:35")
         val aula2 = Aula("5","Descomplica","Concursos","https://images.passeidireto.com/thumbnails/video/65117545/thumb.jpg.xlarge","11:46")
@@ -78,10 +80,10 @@ class DestaquesFragment : Fragment() {
         val aula4 = Aula("2","Multiplicação e Divisão","Ferretto","https://img.youtube.com/vi/0UGJRHq2PS4/maxresdefault.jpg","15:32")
         val aula5 = Aula("4","Adição e Subtração","Ferretto","https://images.passeidireto.com/thumbnails/video/65117508/thumb.jpg.xlarge","23:22")
 
-        listEmAlta!!.add(aula1)
-        listEmAlta!!.add(aula2)
-        listEmAlta!!.add(aula3)
-        listEmAlta!!.add(aula4)
-        listEmAlta!!.add(aula5)
+        listRecomendados!!.add(aula1)
+        listRecomendados!!.add(aula2)
+        listRecomendados!!.add(aula3)
+        listRecomendados!!.add(aula4)
+        listRecomendados!!.add(aula5)
     }
 }
