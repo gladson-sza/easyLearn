@@ -11,14 +11,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.NavegacaoActivity"
-            android:label="@string/title_activity_navegacao"></activity>
-        <activity android:name=".activity.CadastroActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.SplashActivity">
+            android:label="@string/title_activity_navegacao"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.CadastroActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

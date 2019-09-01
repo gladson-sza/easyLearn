@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 
 import com.gmmp.easylearn.R
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,14 +20,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun inicializar() {
-        //Esconde a Actionbar
-        supportActionBar!!.hide()
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user == null) {
+            //Esconde a Actionbar
+            supportActionBar!!.hide()
 
-        //Inicializa o botão
-        buttonComecar = findViewById(R.id.buttonComecar)
-        buttonComecar!!.setOnClickListener {
-            //Abre tela de cadastro
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            //Inicializa o botão
+            buttonComecar = findViewById(R.id.buttonComecar)
+            buttonComecar!!.setOnClickListener {
+                //Abre tela de cadastro
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+            }
+        }else{
+            val intent = Intent(this@MainActivity, NavegacaoActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 }

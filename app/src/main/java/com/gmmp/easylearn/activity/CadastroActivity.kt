@@ -12,6 +12,7 @@ import android.widget.Toast
 
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.model.Usuario
+import com.gmmp.easylearn.model.ViewDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 import org.w3c.dom.Text
+import android.content.Intent
+import com.gmmp.easylearn.fragment.DestaquesFragment
+
 
 class CadastroActivity : AppCompatActivity() {
 
@@ -34,6 +38,7 @@ class CadastroActivity : AppCompatActivity() {
     private var textLogin: TextView? = null
     private val layoutGoogle: LinearLayout? = null
     private var firebaseAuth: FirebaseAuth? = null
+    private var viewDialog : ViewDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +60,8 @@ class CadastroActivity : AppCompatActivity() {
         textConfirmarSenha = findViewById(R.id.textConfirmaSenha)
         checkTermos = findViewById(R.id.checkTermos)
 
+        viewDialog = ViewDialog(this@CadastroActivity)
+
         //Inicializa o botão de Continuar
         buttonContinuar = findViewById(R.id.buttonContinuar)
         buttonContinuar!!.setOnClickListener {
@@ -63,6 +70,7 @@ class CadastroActivity : AppCompatActivity() {
                 if (!textEmail!!.text.toString().isEmpty()) {
                     if (!textSenha!!.text.toString().isEmpty()) {
                         if (textSenha!!.text.toString() == textConfirmarSenha!!.text.toString()) {
+                            viewDialog!!.showDialog("Validando os dados", "Por favor, aguarde enquanto validamos os dados")
                             //Registra usuário no Firebase
                             registrarUsuario(textEmail!!.text.toString(), textSenha!!.text.toString())
 
@@ -90,6 +98,7 @@ class CadastroActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth!!.createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(this) { task ->
+                    viewDialog!!.hideDialog()
                     if (task.isSuccessful) {
                         //Pega a referência do nó de usuários
                         val reference = FirebaseDatabase.getInstance().reference.child("usuarios")
@@ -102,8 +111,14 @@ class CadastroActivity : AppCompatActivity() {
 
                         //Adiciona ao Firebase
                         reference.child(usuario.id).setValue(usuario)
-                    } else {
 
+                        //Abre tela de Destaques
+                        val intent = Intent(this@CadastroActivity, NavegacaoActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@CadastroActivity, "Erro", Toast.LENGTH_SHORT).show()
                     }
                 }
     }
