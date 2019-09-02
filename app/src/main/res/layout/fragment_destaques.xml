@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.DestaquesFragment">
+    tools:context=".fragment.DestaquesFragment"
+    android:background="@color/white">
 
 
     <ScrollView
@@ -160,21 +161,27 @@
 
             </LinearLayout>
 
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewPrincipais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="horizontal">
+
+            </android.support.v7.widget.RecyclerView>
+            </ScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewPrincipais"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
-
-                </android.support.v7.widget.RecyclerView>
-
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -186,6 +193,16 @@
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:textSize="26sp"
                 android:textColor="@color/colorTitulo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Deslize para o lado para ver mais"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:textSize="14sp"
+                android:textColor="@color/colorCheck"/>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -201,7 +218,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp">
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp">
 
                     </android.support.v7.widget.RecyclerView>
 
