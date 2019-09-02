@@ -12,7 +12,7 @@ import com.gmmp.easylearn.model.Mensagen
 
 import de.hdodenhof.circleimageview.CircleImageView
 
-class MensagensAdapter(private val mensagenList: List<Mensagen>, private val context: Context) : RecyclerView.Adapter<MensagensAdapter.MyViewHolder>() {
+class MensagensAdapter(private val mensagenList: ArrayList<Mensagen>, private val context: Context) : RecyclerView.Adapter<MensagensAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         val itemList = LayoutInflater.from(viewGroup.context)

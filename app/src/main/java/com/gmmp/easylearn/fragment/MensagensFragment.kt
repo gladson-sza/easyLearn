@@ -24,7 +24,7 @@ class MensagensFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
     private var mensagensAdapter: MensagensAdapter? = null
-    private var listaMensagens: ArrayList<Mensagen>? = ArrayList<Mensagen>()
+    private var listaMensagens: ArrayList<Mensagen> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,14 +33,14 @@ class MensagensFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerViewMensagens)
 
-        listaMensagens!!.add(Mensagen("321", "Fala Galera!!!", "Nossa Mano!", Date()))
-        listaMensagens!!.add(Mensagen("123", "Mensagem aleatoria", "serio mesmo", Date()))
-        listaMensagens!!.add(Mensagen("4323", "RIP IRON MAN", "Tony Stark Morreu", Date()))
-        listaMensagens!!.add(Mensagen("213", "Luciano Hulk", "", Date()))
-        listaMensagens!!.add(Mensagen("123", "Bolsolixo", "Birolo ataca novamente", Date()))
+        listaMensagens.add(Mensagen("321", "Fala Galera!!!", "Nossa Mano!", Date()))
+        listaMensagens.add(Mensagen("123", "Mensagem aleatoria", "serio mesmo", Date()))
+        listaMensagens.add(Mensagen("4323", "RIP IRON MAN", "Tony Stark Morreu", Date()))
+        listaMensagens.add(Mensagen("213", "Luciano Hulk", "", Date()))
+        listaMensagens.add(Mensagen("123", "Bolsolixo", "Birolo ataca novamente", Date()))
 
         // Configura o Adapter
-        mensagensAdapter = activity?.let { MensagensAdapter(listaMensagens!!.toList(), it) }
+        mensagensAdapter = activity?.let { MensagensAdapter(listaMensagens, it) }
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
         recyclerView!!.adapter = mensagensAdapter
 
