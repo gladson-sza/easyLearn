@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/imageCursosDisponibilizadosThumb"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_weight="0"
+        app:srcCompat="@color/colorCinza" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:id="@+id/textCursosDisponibilizadosNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome do Curso"
+            android:fontFamily="@font/sfprodisplay_bold"/>
+        
+        <TextView
+            android:id="@+id/textCursosDisponibilizadosDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descrição"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonCursosDisponibilizadosEditar"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text="Editar"
+        android:textColor="@color/white"
+        android:background="@drawable/button_edit"
+        android:layout_weight="0"/>
+</LinearLayout>
