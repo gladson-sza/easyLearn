@@ -45,11 +45,13 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp">
 
-                <ListView
-                    android:id="@+id/listDisciplinas"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewDisciplinas"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp" />
-
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp" />
             </LinearLayout>
 
         </LinearLayout>

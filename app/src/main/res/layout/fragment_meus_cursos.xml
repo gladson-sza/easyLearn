@@ -39,104 +39,39 @@
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:textSize="26sp"
                 android:textColor="@color/colorTitulo"/>
-
-            <LinearLayout
-                android:layout_width="392dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:orientation="horizontal">
+                android:text="Deslize para o lado para ver mais"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:textSize="14sp"
+                android:textColor="@color/colorCheck"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imageViewVideo1"
-                        android:layout_width="156dp"
-                        android:layout_height="96dp"
-                        android:src="@drawable/ic_video" />
-
-                    <TextView
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewVistoPorUltimo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome da aula"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
+                    </android.support.v7.widget.RecyclerView>
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageViewVideo2"
-                        android:layout_width="156dp"
-                        android:layout_height="96dp"
-                        android:src="@drawable/ic_video" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome da aula"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageViewVideo3"
-                        android:layout_width="156dp"
-                        android:layout_height="96dp"
-                        android:src="@drawable/ic_video" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome da aula"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+            </ScrollView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -149,278 +84,29 @@
                 android:textSize="26sp"
                 android:textColor="@color/colorTitulo"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewVideo4"
-                    android:layout_width="120dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/ic_video" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewMeusCursos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp">
 
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do canal"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
+                    </android.support.v7.widget.RecyclerView>
 
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Breve resumo do curso."
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/buttonAbrir"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/sfprodisplay_bold"
-                        android:text="Abrir"
-                        android:textColor="@android:color/white"
-                        android:textSize="14dp"
-                        android:background="@drawable/button_abrir" />
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewVideo7"
-                    android:layout_width="120dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/ic_video" />
-
-                <LinearLayout
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do canal"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Breve resumo do curso."
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/buttonAbrir5"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/sfprodisplay_bold"
-                        android:text="Abrir"
-                        android:textColor="@android:color/white"
-                        android:textSize="14dp"
-                        android:background="@drawable/button_abrir" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewVideo6"
-                    android:layout_width="120dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/ic_video" />
-
-                <LinearLayout
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do canal"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Breve resumo do curso."
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/buttonAbrir2"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/sfprodisplay_bold"
-                        android:text="Abrir"
-                        android:textColor="@android:color/white"
-                        android:textSize="14dp"
-                        android:background="@drawable/button_abrir" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewVideo5"
-                    android:layout_width="120dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/ic_video" />
-
-                <LinearLayout
-                    android:layout_marginTop="13dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do curso"
-                        android:textColor="@color/colorTitulo"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Nome do canal"
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sfprodisplay_medium"
-                        android:text="Breve resumo do curso."
-                        android:textColor="@color/colorCinza"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/buttonAbrir3"
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:fontFamily="@font/sfprodisplay_bold"
-                        android:text="Abrir"
-                        android:textColor="@android:color/white"
-                        android:textSize="14dp"
-                        android:background="@drawable/button_abrir" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
+            </ScrollView>
         </LinearLayout>
-
-
-
-
-        </LinearLayout>
-
     </ScrollView>
-
-
-
 </FrameLayout>
