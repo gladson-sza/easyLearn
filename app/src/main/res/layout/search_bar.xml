@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/buttonFiltrar"
+        android:layout_width="48dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_adjusts"
+        app:srcCompat="@drawable/ic_adjusts"
+        android:tint="@color/colorBold"/>
+
+    <EditText
+        android:id="@+id/textPesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
+        android:paddingRight="10dp"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorDescricao"
+        android:ems="10"
+        android:focusedByDefault="false"
+        android:hint="Pesquisar cursos, aulas..."
+        android:background="@color/colorEditText"/>
+
+    <ImageButton
+        android:id="@+id/buttonProcurar"
+        android:layout_width="46dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_search"
+        app:srcCompat="@drawable/ic_search_black_24dp"
+        android:tint="@color/white"/>
+
+</LinearLayout>
