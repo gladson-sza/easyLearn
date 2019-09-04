@@ -18,6 +18,7 @@ import com.gmmp.easylearn.adapter.MensagensAdapter
 import com.gmmp.easylearn.model.Disciplina
 import com.gmmp.easylearn.model.Mensagen
 import com.gmmp.easylearn.model.Usuario
+import com.gmmp.easylearn.model.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,8 +37,13 @@ class DisciplinasFragment : Fragment()  {
     private var disciplinaAdapter: DisciplinasAdapter? = null
     private var listaDisciplinas: ArrayList<Disciplina> = ArrayList()
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val viewDialog = ViewDialog(activity)
+        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
+
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_disciplinas, container, false)
 
@@ -60,6 +66,9 @@ class DisciplinasFragment : Fragment()  {
                     var u = d.getValue(Disciplina::class.java)
                     if (u != null) {
                         listaDisciplinas.add(u)
+
+                        // Fecha o Dialog após carregar os dados
+                        viewDialog.hideDialog()
                     }
 
 

@@ -9,11 +9,7 @@ import android.view.MenuItem
 import android.widget.TextView
 
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.fragment.DestaquesFragment
-import com.gmmp.easylearn.fragment.DisciplinasFragment
-import com.gmmp.easylearn.fragment.MensagensFragment
-import com.gmmp.easylearn.fragment.MeusCursosFragment
-import com.gmmp.easylearn.fragment.MinhaContaFragment
+import com.gmmp.easylearn.fragment.*
 
 class NavegacaoActivity : AppCompatActivity() {
 
@@ -36,7 +32,7 @@ class NavegacaoActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_minha_conta -> {
-                mudarFragment(MinhaContaFragment())
+                mudarFragment(MenuPerfilFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }
