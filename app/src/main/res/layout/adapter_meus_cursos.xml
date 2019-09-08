@@ -1,54 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="10dp">
+    android:paddingRight="12dp"
+    android:paddingLeft="0dp"
+    android:paddingBottom="12dp"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/imageMeusCursosThumb"
-        android:layout_width="115dp"
-        android:layout_height="80dp"
-        android:layout_weight="0"
-        app:srcCompat="@color/colorCinza" />
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:src="@color/colorCinza"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textMeusCursosNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome do Curso"
-            android:fontFamily="@font/sfprodisplay_bold"/>
+            android:layout_marginLeft="6dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:text="Título"
+            android:maxLines="1"
+            android:textColor="@color/colorTitulo"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/textCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sfprodisplay_regular"
+            android:text="Categoria"
+            android:maxLines="1"
+            android:layout_marginLeft="6dp"
+            android:textColor="@color/colorCheck"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/textMeusCursosDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descrição"/>
+            android:fontFamily="@font/sfprodisplay_regular"
+            android:text="Descrição"
+            android:maxLines="3"
+            android:layout_marginLeft="6dp"
+            android:textColor="@color/colorDescricao"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
-
     <Button
         android:id="@+id/buttonAbrirCurso"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_weight="3"
+        android:background="@drawable/button_primary"
         android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Abrir"
-        android:stateListAnimator="@null"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:background="@drawable/button_abrir" />
+        android:text="Preço"
+        android:textAllCaps="true"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
 
 </LinearLayout>

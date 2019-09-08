@@ -2,6 +2,7 @@ package com.gmmp.easylearn.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,45 +18,46 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 import java.util.ArrayList
 
-class MeusCursosAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<MeusCursosAdapter.MyViewHolder>() {
+class MeusCursosAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<MeusCursosAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
-        val itemList = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.adapter_meus_cursos, viewGroup, false)
-
-        return MyViewHolder(itemList)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.adapter_meus_cursos, viewGroup, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
-        var (id, nome, descricao, thumb, disciplina) = listCursos[i]
+    override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
+        val (id, titulo, descricao, thumbUrl, preco) = listCursos[i]
 
-        if (!thumb.isEmpty()) {
+        viewHolder.textTitulo.text = titulo
+        viewHolder.textDescricao.text = descricao
+
+        if (!thumbUrl.isEmpty()) {
             Glide.with(context)
                     .load(listCursos[i].thumbUrl)
                     .centerCrop()
-                    .into(myViewHolder.thumbCurso)
+                    .into(viewHolder.imageThumbnail)
         }
-        myViewHolder.textNome.text = nome
-        myViewHolder.textDescricao.text = descricao
 
+        viewHolder.buttonPreco.text = "Abrir"
     }
 
     override fun getItemCount(): Int {
         return listCursos.size
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var thumbCurso: ImageView
-        var textNome: TextView
+        var imageThumbnail: ImageView
+        var textTitulo: TextView
         var textDescricao: TextView
-        var btnAbrir: Button
+        var buttonPreco : Button
 
         init {
-            thumbCurso = itemView.findViewById(R.id.imageMeusCursosThumb)
-            textNome = itemView.findViewById(R.id.textMeusCursosNome)
+            imageThumbnail = itemView.findViewById(R.id.imageMeusCursosThumb)
+            textTitulo = itemView.findViewById(R.id.textMeusCursosNome)
             textDescricao = itemView.findViewById(R.id.textMeusCursosDescricao)
-            btnAbrir = itemView.findViewById(R.id.buttonAbrirCurso)
+            buttonPreco = itemView.findViewById(R.id.buttonAbrirCurso)
         }
+
     }
 }

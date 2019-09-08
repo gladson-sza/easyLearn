@@ -1,0 +1,8 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item name="ic_menu_editar" type="drawable">@drawable/ic_menu_editar</item>
+    <item name="ic_menu_canal" type="drawable">@drawable/ic_menu_canal</item>
+    <item name="ic_menu_notificacoes" type="drawable">@drawable/ic_menu_notificacoes</item>
+    <item name="ic_menu_compartilhar" type="drawable">@drawable/ic_menu_compartilhar</item>
+    <item name="ic_menu_sobre" type="drawable">@drawable/ic_menu_sobre</item>
+    <item name="ic_menu_sair" type="drawable">@drawable/ic_menu_sair</item>
+</resources>
