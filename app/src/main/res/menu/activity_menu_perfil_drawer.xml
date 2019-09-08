@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_editar_perfil"
+            android:icon="@drawable/ic_menu_editar"
+            android:title="@string/menu_editar_perfil" />
+        <item
+            android:id="@+id/nav_meu_canal"
+            android:icon="@drawable/ic_menu_canal"
+            android:title="@string/menu_meu_canal" />
+        <item
+            android:id="@+id/nav_notificacoes"
+            android:icon="@drawable/ic_menu_notificacoes"
+            android:title="@string/menu_notidicacoes" />
+
+        <item
+            android:id="@+id/nav_compartilhar"
+            android:icon="@drawable/ic_menu_compartilhar"
+            android:title="@string/menu_compartilhar" />
+
+        <item
+            android:id="@+id/nav_sobre"
+            android:icon="@drawable/ic_menu_sobre"
+            android:title="@string/menu_sobre" />
+
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_menu_sair"
+            android:title="@string/sair" />
+    </group>
+</menu>

@@ -12,4 +12,20 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_a">aActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_editar_perfil">Editar perfil</string>
+    <string name="menu_meu_canal">Meu canal</string>
+    <string name="menu_notidicacoes">Notificações</string>
+    <string name="menu_compartilhar">Compartilhar easyCash</string>
+    <string name="menu_sobre">Sobre</string>
+    <string name="sair">Sair</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 </resources>
