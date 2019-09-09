@@ -1,6 +1,7 @@
 package com.gmmp.easylearn.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.EditarCursoActivity
 import com.gmmp.easylearn.model.Curso
 
 import kotlinx.android.synthetic.main.adapter_cursos_disponibilizados.view.*
@@ -28,6 +30,13 @@ class CursosDisponibilizadosAdapter(private val cursoList: List<Curso>, private 
 
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
+        myViewHolder.buttonEdit.setOnClickListener {
+
+            var intent = Intent(context, EditarCursoActivity::class.java)
+            intent.putExtra("idCurso", id)
+            context.startActivity(intent)
+
+        }
 
     }
 

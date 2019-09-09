@@ -32,7 +32,7 @@ class NavegacaoActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_minha_conta -> {
-                mudarFragment(MenuPerfilFragment())
+                mudarFragment(MinhaContaFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }

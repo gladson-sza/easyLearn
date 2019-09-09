@@ -2,10 +2,16 @@ package com.gmmp.easylearn.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Spinner
 import android.widget.Toast
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.model.Disciplina
+import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_novo_curso.*
 
 class NovoCursoActivity : AppCompatActivity() {
