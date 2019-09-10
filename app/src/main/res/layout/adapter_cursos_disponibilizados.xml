@@ -28,13 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nome do Curso"
-            android:fontFamily="@font/sfprodisplay_bold"/>
-        
+            android:fontFamily="@font/sfprodisplay_bold" />
+
         <TextView
             android:id="@+id/textCursosDisponibilizadosDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descrição"/>
+            android:text="Descrição" />
 
     </LinearLayout>
 
@@ -46,5 +46,5 @@
         android:text="Editar"
         android:textColor="@color/white"
         android:background="@drawable/button_edit"
-        android:layout_weight="0"/>
+        android:layout_weight="0" />
 </LinearLayout>

@@ -40,9 +40,7 @@ class CursosDisponibilizadosAdapter(private val cursoList: List<Curso>, private 
 
     }
 
-    override fun getItemCount(): Int {
-        return cursoList.size
-    }
+    override fun getItemCount(): Int = cursoList.size
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

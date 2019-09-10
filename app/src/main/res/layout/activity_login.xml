@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorFundo"
+    android:orientation="vertical"
     tools:context=".activity.CadastroActivity">
 
     <android.support.v7.widget.Toolbar
@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorToolbar"
-        app:titleTextColor="@color/colorTituloActionBar"
-        app:title="Iniciar sessão"
         android:elevation="1dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Iniciar sessão"
+        app:titleTextColor="@color/colorTituloActionBar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Entrar com seu email"
                 android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="20sp"
-                android:textColor="@color/colorTitulo"/>
+                android:text="Entrar com seu email"
+                android:textColor="@color/colorTitulo"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -43,10 +43,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="6dp"
-                android:text="Endereço de email"
                 android:fontFamily="@font/sfprodisplay_semibold"
-                android:textSize="16sp"
-                android:textColor="@color/colorDescricao"/>
+                android:text="Endereço de email"
+                android:textColor="@color/colorDescricao"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/textEmail"
@@ -56,13 +56,13 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="16dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:textColor="@color/colorDescricao"
+                android:background="@color/colorEditText"
                 android:ems="10"
                 android:hint="Endereço de email"
-                android:background="@color/colorEditText"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorDescricao" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -70,10 +70,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="6dp"
-                android:text="Senha"
                 android:fontFamily="@font/sfprodisplay_semibold"
-                android:textSize="16sp"
-                android:textColor="@color/colorDescricao"/>
+                android:text="Senha"
+                android:textColor="@color/colorDescricao"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/textSenha"
@@ -90,7 +90,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textColor="@color/colorDescricao" />
-
 
 
             <LinearLayout
@@ -116,7 +115,7 @@
                     android:fontFamily="@font/sfprodisplay_semibold"
                     android:text="Lembrar-se"
                     android:textColor="@color/colorBold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:id="@+id/layoutEsqueciMinhaConta"
@@ -143,25 +142,25 @@
                 android:id="@+id/buttonEntrar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="bottom"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
-                android:layout_gravity="bottom"
+                android:background="@drawable/button_primary"
                 android:fontFamily="@font/sfprodisplay_bold"
+                android:stateListAnimator="@null"
                 android:text="Iniciar sessão"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:stateListAnimator="@null"
-                android:background="@drawable/button_primary" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:id="@+id/layoutCadastro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
@@ -171,7 +170,7 @@
                     android:fontFamily="@font/sfprodisplay_semibold"
                     android:text="Ainda não possui uma conta? "
                     android:textColor="@color/colorBold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textCadastro"
@@ -180,7 +179,7 @@
                     android:fontFamily="@font/sfprodisplay_bold"
                     android:text="Clique aqui"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -191,60 +190,42 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:background="@color/colorDiv"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@color/colorDiv" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/sfprodisplay_regular"
-                android:text="ou"
-                android:textColor="@color/colorBold"
-                android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0"
+                    android:fontFamily="@font/sfprodisplay_regular"
+                    android:text="ou"
+                    android:textColor="@color/colorBold"
+                    android:textSize="18sp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:background="@color/colorDiv"/>
+                    android:layout_weight="1"
+                    android:background="@color/colorDiv" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/layoutGoogle"
+            <include
+                android:id="@+id/buttonCadastroGoogle"
+                layout="@layout/button_google_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:background="@drawable/button_google">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_google_icon"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/sfprodisplay_bold"
-                    android:text="Entrar com Google"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"/>
-
-            </LinearLayout>
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp" />
 
         </LinearLayout>
 

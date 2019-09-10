@@ -3,7 +3,6 @@ package com.gmmp.easylearn.activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 
 import com.gmmp.easylearn.R
@@ -11,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
-    private var buttonComecar: Button? = null
+    lateinit var buttonComecar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
             //Inicializa o botão
             buttonComecar = findViewById(R.id.buttonComecar)
-            buttonComecar!!.setOnClickListener {
+            buttonComecar.setOnClickListener {
                 //Abre tela de cadastro
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
             }
