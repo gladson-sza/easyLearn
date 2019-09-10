@@ -16,7 +16,7 @@
     tools:context=".fragment.MinhaContaFragment">
 
     <LinearLayout
-        android:id="@+id/editar_conta"
+        android:id="@+id/menuEditarConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -49,6 +49,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menuNotificacoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -65,13 +66,13 @@
             android:id="@+id/text_notificacoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:src="@color/colorTitulo"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="15dp"
-            android:text="Notificações"/>
+            android:text="Notificações"
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/editar_notificacoes"
@@ -81,7 +82,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/meu_canal"
+        android:id="@+id/menuMeuCanal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -114,6 +115,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menuCompatilharEasyCash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -130,13 +132,13 @@
             android:id="@+id/text_compartilhar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:src="@color/colorTitulo"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="15dp"
-            android:text="Compartilhar EasyCash"/>
+            android:text="Compartilhar EasyCash"
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/abrir_compartilhar"
@@ -146,6 +148,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menuSobre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -162,13 +165,13 @@
             android:id="@+id/text_sobre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:src="@color/colorTitulo"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="15dp"
-            android:text="Sobre"/>
+            android:text="Sobre"
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/abrir_sobre"
@@ -178,6 +181,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menuSair"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -194,13 +198,13 @@
             android:id="@+id/text_sair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:src="@color/colorTitulo"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="15dp"
-            android:text="Sair"/>
+            android:text="Sair"
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/abrir_sair"
