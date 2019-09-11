@@ -26,8 +26,8 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/navigation_minha_conta"
-        android:icon="@drawable/ic_person_primary_24dp"
-        android:title="@string/minha_conta"
+        android:icon="@drawable/ic_adjusts"
+        android:title="@string/preferencias"
         app:showAsAction="ifRoom" />
 
 </menu>
