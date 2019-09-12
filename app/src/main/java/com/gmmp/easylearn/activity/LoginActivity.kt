@@ -75,6 +75,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, CadastroActivity::class.java))
         })
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         // Configura o Token do Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -117,7 +119,7 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Falha ao tentar autenticar com o google", Toast.LENGTH_SHORT)
+                e.printStackTrace()
             }
         }
     }
