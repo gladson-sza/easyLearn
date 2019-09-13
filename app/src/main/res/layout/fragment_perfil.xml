@@ -39,6 +39,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.63"
         app:srcCompat="@drawable/ic_gear" />
 
     <TextView
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:fontFamily="@font/sfprodisplay_bold"
@@ -64,10 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:maxLines="3"
+        android:text="Descrição do Canal"
+        android:textColor="@color/colorDescricao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPerfilNomeDoCanal" />
@@ -98,9 +100,6 @@
         android:id="@+id/buttonNovoCurso"
         android:layout_width="160dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="@drawable/button_primary_outline"
         android:drawableStart="@drawable/ic_add_primary_24dp"
@@ -110,9 +109,11 @@
         android:paddingRight="8dp"
         android:text="Novo Curso"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCursosDisponibilizados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPerfilDescricao" />
+        app:layout_constraintBottom_toTopOf="@+id/textPerfilNomeDoCanal"
+        app:layout_constraintEnd_toStartOf="@+id/imagePreferencias"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textViewNCursosSubscritos"

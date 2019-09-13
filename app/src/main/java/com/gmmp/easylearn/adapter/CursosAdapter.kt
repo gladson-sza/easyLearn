@@ -11,13 +11,11 @@ import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
-import de.hdodenhof.circleimageview.CircleImageView
 
 import java.util.ArrayList
 
-class MeusCursosAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<MeusCursosAdapter.MyViewHolder>() {
+class CursosAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<CursosAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         val itemList = LayoutInflater.from(viewGroup.context)
@@ -52,10 +50,10 @@ class MeusCursosAdapter(private val context: Context, private val listCursos: Ar
         var btnAbrir: Button
 
         init {
-            thumbCurso = itemView.findViewById(R.id.imageMeusCursosThumb)
-            textNome = itemView.findViewById(R.id.textMeusCursosNome)
-            textDescricao = itemView.findViewById(R.id.textMeusCursosDescricao)
-            btnAbrir = itemView.findViewById(R.id.buttonAbrirCurso)
+            thumbCurso = itemView.findViewById(R.id.imageThumbnail)
+            textNome = itemView.findViewById(R.id.textTitulo)
+            textDescricao = itemView.findViewById(R.id.textDescricao)
+            btnAbrir = itemView.findViewById(R.id.buttonAbrir)
         }
     }
 }

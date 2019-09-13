@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.VerticalAdapter
+import com.gmmp.easylearn.helper.RecyclerItemClickListener
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 
@@ -53,7 +54,7 @@ class DestaquesFragment : Fragment() {
         recyclerViewRecomendados.adapter = adapterRecomendados
 
         //Inicializa Canais Principais
-        recyclerViewPrincipais.layoutManager =LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewPrincipais.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapterPrincipais = VerticalAdapter(activity!!, listPrincipais!!)
         recyclerViewPrincipais.adapter = adapterPrincipais
     }

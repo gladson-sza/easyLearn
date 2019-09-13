@@ -3,6 +3,7 @@ package com.gmmp.easylearn.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_disciplinas.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,30 +51,34 @@ class DisciplinasFragment : Fragment()  {
 
         // Configura o Adapter
         disciplinaAdapter = activity?.let { DisciplinasAdapter(listaDisciplinas, it) }
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerView!!.layoutManager = layoutManager
         recyclerView!!.adapter = disciplinaAdapter
+        recyclerView!!.addItemDecoration(DividerItemDecoration(recyclerView!!.context, layoutManager.orientation))
 
         disciplinas.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-
                 for (d  in dataSnapshot.children) {
                     var u = d.getValue(Disciplina::class.java)
                     if (u != null) {
                         listaDisciplinas.add(u)
                     }
 
-
                 }
 
                 disciplinaAdapter?.notifyDataSetChanged()
+                val progressBar = progress_circular
+                val textCarregando = textCarregando
+                progressBar!!.visibility = View.GONE
+                textCarregando.visibility = View.GONE
+                recyclerView!!.visibility = View.VISIBLE
+
             }
 
             override fun onCancelled(p0: DatabaseError) {
 
             }
         })
-
         return view
     }
 

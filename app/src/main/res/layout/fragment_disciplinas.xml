@@ -6,56 +6,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DisciplinasFragment">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollViewo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Buscar"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="26sp"
-                android:textColor="@color/colorTitulo"/>
-
-            <include
-                android:id="@+id/search_bar"
-                layout="@layout/search_bar"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="Disciplinas"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="26sp"
-                android:textColor="@color/colorTitulo"/>
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Buscar"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:textSize="26sp"
+                    android:textColor="@color/colorTitulo"/>
+
+                <include
+                    android:id="@+id/search_bar"
+                    layout="@layout/search_bar"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Disciplinas"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:textSize="26sp"
+                    android:textColor="@color/colorTitulo"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewDisciplinas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_margin="20dp"
+                    android:visibility="gone"/>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorPrimary"/>
 
+        <TextView
+            android:id="@+id/textCarregando"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_circular"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:text="Carregando..."
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 </FrameLayout>
