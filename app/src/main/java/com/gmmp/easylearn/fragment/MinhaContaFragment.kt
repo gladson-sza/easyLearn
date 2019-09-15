@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.LoginActivity
 import com.gmmp.easylearn.activity.MeuCanalActivity
+import com.gmmp.easylearn.model.Usuario
+import com.gmmp.easylearn.model.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -44,7 +46,7 @@ class MinhaContaFragment : Fragment() {
 
         // Incializa os compoenentes da tela
 
-        /**
+
 
         val viewDialog = ViewDialog(activity)
         var id = "Erro ao obter o id"
@@ -56,17 +58,17 @@ class MinhaContaFragment : Fragment() {
         val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth!!.uid)
 
         usuario.addValueEventListener(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-        val u = dataSnapshot.getValue(Usuario::class.java)
-        id = u!!.id
-        // Fecha o Dialog após carregar os dados
-        viewDialog.hideDialog()
-        }
-        override fun onCancelled(p0: DatabaseError) {
-        }
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val u = dataSnapshot.getValue(Usuario::class.java)
+                id = u!!.id
+                // Fecha o Dialog após carregar os dados
+            viewDialog.hideDialog()
+             }
+            override fun onCancelled(p0: DatabaseError) {
+            }
         })
 
-         */
+
 
 
         view.menuCompatilharEasyCash.setOnClickListener {
