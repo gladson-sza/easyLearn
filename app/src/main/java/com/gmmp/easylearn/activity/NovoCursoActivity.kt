@@ -2,6 +2,7 @@ package com.gmmp.easylearn.activity
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
@@ -17,7 +18,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_novo_curso.*
+import java.io.ByteArrayOutputStream
 
 
 class NovoCursoActivity : AppCompatActivity() {
@@ -106,15 +110,41 @@ class NovoCursoActivity : AppCompatActivity() {
             } else if (disciplinaSelecionada.equals(SPINNER_VAZIO)) {
                 Toast.makeText(applicationContext, "Você não selecionou a disciplina", Toast.LENGTH_SHORT).show()
             } else {
-                canal.child(editNomeCurso.text.toString()).child("id").setValue(editNomeCurso.text.toString())
-                canal.child(editNomeCurso.text.toString()).child("idCanal").setValue(idCanal)
-                canal.child(editNomeCurso.text.toString()).child("nome").setValue(editNomeCurso.text.toString())
-                canal.child(editNomeCurso.text.toString()).child("descricao").setValue(editDescricaoCurso.text.toString())
-                canal.child(editNomeCurso.text.toString()).child("thumbUrl").setValue("---")
-                canal.child(editNomeCurso.text.toString()).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
 
-                Toast.makeText(applicationContext, "Curso Adicionado", Toast.LENGTH_SHORT).show()
-                finish()
+                val viewDialog = ViewDialog(this)
+                viewDialog.showDialog("Carregando", "Aguarde, estamos preparando as coisas por aqui")
+
+                val cursoId = editNomeCurso.text.toString()
+
+                canal.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
+                canal.child(cursoId).child("idCanal").setValue(idCanal)
+                canal.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
+                canal.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
+                canal.child(cursoId).child("thumbUrl").setValue("---")
+                canal.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
+
+                val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
+                val outputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+                val imageBytes = outputStream.toByteArray()
+
+                val imageRef = FirebaseStorage.getInstance().reference
+                        .child("imagens")
+                        .child("cursos")
+                        .child("$cursoId.jpeg")
+
+                val uploadTask = imageRef.putBytes(imageBytes)
+                uploadTask.addOnSuccessListener {
+                    viewDialog.hideDialog()
+                    Toast.makeText(applicationContext, "Curso criado com sucesso", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                uploadTask.addOnFailureListener {
+                    viewDialog.hideDialog()
+                    Toast.makeText(applicationContext, "Não foi possível fazer upload da Thumb", Toast.LENGTH_SHORT).show()
+                }
+
+
             }
 
         }
