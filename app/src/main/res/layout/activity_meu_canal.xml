@@ -7,7 +7,7 @@
     tools:context=".activity.MeuCanalActivity">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageThumb"
             android:layout_width="0dp"
             android:layout_height="130dp"
             android:src="@color/colorCinza"
@@ -28,19 +28,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imagePreferencias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/ic_gear" />
-
         <TextView
-            android:id="@+id/textPerfilNomeDoCanal"
+            android:id="@+id/textNomeCanal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -57,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
         <TextView
-            android:id="@+id/textPerfilDescricao"
+            android:id="@+id/textDescricao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -68,7 +57,7 @@
             android:maxLines="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textPerfilNomeDoCanal" />
+            app:layout_constraintTop_toBottomOf="@+id/textNomeCanal" />
 
         <TextView
             android:id="@+id/textNCursosDisponibilizados"
@@ -79,7 +68,7 @@
             android:layout_marginTop="10dp"
             android:text="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textPerfilDescricao" />
+            app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
 
         <TextView
             android:id="@+id/textView4"
@@ -110,10 +99,10 @@
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/textViewCursosDisponibilizados"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textPerfilDescricao" />
+            app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
 
         <TextView
-            android:id="@+id/textViewNCursosSubscritos"
+            android:id="@+id/textNCursosSubscritos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -130,9 +119,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="cursos subscritos"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewNCursosSubscritos"
-            app:layout_constraintStart_toEndOf="@+id/textViewNCursosSubscritos"
-            app:layout_constraintTop_toTopOf="@+id/textViewNCursosSubscritos" />
+            app:layout_constraintBottom_toBottomOf="@+id/textNCursosSubscritos"
+            app:layout_constraintStart_toEndOf="@+id/textNCursosSubscritos"
+            app:layout_constraintTop_toTopOf="@+id/textNCursosSubscritos" />
 
         <TextView
             android:id="@+id/textViewCursosDisponibilizados"
@@ -150,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNCursosSubscritos" />
+            app:layout_constraintTop_toBottomOf="@+id/textNCursosSubscritos" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewCursosDisponibilizados"

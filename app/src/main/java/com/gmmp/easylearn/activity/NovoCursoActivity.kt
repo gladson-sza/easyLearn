@@ -12,6 +12,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_cadastro.*
+import kotlinx.android.synthetic.main.activity_meu_canal.*
 import kotlinx.android.synthetic.main.activity_novo_curso.*
 
 class NovoCursoActivity : AppCompatActivity() {
@@ -29,29 +31,20 @@ class NovoCursoActivity : AppCompatActivity() {
         val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth?.uid!!)
         val canal = usuario.child("canal").child("cursos")
 
-        val imageCurso = imageNovoCurso
-        val nomeCurso = editTextNomeCurso
-        val descricaoCurso = editTextCursoDescricao
-        val spinnerDisciplinas = spinnerDisciplinas
-        val buttonAdicionarCurso = buttonAdicionarCurso
+        buttonSalvar.setOnClickListener {
 
-        buttonAdicionarCurso.setOnClickListener {
+            if (textNome.text.isNotEmpty() && textDescricao.text.isNotEmpty()) {
 
-            if (nomeCurso.text.isNotEmpty() && descricaoCurso.text.isNotEmpty()) {
+                canal.child(textNome.text.toString()).child("id").setValue("---")
+                canal.child(textNome.text.toString()).child("nome").setValue(textNome.text.toString())
+                canal.child(textNome.text.toString()).child("descricao").setValue(textDescricao.text.toString())
+                canal.child(textNome.text.toString()).child("thumbUrl").setValue("---")
+                canal.child(textNome.text.toString()).child("disciplina").setValue("---")
 
-                // TODO ADICIONAR DEMAIS DADOS
-
-                canal.child(nomeCurso.text.toString()).child("id").setValue("---")
-                canal.child(nomeCurso.text.toString()).child("nome").setValue(nomeCurso.text.toString())
-                canal.child(nomeCurso.text.toString()).child("descricao").setValue(descricaoCurso.text.toString())
-                canal.child(nomeCurso.text.toString()).child("thumbUrl").setValue("---")
-                canal.child(nomeCurso.text.toString()).child("disciplina").setValue("---")
-
-
-                Toast.makeText(applicationContext, "Curso Adicionado", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "Curso Adicionado", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(applicationContext, "Preencha todos os campos", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
 
         }

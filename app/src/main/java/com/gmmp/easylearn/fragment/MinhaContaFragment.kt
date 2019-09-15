@@ -44,33 +44,6 @@ class MinhaContaFragment : Fragment() {
             transaction?.commit()
         }
 
-        // Incializa os compoenentes da tela
-
-
-
-        val viewDialog = ViewDialog(activity)
-        var id = "Erro ao obter o id"
-
-        // Carrega as Informações do Usuário no Seu Perfil
-        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
-
-        val auth = FirebaseAuth.getInstance().currentUser
-        val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth!!.uid)
-
-        usuario.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val u = dataSnapshot.getValue(Usuario::class.java)
-                id = u!!.id
-                // Fecha o Dialog após carregar os dados
-            viewDialog.hideDialog()
-             }
-            override fun onCancelled(p0: DatabaseError) {
-            }
-        })
-
-
-
-
         view.menuCompatilharEasyCash.setOnClickListener {
             val myIntent = Intent(Intent.ACTION_SEND)
             myIntent.type = "type/plain"

@@ -1,99 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFundo"
+    android:orientation="vertical"
     tools:context=".activity.NovoCursoActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorToolbar"
+        android:elevation="1dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Novo Curso"
+        app:titleTextColor="@color/colorTituloActionBar" />
+
     <ImageView
-        android:id="@+id/imageNovoCurso"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorCinza" />
-
-    <EditText
-        android:id="@+id/editTextNomeCurso"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:hint="Nome do Curso"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageNovoCurso" />
-
-    <Spinner
-        android:id="@+id/spinnerDisciplinas"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewLabelDisciplina"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomeCurso" />
+        android:id="@+id/imageThumb"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@color/colorCheck" />
 
     <TextView
-        android:id="@+id/textViewLabelDisciplina"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Disciplina:"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerDisciplinas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinnerDisciplinas" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/sfprodisplay_semibold"
+        android:text="Nome do Curso"
+        android:textColor="@color/colorDescricao"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editNomeCuso"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorEditText"
+        android:ems="10"
+        android:hint="Meu curso super legal"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/colorDescricao" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/sfprodisplay_semibold"
+            android:text="Disciplina"
+            android:textColor="@color/colorDescricao"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/sfprodisplay_semibold"
+        android:text="Descrição"
+        android:textColor="@color/colorDescricao"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editDescricaoCurso"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorEditText"
+        android:ems="10"
+        android:hint="Uma breve descrição deste curso"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/colorDescricao" />
 
     <Button
-        android:id="@+id/buttonAdicionarCurso"
-        android:layout_width="0dp"
+        android:id="@+id/buttonSalvar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
         android:background="@drawable/button_primary"
         android:fontFamily="@font/sfprodisplay_bold"
-        android:stateListAnimator="@null"
-        android:text="Adicionar Curso"
+        android:text="Salvar"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCursoDescricao" />
-
-    <EditText
-        android:id="@+id/editTextCursoDescricao"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Descrição do curso"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDisciplinas" />
-
-</android.support.constraint.ConstraintLayout>
+        android:textSize="18sp" />
+</LinearLayout>

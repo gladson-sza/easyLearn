@@ -1,43 +1,39 @@
 package com.gmmp.easylearn.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.adapter.CursosDisponibilizadosAdapter
+import com.gmmp.easylearn.model.Curso
+import com.gmmp.easylearn.model.Usuario
+import com.gmmp.easylearn.model.ViewDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_meu_canal.*
 
 class MeuCanalActivity : AppCompatActivity() {
+
+    private var listCursos = arrayListOf<Curso>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meu_canal)
+
+        inicializar()
     }
 
-    /*
-    fun inicializar(view: View) {
+    fun inicializar() {
 
-        val textNomeCanal = view.textPerfilNomeDoCanal
-        val textViewDescricao = view.textPerfilDescricao
+        val textNomeCanal = textNomeCanal
+        val textViewDescricao = textDescricao
 
-        val viewDialog = ViewDialog(activity)
+        val viewDialog = ViewDialog(this)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
-
-        val preferencias = view.imagePreferencias
-
-        preferencias.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameContainer, EditarPerfilFragment())
-            transaction?.commit()
-        }
-
-        /* TODO ARRUMAR UM BOTÃO PRA SAIR DA CONTA
-        preferencias.setOnClickListener {
-            viewDialog.showDialog("Saindo", "Aguarde enquanto fazemos as alterações")
-            viewDialog.hideDialog()
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            FirebaseAuth.getInstance().signOut()
-            startActivity(intent)
-        }*/
 
         // Carrega as Informações do Usuário no Seu Perfil
         val auth = FirebaseAuth.getInstance().currentUser
@@ -61,15 +57,15 @@ class MeuCanalActivity : AppCompatActivity() {
         })
 
         // Botão de Novo Curso
-        val buttonNovoCurso = view.buttonNovoCurso
+        val buttonNovoCurso = buttonNovoCurso
         buttonNovoCurso.setOnClickListener {
-            startActivity(Intent(activity, NovoCursoActivity::class.java))
+            startActivity(Intent(this, NovoCursoActivity::class.java))
         }
 
         // Configura o RecyclerView de CursosDisponibilizados
-        val adapter = CursosDisponibilizadosAdapter(listCursos!!, context!!)
-        var recyclerView = view.recyclerViewCursosDisponibilizados
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = CursosDisponibilizadosAdapter(listCursos, this)
+        var recyclerView = recyclerViewCursosDisponibilizados
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         // Carrega os Dados
@@ -80,7 +76,7 @@ class MeuCanalActivity : AppCompatActivity() {
                     listCursos.add(ds.getValue(Curso::class.java)!!)
                 }
 
-                val textCursosDisponibilizados = view.textNCursosDisponibilizados
+                val textCursosDisponibilizados = textNCursosDisponibilizados
                 textCursosDisponibilizados.text = listCursos.size.toString()
 
                 adapter.notifyDataSetChanged()
@@ -93,5 +89,4 @@ class MeuCanalActivity : AppCompatActivity() {
 
     }
 
-     */
 }

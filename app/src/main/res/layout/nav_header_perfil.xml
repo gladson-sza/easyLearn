@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageThumb"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:src="@color/colorCinza"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textPerfilNomeDoCanal"
+        android:id="@+id/textNomeCanal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
