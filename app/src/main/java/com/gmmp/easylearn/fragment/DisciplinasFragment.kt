@@ -69,9 +69,9 @@ class DisciplinasFragment : Fragment()  {
                 disciplinaAdapter?.notifyDataSetChanged()
                 val progressBar = progress_circular
                 val textCarregando = textCarregando
-                progressBar!!.visibility = View.GONE
+                progressBar?.visibility = View.GONE
                 textCarregando.visibility = View.GONE
-                recyclerView!!.visibility = View.VISIBLE
+                recyclerView?.visibility = View.VISIBLE
 
             }
 

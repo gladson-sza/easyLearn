@@ -38,7 +38,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editNomeCuso"
+        android:id="@+id/editNomeCurso"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -72,7 +72,7 @@
             android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerDisciplinas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

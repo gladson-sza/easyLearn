@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.CursosAdapter
+import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 
@@ -22,8 +20,8 @@ import com.gmmp.easylearn.model.Curso
  */
 class MeusCursosFragment : Fragment() {
 
-    private var listVistoPorUltimo : ArrayList<Aula>? = null
-    private var listMeusCursos : ArrayList<Curso>? = null
+    private var listVistoPorUltimo: ArrayList<Aula>? = null
+    private var listMeusCursos: ArrayList<Curso>? = null
     private var cursosAdapter: CursosAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +32,7 @@ class MeusCursosFragment : Fragment() {
         return view
     }
 
-    fun inicializar(view: View){
+    fun inicializar(view: View) {
         encherVistoPorUltimo()
         encherMeusCursos()
 
@@ -56,12 +54,12 @@ class MeusCursosFragment : Fragment() {
 
     }
 
-    fun encherVistoPorUltimo(){
+    fun encherVistoPorUltimo() {
         listVistoPorUltimo = ArrayList<Aula>()
 
-        val aula1 = Aula("1","Kotlin: Introdução","Emmerson Santa Rita","https://blog.intuz.com/wp-content/uploads/2017/12/Kotlin_Banner_V2--1-.jpg","25:35")
-        val aula2 = Aula("5","C: Ponteiros","Thiago","https://i.ytimg.com/vi/9yUZygnRsm8/maxresdefault.jpg","11:46")
-        val aula3 = Aula("3","Revisão Enem 2019","Alex","https://www.sinergia.edu.br/wp-content/uploads/2016/09/Banner-Aul%C3%A3o-Sinergia-FACEBOOK-17-setembro-1200x480.jpg","25:35")
+        val aula1 = Aula("1", "Kotlin: Introdução", "Emmerson Santa Rita", "https://blog.intuz.com/wp-content/uploads/2017/12/Kotlin_Banner_V2--1-.jpg", "25:35")
+        val aula2 = Aula("5", "C: Ponteiros", "Thiago", "https://i.ytimg.com/vi/9yUZygnRsm8/maxresdefault.jpg", "11:46")
+        val aula3 = Aula("3", "Revisão Enem 2019", "Alex", "https://www.sinergia.edu.br/wp-content/uploads/2016/09/Banner-Aul%C3%A3o-Sinergia-FACEBOOK-17-setembro-1200x480.jpg", "25:35")
 
         listVistoPorUltimo!!.add(aula1)
         listVistoPorUltimo!!.add(aula3)
@@ -70,13 +68,13 @@ class MeusCursosFragment : Fragment() {
 
     }
 
-    fun encherMeusCursos(){
+    fun encherMeusCursos() {
         listMeusCursos = ArrayList<Curso>()
 
-        val curso1 = Curso("1", "Emmerson Santa Rita", "Neste cursos voc...", "https://miro.medium.com/max/1200/1*RIANcAESOEI6IbMbxvE5Aw.jpeg","Linguagem de Programção");
-        val curso2 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
-        val curso3 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
-        val curso4 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
+        val curso1 = Curso("1", "", "Emmerson Santa Rita", "Neste cursos voc...", "https://miro.medium.com/max/1200/1*RIANcAESOEI6IbMbxvE5Aw.jpeg", "Linguagem de Programção");
+        val curso2 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
+        val curso3 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
+        val curso4 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
 
         listMeusCursos!!.add(curso1)
         listMeusCursos!!.add(curso2)
