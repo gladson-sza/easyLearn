@@ -39,9 +39,9 @@
 
         <ImageView
             android:id="@+id/abir_editar_conta"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,9 +72,9 @@
 
         <ImageView
             android:id="@+id/editar_notificacoes"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -105,9 +105,9 @@
 
         <ImageView
             android:id="@+id/abrir_canal"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -138,9 +138,9 @@
 
         <ImageView
             android:id="@+id/abrir_compartilhar"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -171,9 +171,9 @@
 
         <ImageView
             android:id="@+id/abrir_sobre"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -204,9 +204,9 @@
 
         <ImageView
             android:id="@+id/abrir_sair"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/ic_conta_abrir" />
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
 
