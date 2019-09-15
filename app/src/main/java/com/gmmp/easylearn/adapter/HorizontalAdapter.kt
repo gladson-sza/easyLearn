@@ -17,7 +17,7 @@ import java.util.ArrayList
 class HorizontalAdapter(private val context: Context, private val listAulas: ArrayList<Aula>) : RecyclerView.Adapter<HorizontalAdapter.ViewHolder>(), View.OnClickListener {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout_horizontal_video, viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.adapter_horizontal_video, viewGroup, false)
         return ViewHolder(view)
     }
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
@@ -39,7 +40,7 @@ class DisciplinasAdapter(private val disciplinasList: ArrayList<Disciplina>, pri
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val iconDisciplina: CircleImageView
+        val iconDisciplina: ImageView
         val textViewNomeDisciplina: TextView
 
         init {

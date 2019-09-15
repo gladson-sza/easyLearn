@@ -11,7 +11,6 @@ import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 
 import java.util.ArrayList
@@ -19,7 +18,7 @@ import java.util.ArrayList
 class VerticalAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<VerticalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.layout_vertical_video, viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.adapter_vertical_video, viewGroup, false)
         return ViewHolder(view)
     }
 
