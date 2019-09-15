@@ -11,10 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.adapter.DisciplinasAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
-import com.gmmp.easylearn.adapter.MeusCursosAdapter
-import com.gmmp.easylearn.adapter.VerticalAdapter
+import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 
@@ -26,6 +24,7 @@ class MeusCursosFragment : Fragment() {
 
     private var listVistoPorUltimo : ArrayList<Aula>? = null
     private var listMeusCursos : ArrayList<Curso>? = null
+    private var cursosAdapter: CursosAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,13 +46,13 @@ class MeusCursosFragment : Fragment() {
         recyclerViewVistoPorUltimo.adapter = adapterVistoPorUltimo
 
         val recyclerViewMeusCursos = view.findViewById<RecyclerView>(R.id.recyclerViewMeusCursos)
+        val linearManager = LinearLayoutManager(activity)
 
         //Inicializa os cursos
-        recyclerViewMeusCursos.layoutManager =LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val meusCursosAdapter = MeusCursosAdapter(activity!!, listMeusCursos!!)
-        recyclerViewMeusCursos.adapter = meusCursosAdapter
-
-
+        cursosAdapter = activity?.let { CursosAdapter(it, listMeusCursos!!) }
+        recyclerViewMeusCursos!!.layoutManager = linearManager
+        recyclerViewMeusCursos.isNestedScrollingEnabled = false
+        recyclerViewMeusCursos!!.adapter = cursosAdapter
 
     }
 
@@ -74,14 +73,15 @@ class MeusCursosFragment : Fragment() {
     fun encherMeusCursos(){
         listMeusCursos = ArrayList<Curso>()
 
-        val curso1 = Curso("1", "Kotlin", "Neste curso vamos...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJGrWQ1ch6aAbchITETRuHYDRUh1JBAcVbOzZNgZ2ZM8k4mzxY","Linguagem de Programção");
-        val curso2 = Curso("2", "Vest mais fácil", "Vamos aprender com...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
-
+        val curso1 = Curso("1", "Emmerson Santa Rita", "Neste cursos voc...", "https://miro.medium.com/max/1200/1*RIANcAESOEI6IbMbxvE5Aw.jpeg","Linguagem de Programção");
+        val curso2 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
+        val curso3 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
+        val curso4 = Curso("2", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB","Teste");
 
         listMeusCursos!!.add(curso1)
         listMeusCursos!!.add(curso2)
-
-
+        listMeusCursos!!.add(curso3)
+        listMeusCursos!!.add(curso4)
 
 
     }

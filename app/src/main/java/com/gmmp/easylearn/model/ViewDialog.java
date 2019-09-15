@@ -26,7 +26,7 @@ public class ViewDialog {
         dialog  = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.layout_loading);
+        dialog.setContentView(R.layout.loading);
         TextView title = dialog.findViewById(R.id.title);
         TextView description = dialog.findViewById(R.id.description);
 
@@ -44,8 +44,8 @@ public class ViewDialog {
 
         GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
         Glide.with(activity)
-                .load(R.drawable.coffe_loading)
-                .placeholder(R.drawable.coffe_loading)
+                .load(R.drawable.ic_loading)
+                .placeholder(R.drawable.ic_loading)
                 .centerCrop()
                 .crossFade()
                 .into(imageViewTarget);
