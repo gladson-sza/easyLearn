@@ -4,7 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.CursosDisponibilizadosAdapter
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
@@ -38,7 +40,7 @@ class MeuCanalActivity : AppCompatActivity() {
         // Carrega as Informações do Usuário no Seu Perfil
         val auth = FirebaseAuth.getInstance().currentUser
         val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth!!.uid)
-        val cursos = usuario.child("canal").child("cursos")
+        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
 
         usuario.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -63,29 +65,32 @@ class MeuCanalActivity : AppCompatActivity() {
         }
 
         // Configura o RecyclerView de CursosDisponibilizados
-        val adapter = CursosDisponibilizadosAdapter(listCursos, this)
+        val adapter = CursosAdapter(this, listCursos)
         var recyclerView = recyclerViewCursosDisponibilizados
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Carrega os Dados
-        cursos.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                listCursos.clear()
-                for (ds in dataSnapshot.children) {
-                    listCursos.add(ds.getValue(Curso::class.java)!!)
-                }
+        cursos.addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        listCursos.clear()
+                        for (d in dataSnapshot.children) {
+                            val c = d.getValue(Curso::class.java)
 
-                val textCursosDisponibilizados = textNCursosDisponibilizados
-                textCursosDisponibilizados.text = listCursos.size.toString()
+                            if (c?.idCanal.equals("${auth.uid}")) {
+                                listCursos.add(c!!)
+                            }
+                        }
 
-                adapter.notifyDataSetChanged()
-            }
+                        adapter.notifyDataSetChanged()
+                        viewDialog.hideDialog()
 
-            override fun onCancelled(databaseError: DatabaseError) {
+                    }
 
-            }
-        })
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
     }
 

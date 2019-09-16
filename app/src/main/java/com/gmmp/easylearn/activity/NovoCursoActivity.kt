@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_novo_curso.*
 import java.io.ByteArrayOutputStream
 
@@ -45,7 +44,7 @@ class NovoCursoActivity : AppCompatActivity() {
         viewDialog.showDialog("Novo Curso", "Aguarde, carregando informações para seu novo curso...")
 
         val idCanal = FirebaseAuth.getInstance().currentUser?.uid
-        val canal = FirebaseDatabase.getInstance().reference.child("cursos")
+        val novoCurso = FirebaseDatabase.getInstance().reference.child("cursos")
         imageThumb = findViewById(R.id.imageThumb)
 
         imageThumb.setOnClickListener {
@@ -116,12 +115,11 @@ class NovoCursoActivity : AppCompatActivity() {
 
                 val cursoId = editNomeCurso.text.toString()
 
-                canal.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
-                canal.child(cursoId).child("idCanal").setValue(idCanal)
-                canal.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
-                canal.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
-                canal.child(cursoId).child("thumbUrl").setValue("---")
-                canal.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
+                novoCurso.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
+                novoCurso.child(cursoId).child("idCanal").setValue(idCanal)
+                novoCurso.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
+                novoCurso.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
+                novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
 
                 val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
                 val outputStream = ByteArrayOutputStream()
@@ -134,16 +132,24 @@ class NovoCursoActivity : AppCompatActivity() {
                         .child("$cursoId.jpeg")
 
                 val uploadTask = imageRef.putBytes(imageBytes)
-                uploadTask.addOnSuccessListener {
-                    viewDialog.hideDialog()
-                    Toast.makeText(applicationContext, "Curso criado com sucesso", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
                 uploadTask.addOnFailureListener {
+                    novoCurso.child(cursoId).removeValue()
                     viewDialog.hideDialog()
                     Toast.makeText(applicationContext, "Não foi possível fazer upload da Thumb", Toast.LENGTH_SHORT).show()
-                }
+                }.addOnSuccessListener {
+                    imageRef.downloadUrl.addOnFailureListener {
+                        novoCurso.child(cursoId).removeValue()
+                        viewDialog.hideDialog()
+                        Toast.makeText(applicationContext, "Não foi possível fazer upload da Thumb", Toast.LENGTH_SHORT).show()
+                    }.addOnSuccessListener {
+                        novoCurso.child(cursoId).child("thumbUrl").setValue(it.toString())
+                        viewDialog.hideDialog()
+                        Toast.makeText(applicationContext, "Curso criado com sucesso", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
 
+
+                }
 
             }
 

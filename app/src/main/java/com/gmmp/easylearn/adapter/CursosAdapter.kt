@@ -25,13 +25,14 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
     }
 
     override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
-        var (id, nome, descricao, thumb, disciplina) = listCursos[i]
+        var (id, idCanal, nome, descricao, thumb, disciplina) = listCursos[i]
         if (!thumb.isEmpty()) {
             Glide.with(context)
                     .load(listCursos[i].thumbUrl)
                     .centerCrop()
                     .into(myViewHolder.thumbCurso)
         }
+
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
     }
