@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnIniciarSessao: Button
     private lateinit var txtCadastro: TextView
+    private lateinit var txtRecuperarSenha: TextView
     private lateinit var editEmail: EditText
     private lateinit var editSenha: EditText
     private lateinit var firebaseAuth: FirebaseAuth
@@ -40,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         editEmail = findViewById(R.id.textEmail)
         editSenha = findViewById(R.id.textSenha)
 
-        viewDialog = ViewDialog(this@LoginActivity)
+        viewDialog = ViewDialog(this)
 
         supportActionBar?.hide()
         //Inicializa o botão
@@ -56,16 +57,16 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(this) { task ->
                     viewDialog.hideDialog()
                     if (task.isSuccessful) {
-                        val intent = Intent(this@LoginActivity, NavegacaoActivity::class.java)
+                        val intent = Intent(this, NavegacaoActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this@LoginActivity, "Credenciais inválidas", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
-                Toast.makeText(this@LoginActivity, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -88,9 +89,13 @@ class LoginActivity : AppCompatActivity() {
         // Configura clique do botão do Google
         btnGoogle = findViewById(R.id.buttonLoginGoogle)
         btnGoogle.setOnClickListener {
-            Toast.makeText(applicationContext, "AAA", Toast.LENGTH_SHORT)
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
+
+        txtRecuperarSenha = findViewById(R.id.textRecuperarSenha)
+        txtRecuperarSenha.setOnClickListener {
+            startActivity(Intent(applicationContext, EsqueciMinhaSenhaActivity::class.java))
         }
 
     }
@@ -100,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val intent = Intent(this@LoginActivity, NavegacaoActivity::class.java)
+                        val intent = Intent(this, NavegacaoActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)

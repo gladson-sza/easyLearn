@@ -120,6 +120,10 @@ class CadastroActivity : AppCompatActivity() {
 
 
     fun registrarUsuario(email: String, senha: String) {
+
+        val carregando = ViewDialog(this)
+        carregando.showDialog("Autenticando", "Carregando...")
+
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(this) { task ->
@@ -136,6 +140,8 @@ class CadastroActivity : AppCompatActivity() {
 
                         //Adiciona ao Firebase
                         reference.child(usuario.id).setValue(usuario)
+
+                        carregando.hideDialog()
 
                         //Abre tela de Destaques
                         val intent = Intent(this@CadastroActivity, NavegacaoActivity::class.java)
