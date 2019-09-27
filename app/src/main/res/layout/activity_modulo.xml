@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.a"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Conteúdo do curso"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:textSize="26sp"
+        android:textColor="@color/colorTitulo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Delize para baixo para vizualizar todo o conteúdo"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:textSize="14sp"
+        android:textColor="@color/colorCheck"/>
+
+<!--    <android.support.v7.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerViewModulo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:orientation="horizontal">-->
+<!--    </android.support.v7.widget.RecyclerView>-->
+
+    <iammert.com.expandablelib.ExpandableLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:parentLayout="@layout/layout_parent"
+        app:childLayout="@layout/layout_child"/>
+
+
+
+</LinearLayout>

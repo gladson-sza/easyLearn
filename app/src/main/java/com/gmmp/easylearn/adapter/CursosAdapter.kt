@@ -1,6 +1,7 @@
 package com.gmmp.easylearn.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,9 @@ import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.ModuloActivity
+import com.gmmp.easylearn.activity.NovoCursoActivity
+import com.gmmp.easylearn.activity.a
 import com.gmmp.easylearn.model.Curso
 
 
@@ -35,6 +39,9 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
 
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
+        myViewHolder.btnAbrir.setOnClickListener {
+            context.startActivity(Intent(context, a::class.java))
+        }
     }
 
     override fun getItemCount(): Int {

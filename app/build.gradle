@@ -59,6 +59,15 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // ExpandableLayout
+    compile 'com.github.iammert:ExpandableLayout:1.4.1'
+
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
