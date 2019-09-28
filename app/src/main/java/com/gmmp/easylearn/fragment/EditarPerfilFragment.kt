@@ -37,13 +37,7 @@ class EditarPerfilFragment : Fragment() {
 
     fun inicializar(view: View) {
 
-        // Incializa os compoenentes da tela
         val viewDialog = ViewDialog(activity)
-        val editNome = view.editTextNome
-        val editDescricao = view.editTextCursoDescricao
-        val editPerfil = view.editImageProfile
-        val editWallpeper = view.editImageWallpaper
-        val buttonSalvar = view.editButtonSalvar
 
         // Carrega as Informações do Usuário no Seu Perfil
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
@@ -55,8 +49,8 @@ class EditarPerfilFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val u = dataSnapshot.getValue(Usuario::class.java)
 
-                editNome.setText(u?.nome)
-                editDescricao.setText(u?.descricao)
+                view.editNome.setText(u?.nome)
+                view.editDescricao.setText(u?.descricao)
 
                 // Fecha o Dialog após carregar os dados
                 viewDialog.hideDialog()
@@ -67,14 +61,13 @@ class EditarPerfilFragment : Fragment() {
             }
         })
 
-
         // Configuração do Botão de Salvar
-        buttonSalvar.setOnClickListener {
+        view.buttonSalvar.setOnClickListener {
 
             viewDialog.showDialog("Aguarde", "Salvando Informações")
 
-            usuario.child("nome").setValue(editNome?.text.toString())
-            usuario.child("descricao").setValue(editDescricao?.text.toString())
+            usuario.child("nome").setValue(view.editNome?.text.toString())
+            usuario.child("descricao").setValue(view.editDescricao?.text.toString())
 
             viewDialog.hideDialog()
 

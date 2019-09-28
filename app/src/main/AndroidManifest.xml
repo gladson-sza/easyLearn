@@ -18,7 +18,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.LoginActivity" />
         </activity>
-        <activity android:name=".activity.MeuCanalActivity" />
+        <activity android:name=".activity.MeuCanalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.NavegacaoActivity" />
+        </activity>
         <activity android:name=".activity.EditarCursoActivity" />
         <activity android:name=".activity.NovoCursoActivity" />
         <activity

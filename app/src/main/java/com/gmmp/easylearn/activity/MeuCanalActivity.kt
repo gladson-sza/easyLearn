@@ -26,6 +26,8 @@ class MeuCanalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meu_canal)
 
+        supportActionBar?.title = "Meu Canal"
+
         inicializar()
     }
 
