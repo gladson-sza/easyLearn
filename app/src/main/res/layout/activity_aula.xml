@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AulaActivity">
+
+    <!-- https://github.com/AriesHoo/JieCaoVideoPlayer -->
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/videoplayer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/videoplayer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_nomeAula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprodisplay_bold"
+                android:text="Nome da Aula"
+                android:textColor="@color/colorTitulo"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_nomeCurso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="Nome do Curso"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="•"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/txt_nomeCanal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="Nome do Canal"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btn_gostei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_options"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_thumb_up_black_24dp"
+                        android:tint="@color/colorInativo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_medium"
+                        android:text="Gostei" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_naoGostei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_options"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_thumb_down_black_24dp"
+                        android:tint="@color/colorInativo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_medium"
+                        android:text="Não gostei" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_materialApoio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_options"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_file_download_black_24dp"
+                        android:tint="@color/colorInativo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_medium"
+                        android:text="Transferir" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_partilhar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_options"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_share_black_24dp"
+                        android:tint="@color/colorInativo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_medium"
+                        android:text="Partilhar" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_denunciar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_options"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_assistant_photo_black_24dp"
+                        android:tint="@color/colorInativo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_medium"
+                        android:text="Denunciar" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/column_divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_semibold"
+                    android:text="Comentários"
+                    android:textColor="@color/colorDescricao"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/txt_qtd_comentarios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/sfprodisplay_medium"
+                    android:text="(0)"
+                    android:textColor="@color/colorInativo"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_usuario"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="6dp"
+                    android:src="@drawable/ic_default_avatar"/>
+
+                <EditText
+                    android:id="@+id/btn_comentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Adicione um comentário publico"
+                    android:fontFamily="@font/sfprodisplay_regular"
+                    android:textSize="16sp"
+                    android:enabled="false"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerComentarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
