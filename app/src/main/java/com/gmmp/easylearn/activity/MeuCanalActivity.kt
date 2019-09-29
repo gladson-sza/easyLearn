@@ -4,13 +4,11 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
-import com.gmmp.easylearn.adapter.CursosDisponibilizadosAdapter
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
-import com.gmmp.easylearn.model.ViewDialog
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

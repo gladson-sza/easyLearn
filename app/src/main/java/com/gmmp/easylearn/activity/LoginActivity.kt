@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.model.ViewDialog
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
