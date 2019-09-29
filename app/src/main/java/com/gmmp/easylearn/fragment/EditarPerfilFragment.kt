@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.model.Usuario
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_meu_canal.*
 import kotlinx.android.synthetic.main.fragment_editar_perfil.view.*
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
@@ -62,8 +64,24 @@ class EditarPerfilFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val u = dataSnapshot.getValue(Usuario::class.java)
 
-                view.editNome.setText(u?.nome)
-                view.editDescricao.setText(u?.descricao)
+                if (u != null) {
+                    view.editNome.setText(u.nome)
+                    view.editDescricao.setText(u.descricao)
+
+                    if (u.urlPerfil.isNotEmpty()) {
+                        Glide.with(activity)
+                                .load(u.urlPerfil)
+                                .centerCrop()
+                                .into(view.editImageProfile)
+                    }
+
+                    if (u.urlWallpaper.isNotEmpty()) {
+                        Glide.with(activity)
+                                .load(u.urlWallpaper)
+                                .centerCrop()
+                                .into(view.editImageWallpaper)
+                    }
+                }
 
                 // Fecha o Dialog após carregar os dados
                 viewDialog.hideDialog()
@@ -115,42 +133,43 @@ class EditarPerfilFragment : Fragment() {
                 imageProfileRef.downloadUrl.addOnFailureListener {
                     toast("Não foi possível fazer upload da Foto de Perfil")
                 }.addOnSuccessListener {
-                    usuario.child("perfilUrl").setValue(it.toString())
+                    usuario.child("urlPerfil").setValue(it.toString())
                     toast("Foto de perfil atualizado com sucesso")
+
+                    // Imagem de Capa
+
+                    val bitmapWallpaper = (view.editImageWallpaper.drawable as BitmapDrawable).bitmap
+                    val outputStreamWallpaper = ByteArrayOutputStream()
+                    bitmapWallpaper.compress(Bitmap.CompressFormat.JPEG, 70, outputStreamWallpaper)
+                    val imageBytesWallpaper = outputStreamWallpaper.toByteArray()
+
+                    val imageWallpaperRef = FirebaseStorage.getInstance().reference
+                            .child("imagens")
+                            .child("usuarios")
+                            .child("${auth.uid}wallpaper.jpeg")
+
+                    val uploadTaskWallpaper = imageWallpaperRef.putBytes(imageBytesWallpaper)
+                    uploadTaskWallpaper.addOnFailureListener {
+                        viewDialog.hideDialog()
+                        toast("Não foi possível fazer upload da Foto de Capa")
+                    }.addOnSuccessListener {
+                        imageWallpaperRef.downloadUrl.addOnFailureListener {
+                            toast("Não foi possível fazer upload da Foto de Capa")
+                        }.addOnSuccessListener {
+                            usuario.child("urlWallpaper").setValue(it.toString())
+                            toast("Foto de capa atualizada com sucesso")
+                            viewDialog.hideDialog()
+
+                            // Volta para o fragment de MinhaConta
+                            val transaction = activity?.supportFragmentManager?.beginTransaction()
+                            transaction?.replace(R.id.frameContainer, MinhaContaFragment())
+                            transaction?.commit()
+
+                        }
+                    }
                 }
             }
 
-            // Imagem de Capa
-
-            val bitmapWallpaper = (view.editImageWallpaper.drawable as BitmapDrawable).bitmap
-            val outputStreamWallpaper = ByteArrayOutputStream()
-            bitmapWallpaper.compress(Bitmap.CompressFormat.JPEG, 70, outputStreamWallpaper)
-            val imageBytesWallpaper = outputStreamWallpaper.toByteArray()
-
-            val imageWallpaperRef = FirebaseStorage.getInstance().reference
-                    .child("imagens")
-                    .child("usuarios")
-                    .child("${auth.uid}wallpaper.jpeg")
-
-            val uploadTaskWallpaper = imageWallpaperRef.putBytes(imageBytesWallpaper)
-            uploadTaskWallpaper.addOnFailureListener {
-                viewDialog.hideDialog()
-                toast("Não foi possível fazer upload da Foto de Capa")
-            }.addOnSuccessListener {
-                imageWallpaperRef.downloadUrl.addOnFailureListener {
-                    toast("Não foi possível fazer upload da Foto de Capa")
-                }.addOnSuccessListener {
-                    usuario.child("wallpaperUrl").setValue(it.toString())
-                    toast("Foto de capa atualizada com sucesso")
-                }
-            }
-
-            viewDialog.hideDialog()
-
-            // Volta para o fragment de MinhaConta
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameContainer, MinhaContaFragment())
-            transaction?.commit()
         }
     }
 

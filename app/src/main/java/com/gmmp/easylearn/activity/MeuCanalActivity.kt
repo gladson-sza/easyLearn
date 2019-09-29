@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.model.Curso
@@ -46,8 +47,27 @@ class MeuCanalActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val u = dataSnapshot.getValue(Usuario::class.java)
 
-                textNomeCanal.text = u?.nome
-                textViewDescricao.text = u?.descricao
+                if (u != null) {
+
+                    textNomeCanal.text = u.nome
+                    textViewDescricao.text = u.descricao
+
+                    if (u.urlPerfil.isNotEmpty()) {
+                        Glide.with(applicationContext)
+                                .load(u.urlPerfil)
+                                .centerCrop()
+                                .into(imageProfile)
+                    }
+
+                    if (u.urlWallpaper.isNotEmpty()) {
+                        Glide.with(applicationContext)
+                                .load(u.urlWallpaper)
+                                .centerCrop()
+                                .into(imageThumb)
+                    }
+                }
+
+
 
                 // Fecha o Dialog após carregar os dados
                 viewDialog.hideDialog()
