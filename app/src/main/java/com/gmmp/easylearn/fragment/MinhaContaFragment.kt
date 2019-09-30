@@ -9,15 +9,8 @@ import android.view.ViewGroup
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.LoginActivity
 import com.gmmp.easylearn.activity.MeuCanalActivity
-import com.gmmp.easylearn.model.Usuario
-import com.gmmp.easylearn.model.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_perfil.view.*
-import kotlin.collections.ArrayList
 
 
 /**
