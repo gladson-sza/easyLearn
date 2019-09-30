@@ -5,10 +5,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import com.gmmp.easylearn.model.Curso
 
 /**
  * Função que verifica que sem conexão com a internet
  */
+
 fun temConexao(context: Context): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = connectivityManager.activeNetworkInfo
@@ -27,3 +29,6 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
 
     return true
 }
+
+//Nome do curso
+var cursoGlobal: Curso? = null

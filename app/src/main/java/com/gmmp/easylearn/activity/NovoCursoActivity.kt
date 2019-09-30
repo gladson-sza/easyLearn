@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.gmmp.easylearn.R
@@ -35,6 +36,10 @@ class NovoCursoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_curso)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
+        supportActionBar!!.setHomeButtonEnabled(true)      //Ativar o botão
+        supportActionBar!!.setTitle("Novo curso")
 
         inicializar()
     }
@@ -173,5 +178,15 @@ class NovoCursoActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { //Botão adicional na ToolBar
+        when (item.itemId) {
+            android.R.id.home  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
+            -> finish()  //Método para matar a activity e não deixa-lá indexada na pilhagem
+            else -> {
+            }
+        }
+        return true
     }
 }

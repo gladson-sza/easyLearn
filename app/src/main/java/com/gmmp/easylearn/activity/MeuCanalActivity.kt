@@ -4,11 +4,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
+import com.gmmp.easylearn.model.Video
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -32,7 +34,9 @@ class MeuCanalActivity : AppCompatActivity() {
 
     fun inicializar() {
 
-        val textNomeCanal = textNomeCanal
+        supportActionBar!!.hide()
+        
+        //val textNomeCanal = textNomeCanal
         val textViewDescricao = textDescricao
 
         val viewDialog = ViewDialog(this)
@@ -66,7 +70,6 @@ class MeuCanalActivity : AppCompatActivity() {
                                 .into(imageThumb)
                     }
                 }
-
 
 
                 // Fecha o Dialog após carregar os dados
