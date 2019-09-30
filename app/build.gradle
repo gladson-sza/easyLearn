@@ -46,6 +46,7 @@ dependencies {
 
     // Bibliotecas de Design (Suporte)
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:support-vector-drawable:28.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'android.arch.navigation:navigation-ui:1.0.0'
@@ -59,15 +60,9 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // ExpandableLayout
+    // Expandable
     compile 'com.github.iammert:ExpandableLayout:1.4.1'
 
-}
-
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
 }
 
 apply plugin: 'com.google.gms.google-services'

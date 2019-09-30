@@ -13,9 +13,9 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.ModuloActivity
-import com.gmmp.easylearn.activity.NovoCursoActivity
-import com.gmmp.easylearn.activity.a
+import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
+import com.google.firebase.storage.internal.Util
 
 
 import java.util.ArrayList
@@ -40,7 +40,8 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
         myViewHolder.btnAbrir.setOnClickListener {
-            context.startActivity(Intent(context, a::class.java))
+            cursoGlobal = listCursos[i]
+            context.startActivity(Intent(context, ModuloActivity::class.java))
         }
     }
 

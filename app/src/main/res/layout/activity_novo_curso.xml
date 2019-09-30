@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.NovoCursoActivity">
 
+    <!--
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="Novo Curso"
         app:titleTextColor="@color/colorTituloActionBar" />
+        -->
 
     <ImageView
         android:id="@+id/imageThumb"
