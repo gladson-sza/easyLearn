@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_aula.*
 import kotlinx.android.synthetic.main.activity_meu_canal.*
 import org.jetbrains.anko.imageView
 
@@ -37,7 +38,7 @@ class MeuCanalActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        //val textNomeCanal = textNomeCanal
+        val textNomeCanal = textNomeCanal
         val textViewDescricao = textDescricao
 
         val viewDialog = ViewDialog(this)
@@ -54,21 +55,21 @@ class MeuCanalActivity : AppCompatActivity() {
 
                 if (u != null) {
 
-                    imageThumb.title = u.nome
+                    textNomeCanal.text = u.nome
                     textViewDescricao.text = u.descricao
 
-                    /*if (u.urlPerfil.isNotEmpty()) {
+                    if (u.urlPerfil.isNotEmpty()) {
                         Glide.with(applicationContext)
                                 .load(u.urlPerfil)
                                 .centerCrop()
                                 .into(imageProfile)
-                    }*/
+                    }
 
                     if (u.urlWallpaper.isNotEmpty()) {
                         Glide.with(applicationContext)
                                 .load(u.urlWallpaper)
                                 .centerCrop()
-                                .into(imageThumb.imageView())
+                                .into(imageThumb)
                     }
                 }
 

@@ -72,8 +72,8 @@ class MeusCursosFragment : Fragment() {
         listMeusCursos = ArrayList<Curso>()
 
         val curso1 = Curso("1", "", "Emmerson Santa Rita", "Neste cursos voc...", "https://miro.medium.com/max/1200/1*RIANcAESOEI6IbMbxvE5Aw.jpeg", "Linguagem de Programção");
-        val curso2 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
-        val curso3 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
+        val curso2 = Curso("2", "", "Lucas Silva", "Aprenda a resolv...", "https://fundacaomatiasmachline.org.br/wp-content/uploads/2017/05/Dia-do-F%C3%ADsico.jpg", "Teste");
+        val curso3 = Curso("2", "", "Marcos Lima", "Aprenda a resolv...", "https://pbs.twimg.com/media/Ddj-mckXcAI8OL2.jpg", "Teste");
         val curso4 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
 
         listMeusCursos!!.add(curso1)

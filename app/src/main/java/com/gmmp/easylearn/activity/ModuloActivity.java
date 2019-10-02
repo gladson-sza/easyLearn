@@ -1,12 +1,23 @@
 package com.gmmp.easylearn.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.gmmp.easylearn.R;
 import com.gmmp.easylearn.model.Modulo;
 import com.gmmp.easylearn.model.Video;
@@ -21,6 +32,10 @@ import static com.gmmp.easylearn.helper.UtilKt.getCursoGlobal;
 
 public class ModuloActivity extends AppCompatActivity {
 
+    private AppCompatButton btnNovoModulo;
+    private AlertDialog alertDialog;
+    private EditText txtNomeModulo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +44,50 @@ public class ModuloActivity extends AppCompatActivity {
         iniciar();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void iniciar(){
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getCursoGlobal().getNome());
+
+        // Banner
+
+        //Btn novo modulo
+        AlertDialog.Builder builderDialog = new AlertDialog.Builder(this);
+        builderDialog.setTitle("Novo módulo");
+
+        FrameLayout container = new FrameLayout(this);
+        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
+        params.rightMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin);
+        params.topMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin);
+
+        txtNomeModulo = new EditText(this);
+        txtNomeModulo.setHint("Nome do módulo");
+        txtNomeModulo.setBackgroundResource(R.color.colorEditText);
+        txtNomeModulo.setTextColor(R.color.colorDescricao);
+        txtNomeModulo.setLayoutParams(params);
+
+        container.addView(txtNomeModulo);
+
+        builderDialog.setView(container);
+        builderDialog.setPositiveButton("Confirmar", null);
+        builderDialog.setNegativeButton("Cancelar", null);
+
+        alertDialog = builderDialog.create();
+
+        btnNovoModulo = findViewById(R.id.buttonNovoModulo);
+        btnNovoModulo.setOnClickListener(new View.OnClickListener( ) {
+            @Override
+            public void onClick(View v) {
+                alertDialog.show();
+            }
+        });
+
+
+        // Lista de modulos
 
         ExpandableLayout layout = findViewById(R.id.expandable);
 
