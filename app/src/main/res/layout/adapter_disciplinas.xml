@@ -32,7 +32,7 @@
             android:src="@color/colorTitulo"
             android:text="Nome da disciplina"
             android:textColor="@color/colorTitulo"
-            android:textSize="17sp"/>
+            android:textSize="20sp"/>
 
         <ImageView
             android:id="@+id/abir_editar_conta"

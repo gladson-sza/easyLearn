@@ -9,11 +9,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.Toast
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Disciplina
-import com.gmmp.easylearn.model.ViewDialog
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_novo_curso.*
+import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
 
@@ -53,6 +53,7 @@ class NovoCursoActivity : AppCompatActivity() {
         imageThumb = findViewById(R.id.imageThumb)
 
         imageThumb.setOnClickListener {
+
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             if (intent.resolveActivity(applicationContext.packageManager) != null) {
                 startActivityForResult(intent, GALERIA)
@@ -103,59 +104,55 @@ class NovoCursoActivity : AppCompatActivity() {
 
             val disciplinaSelecionada = spinnerDisciplinas.selectedItem as String
 
-            if (editNomeCurso.text.isEmpty()) {
-                Toast.makeText(applicationContext, "Nome do curso obrigatório", Toast.LENGTH_SHORT).show()
-            } else if (editNomeCurso.text.length < 4) {
-                Toast.makeText(applicationContext, "O nome do curso deve ter ao menos 4 caracteres", Toast.LENGTH_SHORT).show()
-            } else if (listaCursos.contains(editNomeCurso.text.toString())) {
+            when {
+                editNomeCurso.text.isEmpty() -> toast("Nome do curso obrigatório")
+                editNomeCurso.text.length < 4 -> toast("O nome do curso deve ter ao menos 4 caracteres")
+                listaCursos.contains(editNomeCurso.text.toString()) -> toast("O nome deste curso já existe")
+                editDescricaoCurso.text.isEmpty() -> toast("Descrição obrigatória")
+                disciplinaSelecionada === SPINNER_VAZIO -> toast("Você não selecionou a disciplina")
 
-            } else if (editDescricaoCurso.text.isEmpty()) {
-                Toast.makeText(applicationContext, "Descrição obrigatória", Toast.LENGTH_SHORT).show()
-            } else if (disciplinaSelecionada.equals(SPINNER_VAZIO)) {
-                Toast.makeText(applicationContext, "Você não selecionou a disciplina", Toast.LENGTH_SHORT).show()
-            } else {
+                else -> {
+                    val viewDialog = ViewDialog(this)
+                    viewDialog.showDialog("Carregando", "Aguarde, estamos preparando as coisas por aqui")
 
-                val viewDialog = ViewDialog(this)
-                viewDialog.showDialog("Carregando", "Aguarde, estamos preparando as coisas por aqui")
+                    val cursoId = editNomeCurso.text.toString()
 
-                val cursoId = editNomeCurso.text.toString()
+                    novoCurso.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
+                    novoCurso.child(cursoId).child("idCanal").setValue(idCanal)
+                    novoCurso.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
+                    novoCurso.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
+                    novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
 
-                novoCurso.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
-                novoCurso.child(cursoId).child("idCanal").setValue(idCanal)
-                novoCurso.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
-                novoCurso.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
-                novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
+                    val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
+                    val outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+                    val imageBytes = outputStream.toByteArray()
 
-                val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
-                val outputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
-                val imageBytes = outputStream.toByteArray()
+                    val imageRef = FirebaseStorage.getInstance().reference
+                            .child("imagens")
+                            .child("cursos")
+                            .child("$cursoId.jpeg")
 
-                val imageRef = FirebaseStorage.getInstance().reference
-                        .child("imagens")
-                        .child("cursos")
-                        .child("$cursoId.jpeg")
-
-                val uploadTask = imageRef.putBytes(imageBytes)
-                uploadTask.addOnFailureListener {
-                    novoCurso.child(cursoId).removeValue()
-                    viewDialog.hideDialog()
-                    Toast.makeText(applicationContext, "Não foi possível fazer upload da Thumb", Toast.LENGTH_SHORT).show()
-                }.addOnSuccessListener {
-                    imageRef.downloadUrl.addOnFailureListener {
+                    val uploadTask = imageRef.putBytes(imageBytes)
+                    uploadTask.addOnFailureListener {
                         novoCurso.child(cursoId).removeValue()
                         viewDialog.hideDialog()
-                        Toast.makeText(applicationContext, "Não foi possível fazer upload da Thumb", Toast.LENGTH_SHORT).show()
+                        toast("Não foi possível fazer upload da Thumb")
                     }.addOnSuccessListener {
-                        novoCurso.child(cursoId).child("thumbUrl").setValue(it.toString())
-                        viewDialog.hideDialog()
-                        Toast.makeText(applicationContext, "Curso criado com sucesso", Toast.LENGTH_SHORT).show()
-                        finish()
+                        imageRef.downloadUrl.addOnFailureListener {
+                            novoCurso.child(cursoId).removeValue()
+                            viewDialog.hideDialog()
+                            toast("Não foi possível fazer upload da Thumb")
+                        }.addOnSuccessListener {
+                            novoCurso.child(cursoId).child("thumbUrl").setValue(it.toString())
+                            viewDialog.hideDialog()
+                            toast("Curso criado com sucesso")
+                            finish()
+                        }
+
+
                     }
-
-
                 }
-
             }
 
         }
