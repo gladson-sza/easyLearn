@@ -31,7 +31,7 @@ class MeuCanalActivity : AppCompatActivity() {
     fun inicializar() {
 
         supportActionBar!!.hide()
-        
+
         //val textNomeCanal = textNomeCanal
         val textViewDescricao = textDescricao
 
