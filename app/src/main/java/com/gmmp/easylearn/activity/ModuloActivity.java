@@ -109,9 +109,10 @@ public class ModuloActivity extends AppCompatActivity {
             // Video do modulo
             @Override
             public void renderChild(final View view, Video model, int parentPosition, int childPosition) {
-                if(childPosition == 0){
+                if(childPosition == 0){ // essa condição está errada, pois ela não vai mostrar o primeiro vídeo do array / digitado por Paulo
                     ((TextView) view.findViewById(R.id.tv_child_name)).setTypeface(null, Typeface.BOLD);
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText("Adicionar vídeo");
+                    ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(" ");
                 }else {
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText(model.getNome());
                     ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(model.getDuracao());
