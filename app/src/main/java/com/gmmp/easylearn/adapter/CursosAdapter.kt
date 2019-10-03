@@ -3,6 +3,7 @@ package com.gmmp.easylearn.adapter
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.ModuloActivity
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.internal.Util
 
 
@@ -40,8 +42,18 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
         myViewHolder.btnAbrir.setOnClickListener {
+
             cursoGlobal = listCursos[i]
-            context.startActivity(Intent(context, ModuloActivity::class.java))
+            val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+
+            if(auth.equals(idCanal)) {
+                context.startActivity(Intent(context, ModuloActivity::class.java))
+            } else {
+
+            }
+
+
         }
     }
 

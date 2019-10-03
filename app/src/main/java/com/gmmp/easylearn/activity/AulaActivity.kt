@@ -9,5 +9,7 @@ class AulaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aula)
+
+        supportActionBar?.hide()
     }
 }
