@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MeusCursosFragment">
 
@@ -97,7 +99,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerViewMeusCursos"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="400dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginTop="10dp"
@@ -108,4 +110,4 @@
             </ScrollView>
         </LinearLayout>
     </ScrollView>
-</FrameLayout>
+</LinearLayout>

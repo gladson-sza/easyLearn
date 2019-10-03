@@ -23,7 +23,7 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val (id, titulo, descricao, thumbUrl, preco) = listCursos[i]
+        val (id, idCanal, titulo, descricao, thumbUrl, disciplina, preco) = listCursos[i]
 
         viewHolder.textTitulo.text = titulo
         viewHolder.textDescricao.text = descricao
@@ -35,8 +35,8 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
                     .into(viewHolder.imageThumbnail)
         }
 
-        if (!preco.isEmpty()) {
-            viewHolder.buttonPreco.text = preco
+        if (preco != 0.0) {
+            viewHolder.buttonPreco.text = "R$ $preco"
         } else {
             viewHolder.buttonPreco.text = "Gratuito"
         }

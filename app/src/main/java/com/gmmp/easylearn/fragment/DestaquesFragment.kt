@@ -91,7 +91,7 @@ class DestaquesFragment : Fragment() {
         listPrincipais = ArrayList()
 
         val curso1 = Curso("2", "", "Stoodi", "Preparatório para Vestibulares", "https://cadernodoenem.com.br/wp-content/uploads/2016/09/stoodi-1024x576.png", "", 0.0)
-        val curso2 = Curso("3", "", "Pro ENEM", "Preparatório para Vestibulares", "https://www.concurseirosdamadrugada.com.br/wp-content/uploads/2018/09/logo-proenem-vale-a-pena.png", "", 0.0)
+        val curso2 = Curso("3", "", "Pro ENEM", "Preparatório para Vestibulares", "https://www.concurseirosdamadrugada.com.br/wp-content/uploads/2018/09/logo-proenem-vale-a-pena.png", "", 120.0)
         val curso3 = Curso("4", "", "AulaLivre.net", "Preparatório para Vestibulares", "https://sambatech.com/blog/wp-content/uploads/2015/01/banner-2-case-aula-livre1.png", "", 0.0)
 
         listPrincipais?.add(curso1)

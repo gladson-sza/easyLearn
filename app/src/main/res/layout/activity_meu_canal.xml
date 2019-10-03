@@ -1,195 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fcfcfc">
+    android:layout_height="wrap_content"
+    tools:context=".activity.MeuCanalActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <ImageView
             android:id="@+id/imageThumb"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorCinza"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMargin="48dp"
-            app:expandedTitleMarginEnd="48dp"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:title="Nome do Canal">
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:src="@color/colorCinza"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarid"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
+            android:layout_marginStart="144dp"
+            android:layout_marginLeft="144dp"
+            android:layout_marginTop="68dp"
+            android:src="@drawable/ic_default_avatar"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        <TextView
+            android:id="@+id/textNomeCanal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:gravity="center_horizontal"
+            android:text="Nome do Canal"
+            android:textColor="@color/colorTitulo"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <TextView
+            android:id="@+id/textDescricao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNomeCanal" />
 
+        <TextView
+            android:id="@+id/textNCursosDisponibilizados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="cursos disponibilizados"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonNovoCurso"
+            app:layout_constraintStart_toEndOf="@+id/textNCursosDisponibilizados"
+            app:layout_constraintTop_toTopOf="@+id/buttonNovoCurso" />
 
-            <!--
+        <Button
+            android:id="@+id/buttonNovoCurso"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_primary_outline"
+            android:drawableStart="@drawable/ic_add_primary_24dp"
+            android:drawableLeft="@drawable/ic_add_primary_24dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:paddingLeft="16dp"
+            android:paddingRight="8dp"
+            android:text="Novo Curso"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageProfile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_default_avatar"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewCursosDisponibilizados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:text="Cursos Disponibilizados"
+            android:textColor="@color/colorTitulo"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonNovoCurso" />
 
-            <TextView
-                android:id="@+id/textNomeCanal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:textColor="@color/colorTitulo"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
-
-                -->
-
-            <TextView
-                android:id="@+id/textDescricao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:maxLines="3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textNomeCanal" />
-
-            <TextView
-                android:id="@+id/textNCursosDisponibilizados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="cursos disponibilizados"
-                app:layout_constraintBottom_toBottomOf="@+id/textNCursosDisponibilizados"
-                app:layout_constraintStart_toEndOf="@+id/textNCursosDisponibilizados"
-                app:layout_constraintTop_toTopOf="@+id/textNCursosDisponibilizados" />
-
-            <Button
-                android:id="@+id/buttonNovoCurso"
-                android:layout_width="160dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_primary_outline"
-                android:drawableStart="@drawable/ic_add_primary_24dp"
-                android:drawableLeft="@drawable/ic_add_primary_24dp"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:paddingLeft="16dp"
-                android:paddingRight="8dp"
-                android:text="Novo Curso"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/textViewCursosDisponibilizados"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
-
-            <TextView
-                android:id="@+id/textNCursosSubscritos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textNCursosDisponibilizados" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="cursos subscritos"
-                app:layout_constraintBottom_toBottomOf="@+id/textNCursosSubscritos"
-                app:layout_constraintStart_toEndOf="@+id/textNCursosSubscritos"
-                app:layout_constraintTop_toTopOf="@+id/textNCursosSubscritos" />
-
-            <TextView
-                android:id="@+id/textViewCursosDisponibilizados"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:text="Cursos Disponibilizados"
-                android:textColor="@color/colorTitulo"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textNCursosSubscritos" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewCursosDisponibilizados"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCursosDisponibilizados" />
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewCursosDisponibilizados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCursosDisponibilizados" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
