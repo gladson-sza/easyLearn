@@ -1,6 +1,8 @@
 package com.gmmp.easylearn.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
@@ -93,6 +95,7 @@ public class ModuloActivity extends AppCompatActivity {
 
         layout.setRenderer(new ExpandableLayout.Renderer<Modulo, Video>() {
 
+            // Modulo
             @Override
             public void renderParent(View view, Modulo model, boolean isExpanded, int parentPosition) {
                 ((TextView) view.findViewById(R.id.tv_parent_name)).setText("Seção " + (parentPosition + 1) + " - " + model.getNome());
@@ -103,17 +106,25 @@ public class ModuloActivity extends AppCompatActivity {
                 }
             }
 
+            // Video do modulo
             @Override
             public void renderChild(final View view, Video model, int parentPosition, int childPosition) {
-                ((TextView) view.findViewById(R.id.tv_child_name)).setText(model.getNome());
-                ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(model.getDuracao());
-                (view.findViewById(R.id.tv_child_name)).setOnClickListener(new View.OnClickListener( ) {
-                    @Override
-                    public void onClick(View v) {
-                        TextView txt = (TextView)v;
-                        Toast.makeText(ModuloActivity.this, "Video clicado: " + txt.getText(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if(childPosition == 0){ // essa condição está errada, pois ela não vai mostrar o primeiro vídeo do array / digitado por Paulo
+                    ((TextView) view.findViewById(R.id.tv_child_name)).setTypeface(null, Typeface.BOLD);
+                    ((TextView) view.findViewById(R.id.tv_child_name)).setText("Adicionar vídeo");
+                    ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(" ");
+                }else {
+                    ((TextView) view.findViewById(R.id.tv_child_name)).setText(model.getNome());
+                    ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(model.getDuracao());
+                    (view.findViewById(R.id.tv_child_name)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            TextView txt = (TextView) v;
+                            startActivity(new Intent(getApplicationContext(), AulaActivity.class));
+                            Toast.makeText(ModuloActivity.this, "Video clicado: " + txt.getText(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 
