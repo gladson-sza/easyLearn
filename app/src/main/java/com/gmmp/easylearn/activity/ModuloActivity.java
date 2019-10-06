@@ -1,6 +1,7 @@
 package com.gmmp.easylearn.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -23,6 +24,9 @@ import com.bumptech.glide.Glide;
 import com.gmmp.easylearn.R;
 import com.gmmp.easylearn.model.Modulo;
 import com.gmmp.easylearn.model.Video;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,9 @@ public class ModuloActivity extends AppCompatActivity {
     private AppCompatButton btnNovoModulo;
     private AlertDialog alertDialog;
     private EditText txtNomeModulo;
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +82,22 @@ public class ModuloActivity extends AppCompatActivity {
         container.addView(txtNomeModulo);
 
         builderDialog.setView(container);
-        builderDialog.setPositiveButton("Confirmar", null);
+        builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String nome = txtNomeModulo.getText().toString();
+                if(nome.isEmpty())
+                    txtNomeModulo.setError("Por favor, entre com o nome do módulo");
+                else{
+                    Modulo modulo = new Modulo(nome);
+                    firebaseDatabase = FirebaseDatabase.getInstance();
+                    databaseReference = firebaseDatabase.getReference();
+                    databaseReference.child("modulos").child(nome).setValue(modulo);
+                }
+
+            }
+        });
+
         builderDialog.setNegativeButton("Cancelar", null);
 
         alertDialog = builderDialog.create();
@@ -131,6 +153,7 @@ public class ModuloActivity extends AppCompatActivity {
         layout.addSection(getSection1());
         layout.addSection(getSection2());
     }
+
 
     private Section<Modulo, Video> getSection1(){
         Section<Modulo, Video> section = new Section<>();
