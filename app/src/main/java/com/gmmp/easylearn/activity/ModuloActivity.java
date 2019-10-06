@@ -94,6 +94,7 @@ public class ModuloActivity extends AppCompatActivity {
                     databaseReference = firebaseDatabase.getReference();
 
                     databaseReference.
+                            child("cursos").
                             child(getCursoGlobal().getNome()).
                             child("modulos").
                             child(nome).
