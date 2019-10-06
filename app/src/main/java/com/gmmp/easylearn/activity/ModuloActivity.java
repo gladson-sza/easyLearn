@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmmp.easylearn.R;
+import com.gmmp.easylearn.helper.UtilKt;
 import com.gmmp.easylearn.model.Modulo;
 import com.gmmp.easylearn.model.Video;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +51,7 @@ public class ModuloActivity extends AppCompatActivity {
     private EditText txtNomeModulo;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private ArrayList<Modulo> listaModulos;
+    private ArrayList<Modulo> listaModulos = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -177,24 +178,24 @@ public class ModuloActivity extends AppCompatActivity {
                 }
             }
         });
-        int tam= listarModulos().size();
-        for(int i=0;i< tam;i++)
+        int tam = listarModulos().size();
+        for (int i = 0; i < tam; i++)
             layout.addSection(getSection1(listarModulos().get(i)));
         layout.addSection(getSection2());
     }
 
-    private ArrayList<Modulo> listarModulos(){
-        Query query = databaseReference.child("cursos").child("cursos").
-                child(getCursoGlobal().getNome()).child("modulos");
+    private ArrayList<Modulo> listarModulos() {
+        Query query = UtilKt.modulosReferencia(getCursoGlobal().getNome());
 
         query.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                                            for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                                                 Modulo m = objSnapshot.getValue(Modulo.class);
                                                 listaModulos.add(m);
                                             }
                                         }
+
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -203,6 +204,7 @@ public class ModuloActivity extends AppCompatActivity {
         );
         return listaModulos;
     }
+
     private Section<Modulo, Video> getSection1(Modulo m) {
         Section<Modulo, Video> section = new Section<>();
 

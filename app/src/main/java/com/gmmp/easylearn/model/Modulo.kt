@@ -1,3 +1,5 @@
 package com.gmmp.easylearn.model
 
-data class Modulo(var nome: String)
+data class Modulo(var nome: String) {
+    constructor() : this("")
+}
