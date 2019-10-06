@@ -210,6 +210,7 @@ public class ModuloActivity extends AppCompatActivity {
 
                         }
                 }
+
         );
         return listaModulos;
     }
