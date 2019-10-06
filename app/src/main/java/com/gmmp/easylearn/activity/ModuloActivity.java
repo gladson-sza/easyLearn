@@ -54,7 +54,7 @@ public class ModuloActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceAsColor")
-    private void iniciar(){
+    private void iniciar() {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -67,7 +67,7 @@ public class ModuloActivity extends AppCompatActivity {
         builderDialog.setTitle("Novo módulo");
 
         FrameLayout container = new FrameLayout(this);
-        FrameLayout.LayoutParams params = new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         params.leftMargin = getResources().getDimensionPixelSize(R.dimen.dialog_margin);
         params.rightMargin = getResources().getDimensionPixelSize(R.dimen.fab_margin);
@@ -82,17 +82,22 @@ public class ModuloActivity extends AppCompatActivity {
         container.addView(txtNomeModulo);
 
         builderDialog.setView(container);
-        builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+        builderDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String nome = txtNomeModulo.getText().toString();
-                if(nome.isEmpty())
+                if (nome.isEmpty())
                     txtNomeModulo.setError("Por favor, entre com o nome do módulo");
-                else{
+                else {
                     Modulo modulo = new Modulo(nome);
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     databaseReference = firebaseDatabase.getReference();
-                    databaseReference.child("modulos").child(nome).setValue(modulo);
+
+                    databaseReference.
+                            child(getCursoGlobal().getNome()).
+                            child("modulos").
+                            child(nome).
+                            setValue(modulo);
                 }
 
             }
@@ -103,7 +108,7 @@ public class ModuloActivity extends AppCompatActivity {
         alertDialog = builderDialog.create();
 
         btnNovoModulo = findViewById(R.id.buttonNovoModulo);
-        btnNovoModulo.setOnClickListener(new View.OnClickListener( ) {
+        btnNovoModulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.show();
@@ -121,9 +126,9 @@ public class ModuloActivity extends AppCompatActivity {
             @Override
             public void renderParent(View view, Modulo model, boolean isExpanded, int parentPosition) {
                 ((TextView) view.findViewById(R.id.tv_parent_name)).setText("Seção " + (parentPosition + 1) + " - " + model.getNome());
-                if(isExpanded){
+                if (isExpanded) {
                     view.findViewById(R.id.arrow).setBackgroundResource(R.drawable.ic_seta_para_cima);
-                }else {
+                } else {
                     view.findViewById(R.id.arrow).setBackgroundResource(R.drawable.ic_seta_para_baixo);
                 }
             }
@@ -131,11 +136,11 @@ public class ModuloActivity extends AppCompatActivity {
             // Video do modulo
             @Override
             public void renderChild(final View view, Video model, int parentPosition, int childPosition) {
-                if(childPosition == 0){ // essa condição está errada, pois ela não vai mostrar o primeiro vídeo do array / digitado por Paulo
+                if (childPosition == 0) { // essa condição está errada, pois ela não vai mostrar o primeiro vídeo do array / digitado por Paulo
                     ((TextView) view.findViewById(R.id.tv_child_name)).setTypeface(null, Typeface.BOLD);
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText("Adicionar vídeo");
                     ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(" ");
-                }else {
+                } else {
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText(model.getNome());
                     ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(model.getDuracao());
                     (view.findViewById(R.id.tv_child_name)).setOnClickListener(new View.OnClickListener() {
@@ -155,14 +160,14 @@ public class ModuloActivity extends AppCompatActivity {
     }
 
 
-    private Section<Modulo, Video> getSection1(){
+    private Section<Modulo, Video> getSection1() {
         Section<Modulo, Video> section = new Section<>();
 
         List<Video> aulas = new ArrayList<>();
         Modulo modulo = new Modulo("Vamos começar");
 
-        for(int i = 0; i < 5; i++){
-            aulas.add(new Video("" + i ,"Vídeo " + i, 0,0,0,"0"," ", i + ".0min"));
+        for (int i = 0; i < 5; i++) {
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min"));
         }
 
         section.parent = modulo;
@@ -171,14 +176,14 @@ public class ModuloActivity extends AppCompatActivity {
     }
 
 
-    private Section<Modulo, Video> getSection2(){
+    private Section<Modulo, Video> getSection2() {
         Section<Modulo, Video> section = new Section<>();
 
         List<Video> aulas = new ArrayList<>();
         Modulo modulo = new Modulo("Instalação no Windows");
 
-        for(int i = 0; i < 5; i++){
-            aulas.add(new Video("" + i ,"Vídeo " + i, 0,0,0,"0"," ", i + ".0min"));
+        for (int i = 0; i < 5; i++) {
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min"));
         }
 
         section.parent = modulo;
@@ -192,7 +197,8 @@ public class ModuloActivity extends AppCompatActivity {
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
                 finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem
                 break;
-            default:break;
+            default:
+                break;
         }
         return true;
     }
