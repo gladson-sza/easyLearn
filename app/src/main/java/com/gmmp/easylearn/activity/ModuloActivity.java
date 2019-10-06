@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.jetbrains.anko.ToastsKt;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +101,8 @@ public class ModuloActivity extends AppCompatActivity {
                             child("modulos").
                             child(nome).
                             setValue(modulo);
+
+                    ToastsKt.toast(getApplicationContext(), "Módulo adicionado");
                 }
 
             }
