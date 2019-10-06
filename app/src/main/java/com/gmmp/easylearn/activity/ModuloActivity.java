@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gmmp.easylearn.R;
+import com.gmmp.easylearn.helper.UtilKt;
 import com.gmmp.easylearn.model.Modulo;
 import com.gmmp.easylearn.model.Video;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +51,8 @@ public class ModuloActivity extends AppCompatActivity {
     private EditText txtNomeModulo;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private ArrayList<Modulo> listaModulos;
+    private ArrayList<Modulo> listaModulos = new ArrayList<>();
+    private ExpandableLayout layout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,10 +130,8 @@ public class ModuloActivity extends AppCompatActivity {
             }
         });
 
-
         // Lista de modulos
-
-        ExpandableLayout layout = findViewById(R.id.expandable);
+        layout = findViewById(R.id.expandable);
 
         layout.setRenderer(new ExpandableLayout.Renderer<Modulo, Video>() {
 
@@ -145,6 +145,7 @@ public class ModuloActivity extends AppCompatActivity {
                     view.findViewById(R.id.arrow).setBackgroundResource(R.drawable.ic_seta_para_baixo);
                 }
             }
+
 
             // Video do modulo
             @Override
@@ -177,39 +178,49 @@ public class ModuloActivity extends AppCompatActivity {
                 }
             }
         });
-        int tam= listarModulos().size();
-        for(int i=0;i< tam;i++)
-            layout.addSection(getSection1(listarModulos().get(i)));
         layout.addSection(getSection2());
     }
 
-    private ArrayList<Modulo> listarModulos(){
-        Query query = databaseReference.child("cursos").child("cursos").
-                child(getCursoGlobal().getNome()).child("modulos");
+    private ArrayList<Modulo> listarModulos() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        final Modulo m = new Modulo();
+        databaseReference.
+                child("cursos").
+                child(getCursoGlobal().getNome()).
+                child("modulos").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                String nome = ds.child("nome").getValue().toString();
+                                m.setNome(nome);
+                                listaModulos.add(new Modulo(nome));
+                                layout.addSection(getSection1(m));
+                            }
+                        }
 
-        query.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
-                                                Modulo m = objSnapshot.getValue(Modulo.class);
-                                                listaModulos.add(m);
-                                            }
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        /*for (int i = 0; i < listaModulos.size(); i++) {
+                         layout.addSection(getSection1(listarModulos().get(i)));
+                        }*/
+                        }
 
-                                        }
-                                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                }
         );
         return listaModulos;
     }
+
     private Section<Modulo, Video> getSection1(Modulo m) {
         Section<Modulo, Video> section = new Section<>();
 
         List<Video> aulas = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            //aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
         section.parent = m;
@@ -225,7 +236,7 @@ public class ModuloActivity extends AppCompatActivity {
         Modulo modulo = new Modulo("Instalação no Windows");
 
         for (int i = 0; i < 5; i++) {
-            //aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
         section.parent = modulo;
@@ -246,4 +257,3 @@ public class ModuloActivity extends AppCompatActivity {
     }
 
 }
-
