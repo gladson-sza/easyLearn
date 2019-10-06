@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +26,12 @@ import com.gmmp.easylearn.R;
 import com.gmmp.easylearn.model.Modulo;
 import com.gmmp.easylearn.model.Video;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.anko.ToastsKt;
 
@@ -45,6 +50,7 @@ public class ModuloActivity extends AppCompatActivity {
     private EditText txtNomeModulo;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private ArrayList<Modulo> listaModulos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,7 +157,7 @@ public class ModuloActivity extends AppCompatActivity {
                     view.findViewById(R.id.tv_child_name).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getApplicationContext(), NovoVideoActivity.class);
+                            Intent intent = new Intent();
                             intent.putExtra("modulo", "nomeDoMoculo");
                             startActivity(intent);
                         }
@@ -171,23 +177,42 @@ public class ModuloActivity extends AppCompatActivity {
                 }
             }
         });
-
-        layout.addSection(getSection1());
+        int tam= listarModulos().size();
+        for(int i=0;i< tam;i++)
+            layout.addSection(getSection1(listarModulos().get(i)));
         layout.addSection(getSection2());
     }
 
+    private ArrayList<Modulo> listarModulos(){
+        Query query = databaseReference.child("cursos").child("cursos").
+                child(getCursoGlobal().getNome()).child("modulos");
 
-    private Section<Modulo, Video> getSection1() {
+        query.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                                                Modulo m = objSnapshot.getValue(Modulo.class);
+                                                listaModulos.add(m);
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    }
+        );
+        return listaModulos;
+    }
+    private Section<Modulo, Video> getSection1(Modulo m) {
         Section<Modulo, Video> section = new Section<>();
 
         List<Video> aulas = new ArrayList<>();
-        Modulo modulo = new Modulo("Vamos começar");
 
         for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
+            //aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
-        section.parent = modulo;
+        section.parent = m;
         section.children.addAll(aulas);
         return section;
     }
@@ -200,7 +225,7 @@ public class ModuloActivity extends AppCompatActivity {
         Modulo modulo = new Modulo("Instalação no Windows");
 
         for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
+            //aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
         section.parent = modulo;
@@ -220,5 +245,5 @@ public class ModuloActivity extends AppCompatActivity {
         return true;
     }
 
-
 }
+
