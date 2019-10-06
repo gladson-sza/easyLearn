@@ -3,29 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorFundo"
     android:orientation="vertical"
-    tools:context=".activity.NovoCursoActivity">
-
-    <!--
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorToolbar"
-        android:elevation="1dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Novo Curso"
-        app:titleTextColor="@color/colorTituloActionBar" />
-        -->
+    tools:context=".activity.NovoVideoActivity">
 
     <ImageView
-        android:id="@+id/imageThumb"
+        android:id="@+id/imgUploadVideo"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/thumbnail_placeholder" />
+        android:background="#bcbcbc"
+        android:scaleType="centerInside"
+        android:src="@drawable/video_upload_placeholder" />
 
     <TextView
         android:layout_width="match_parent"
@@ -35,51 +22,24 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="6dp"
         android:fontFamily="@font/sfprodisplay_semibold"
-        android:text="Nome do Curso"
+        android:text="Nome do Vídeo"
         android:textColor="@color/colorDescricao"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editNomeCurso"
+        android:id="@+id/editNomeVideo"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/colorEditText"
         android:ems="10"
-        android:hint="Meu curso super legal"
+        android:hint="Ex: Apresentação do curso"
         android:inputType="text"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@color/colorDescricao" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/sfprodisplay_semibold"
-            android:text="Disciplina"
-            android:textColor="@color/colorDescricao"
-            android:textSize="16sp" />
-
-        <Spinner
-            android:id="@+id/spinnerDisciplinas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
 
     <TextView
         android:layout_width="match_parent"
@@ -93,32 +53,51 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/editDescricaoCurso"
+        android:id="@+id/editDescricaoVideo"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorEditText"
         android:ems="10"
-        android:hint="Uma breve descrição deste curso"
+        android:hint="Ex: Neste vídeo, você aprenderá..."
         android:inputType="text"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@color/colorDescricao" />
 
     <Button
-        android:id="@+id/buttonSalvar"
+        android:id="@+id/btnIncluirMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/button_menu"
+        android:drawableEnd="@drawable/ic_upload_file"
+        android:drawableRight="@drawable/ic_upload_file"
+        android:text="Incluir Material de Apoio"
+        android:textAllCaps="false"
+        android:paddingRight="50dp"
+        android:textColor="@color/white" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="?android:attr/listDivider" />
+
+    <Button
+        android:id="@+id/btnAdicionarVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_primary"
-        android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Salvar"
+        android:text="Salvar e Retornar"
         android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textColor="@color/white" />
+
 </LinearLayout>

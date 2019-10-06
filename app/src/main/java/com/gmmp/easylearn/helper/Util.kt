@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
 import com.gmmp.easylearn.model.Curso
+import com.google.firebase.database.FirebaseDatabase
 
 /**
  * Função que verifica que sem conexão com a internet
@@ -32,3 +33,9 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
 
 //Nome do curso
 var cursoGlobal: Curso? = null
+
+fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
+fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")
+fun usuariosReferencia() = FirebaseDatabase.getInstance().reference.child("usuarios")
+fun modulosReferencia(idCurso: String) = cursosReferencia().child(idCurso).child("modulos")
+fun videosReferencia(idCurso: String, idModulo: String) = modulosReferencia(idCurso).child(idModulo).child("videos")

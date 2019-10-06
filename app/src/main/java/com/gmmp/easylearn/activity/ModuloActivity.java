@@ -43,9 +43,8 @@ public class ModuloActivity extends AppCompatActivity {
     private AppCompatButton btnNovoModulo;
     private AlertDialog alertDialog;
     private EditText txtNomeModulo;
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +80,7 @@ public class ModuloActivity extends AppCompatActivity {
         txtNomeModulo.setTextColor(R.color.colorDescricao);
         txtNomeModulo.setLayoutParams(params);
 
+
         container.addView(txtNomeModulo);
 
         builderDialog.setView(container);
@@ -102,8 +102,10 @@ public class ModuloActivity extends AppCompatActivity {
                             child(nome).
                             setValue(modulo);
 
-                    ToastsKt.toast(getApplicationContext(), "Módulo adicionado");
+                    ToastsKt.toast(getApplicationContext(), "Módulo adicionado").show();
                 }
+
+                txtNomeModulo.setText("");
 
             }
         });
@@ -145,6 +147,16 @@ public class ModuloActivity extends AppCompatActivity {
                     ((TextView) view.findViewById(R.id.tv_child_name)).setTypeface(null, Typeface.BOLD);
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText("Adicionar vídeo");
                     ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(" ");
+
+                    view.findViewById(R.id.tv_child_name).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getApplicationContext(), NovoVideoActivity.class);
+                            intent.putExtra("modulo", "nomeDoMoculo");
+                            startActivity(intent);
+                        }
+                    });
+
                 } else {
                     ((TextView) view.findViewById(R.id.tv_child_name)).setText(model.getNome());
                     ((TextView) view.findViewById(R.id.txt_video_duracao)).setText(model.getDuracao());
@@ -172,7 +184,7 @@ public class ModuloActivity extends AppCompatActivity {
         Modulo modulo = new Modulo("Vamos começar");
 
         for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min"));
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
         section.parent = modulo;
@@ -188,7 +200,7 @@ public class ModuloActivity extends AppCompatActivity {
         Modulo modulo = new Modulo("Instalação no Windows");
 
         for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min"));
+            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
         }
 
         section.parent = modulo;
