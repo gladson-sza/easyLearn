@@ -3,6 +3,7 @@ package com.gmmp.easylearn.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.helper.videosReferencia
 import com.gmmp.easylearn.model.Video
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_novo_video.*
@@ -13,13 +14,6 @@ class NovoVideoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_video)
-
-        val videoReferece = FirebaseDatabase.getInstance().reference
-                .child("cursos")
-                .child("TODO CURSO") // TODO
-                .child("modulos")
-                .child("TODO MODULO") // TODO
-                .child("videos")
 
         imgUploadVideo.setOnClickListener {
             // TODO UPLOAD DE MÍDIA
@@ -42,11 +36,19 @@ class NovoVideoActivity : AppCompatActivity() {
                         nomeVideo,
                         "",
                         descricaoVideo,
-                        null)
+                        "")
 
-                // videoReferece.child(nomeVideo).setValue(video)
+                val idCurso = intent.getStringExtra("curso")
+                val idModulo = intent.getStringExtra("modulo")
 
-                toast("Aula publicada com sucesso!")
+                if (idCurso.isNotEmpty() && idModulo.isNotEmpty()) {
+                    videosReferencia(idCurso, idModulo).child(nomeVideo).setValue(video).toString()
+                    toast("Aula adicionada com sucesso!")
+                } else {
+                    toast("Não foi possível publicar a Aula")
+                }
+
+                finish()
             }
 
         }

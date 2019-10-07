@@ -129,7 +129,8 @@ class ModuloActivity : AppCompatActivity() {
 
                     view.tv_child_name.setOnClickListener {
                         val intent = Intent(applicationContext, NovoVideoActivity::class.java)
-                        intent.putExtra("modulo", "nomeDoMoculo")
+                        intent.putExtra("modulo", listaModulos[parentPosition].nome)
+                        intent.putExtra("curso", cursoGlobal.nome)
                         startActivity(intent)
                     }
 
@@ -153,6 +154,9 @@ class ModuloActivity : AppCompatActivity() {
         modulosReferencia(cursoGlobal.nome).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
+
+                    listaModulos.clear()
+
                     for (ds in dataSnapshot.children) {
                         val modulo = ds.getValue(Modulo::class.java)
 
@@ -179,7 +183,7 @@ class ModuloActivity : AppCompatActivity() {
         val videos = ArrayList<Video>()
 
         // Primeiro vídeo obrigatório para que seja substituído pelo "Adicionar Vídeo" | GLADSON
-        videos.add(Video("", "", "", "", null))
+        videos.add(Video())
 
         section.parent = modulo
         section.children.addAll(videos)
