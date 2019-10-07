@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.NovoVideoActivity"></activity>
+        <activity android:name=".activity.TodosCursosActivity"></activity>
+        <activity android:name=".activity.NovoVideoActivity" />
         <activity android:name=".activity.ModuloActivity" />
         <activity android:name=".activity.AulaActivity" />
         <activity android:name=".activity.EsqueciMinhaSenhaActivity">

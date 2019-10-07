@@ -1,18 +1,31 @@
 package com.gmmp.easylearn.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.MeuCanalActivity
+import com.gmmp.easylearn.activity.NovoCursoActivity
+import com.gmmp.easylearn.activity.TodosCursosActivity
+import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
-import com.gmmp.easylearn.adapter.VerticalAdapter
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_destaques.*
+import kotlinx.android.synthetic.main.fragment_destaques.view.*
 
 
 /**
@@ -22,7 +35,8 @@ class DestaquesFragment : Fragment() {
 
     private var listEmAlta: ArrayList<Aula>? = null
     private var listRecomendados: ArrayList<Aula>? = null
-    private var listPrincipais: ArrayList<Curso>? = null
+    private var listPrincipais = arrayListOf<Curso>()
+    private var cursosAdapter: CursosAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,7 +49,10 @@ class DestaquesFragment : Fragment() {
     fun inicializar(view: View) {
         encherEmAlta()
         encherRecomendados()
-        encherPrincipais()
+
+        view.textVerTudo.setOnClickListener {
+            startActivity(Intent(activity, TodosCursosActivity::class.java))
+        }
 
         val recyclerViewEmAlta = view.findViewById<RecyclerView>(R.id.recyclerViewEmAlta)
         val recyclerViewPrincipais = view.findViewById<RecyclerView>(R.id.recyclerViewPrincipais)
@@ -52,9 +69,15 @@ class DestaquesFragment : Fragment() {
         recyclerViewRecomendados.adapter = adapterRecomendados
 
         //Inicializa Canais Principais
-        recyclerViewPrincipais.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapterPrincipais = VerticalAdapter(activity!!, listPrincipais!!)
-        recyclerViewPrincipais.adapter = adapterPrincipais
+        val adapter = CursosAdapter(context!!, listPrincipais)
+        recyclerViewPrincipais.layoutManager = LinearLayoutManager(context!!)
+        recyclerViewPrincipais.adapter = adapter
+
+        encherPrincipais(adapter)
+
+
+
+
     }
 
     fun encherEmAlta() {
@@ -87,15 +110,40 @@ class DestaquesFragment : Fragment() {
         listRecomendados?.add(aula4)
     }
 
-    fun encherPrincipais() {
-        listPrincipais = ArrayList()
+    fun encherPrincipais(adapter: CursosAdapter) {
 
-        val curso1 = Curso("2", "", "Stoodi", "Preparatório para Vestibulares", "https://cadernodoenem.com.br/wp-content/uploads/2016/09/stoodi-1024x576.png", "", 0.0)
-        val curso2 = Curso("3", "", "Pro ENEM", "Preparatório para Vestibulares", "https://www.concurseirosdamadrugada.com.br/wp-content/uploads/2018/09/logo-proenem-vale-a-pena.png", "", 120.0)
-        val curso3 = Curso("4", "", "AulaLivre.net", "Preparatório para Vestibulares", "https://sambatech.com/blog/wp-content/uploads/2015/01/banner-2-case-aula-livre1.png", "", 0.0)
+        val viewDialog = ViewDialog(activity)
+        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
 
-        listPrincipais?.add(curso1)
-        listPrincipais?.add(curso2)
-        listPrincipais?.add(curso3)
+        // Firebase
+        val auth = FirebaseAuth.getInstance().currentUser
+        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
+
+        cursos.addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        listPrincipais.clear()
+                        for (d in dataSnapshot.children) {
+                            val c = d.getValue(Curso::class.java)
+
+                            if (!(c?.idCanal.equals("${auth!!.uid}"))) {
+                                listPrincipais.add(c!!)
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
+                        adapter.notifyDataSetChanged()
+                        viewDialog.hideDialog()
+                    }
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+                })
+
+//        val curso1 = Curso("2", "", "Stoodi", "Preparatório para Vestibulares", "https://cadernodoenem.com.br/wp-content/uploads/2016/09/stoodi-1024x576.png", "", 0.0)
+//        val curso2 = Curso("3", "", "Pro ENEM", "Preparatório para Vestibulares", "https://www.concurseirosdamadrugada.com.br/wp-content/uploads/2018/09/logo-proenem-vale-a-pena.png", "", 120.0)
+//        val curso3 = Curso("4", "", "AulaLivre.net", "Preparatório para Vestibulares", "https://sambatech.com/blog/wp-content/uploads/2015/01/banner-2-case-aula-livre1.png", "", 0.0)
+//
+//        listPrincipais?.add(curso1)
+//        listPrincipais?.add(curso2)
+//        listPrincipais?.add(curso3)
     }
 }
