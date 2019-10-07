@@ -28,6 +28,7 @@ import iammert.com.expandablelib.Section
 
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.helper.modulosReferencia
+import com.gmmp.easylearn.helper.videosReferencia
 import kotlinx.android.synthetic.main.activity_modulo.*
 import kotlinx.android.synthetic.main.layout_child.view.*
 import kotlinx.android.synthetic.main.layout_parent.view.*
@@ -132,6 +133,8 @@ class ModuloActivity : AppCompatActivity() {
                         intent.putExtra("modulo", listaModulos[parentPosition].nome)
                         intent.putExtra("curso", cursoGlobal.nome)
                         startActivity(intent)
+
+                        finish()
                     }
 
                 } else {
@@ -151,21 +154,23 @@ class ModuloActivity : AppCompatActivity() {
      */
     private fun carregarModulos() {
 
+        listaModulos.clear()
+
         modulosReferencia(cursoGlobal.nome).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
 
-                    listaModulos.clear()
+                if (dataSnapshot.exists()) {
 
                     for (ds in dataSnapshot.children) {
                         val modulo = ds.getValue(Modulo::class.java)
 
                         if (modulo != null) {
                             listaModulos.add(modulo)
-                            layout.addSection(setSection(modulo))
+                            setSection(modulo)
                         }
 
                     }
+
                 }
             }
 
@@ -176,18 +181,38 @@ class ModuloActivity : AppCompatActivity() {
 
     }
 
-    private fun setSection(modulo: Modulo?): Section<Modulo, Video> {
+    private fun setSection(modulo: Modulo) {
 
-        val section = Section<Modulo, Video>()
+        videosReferencia(cursoGlobal.nome, modulo.nome).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-        val videos = ArrayList<Video>()
+                // Primeiro vídeo obrigatório para que seja substituído pelo "Adicionar Vídeo" | GLADSON
+                val videos = ArrayList<Video>()
+                videos.add(Video())
 
-        // Primeiro vídeo obrigatório para que seja substituído pelo "Adicionar Vídeo" | GLADSON
-        videos.add(Video())
+                if (dataSnapshot.exists()) {
+                    for (ds in dataSnapshot.children) {
+                        val video = ds.getValue(Video::class.java)
 
-        section.parent = modulo
-        section.children.addAll(videos)
-        return section
+                        if (video != null) {
+                            videos.add(video)
+                        }
+                    }
+                }
+
+                val section = Section<Modulo, Video>()
+                section.parent = modulo
+                section.children.addAll(videos)
+                layout.addSection(section)
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
+
+
     }
 
 
