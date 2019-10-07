@@ -43,6 +43,7 @@ import iammert.com.expandablelib.ExpandableLayout;
 import iammert.com.expandablelib.Section;
 
 import static com.gmmp.easylearn.helper.UtilKt.getCursoGlobal;
+import static com.gmmp.easylearn.helper.UtilKt.modulosReferencia;
 
 public class ModuloActivity extends AppCompatActivity {
 
@@ -68,8 +69,6 @@ public class ModuloActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle(getCursoGlobal().getNome());
-
-        // Banner
 
         //Btn novo modulo
         AlertDialog.Builder builderDialog = new AlertDialog.Builder(this);
@@ -158,7 +157,7 @@ public class ModuloActivity extends AppCompatActivity {
                     view.findViewById(R.id.tv_child_name).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent();
+                            Intent intent = new Intent(getApplicationContext(), NovoVideoActivity.class);
                             intent.putExtra("modulo", "nomeDoMoculo");
                             startActivity(intent);
                         }
@@ -178,72 +177,47 @@ public class ModuloActivity extends AppCompatActivity {
                 }
             }
         });
-        layout.addSection(getSection2());
+
+        carregarModulos();
     }
 
-    private ArrayList<Modulo> listarModulos() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        final Modulo m = new Modulo();
-        databaseReference.
-                child("cursos").
-                child(getCursoGlobal().getNome()).
-                child("modulos").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                String nome = ds.child("nome").getValue().toString();
-                                m.setNome(nome);
-                                listaModulos.add(new Modulo(nome));
-                                layout.addSection(getSection1(m));
-                            }
-                        }
+    /**
+     * Método responsável por carregar os métodos.
+     */
+    private void carregarModulos() {
 
-                        /*for (int i = 0; i < listaModulos.size(); i++) {
-                         layout.addSection(getSection1(listarModulos().get(i)));
-                        }*/
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
+        UtilKt.modulosReferencia(getCursoGlobal().getNome()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        Modulo m = ds.getValue(Modulo.class);
+                        listaModulos.add(m);
+                        layout.addSection(setSection(m));
+                    }
                 }
+            }
 
-        );
-        return listaModulos;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
-    private Section<Modulo, Video> getSection1(Modulo m) {
+    private Section<Modulo, Video> setSection(Modulo modulo) {
+
         Section<Modulo, Video> section = new Section<>();
 
-        List<Video> aulas = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
-        }
-
-        section.parent = m;
-        section.children.addAll(aulas);
-        return section;
-    }
-
-
-    private Section<Modulo, Video> getSection2() {
-        Section<Modulo, Video> section = new Section<>();
-
-        List<Video> aulas = new ArrayList<>();
-        Modulo modulo = new Modulo("Instalação no Windows");
-
-        for (int i = 0; i < 5; i++) {
-            aulas.add(new Video("" + i, "Vídeo " + i, 0, 0, 0, "0", " ", i + ".0min", null));
-        }
+        List<Video> videos = new ArrayList<>();
+        videos.add(new Video("", "", "", "", null));
 
         section.parent = modulo;
-        section.children.addAll(aulas);
+        section.children.addAll(videos);
         return section;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
