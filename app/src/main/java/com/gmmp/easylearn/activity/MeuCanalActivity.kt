@@ -38,9 +38,6 @@ class MeuCanalActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        val textNomeCanal = textNomeCanal
-        val textViewDescricao = textDescricao
-
         val viewDialog = ViewDialog(this)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
 
@@ -56,7 +53,7 @@ class MeuCanalActivity : AppCompatActivity() {
                 if (u != null) {
 
                     textNomeCanal.text = u.nome
-                    textViewDescricao.text = u.descricao
+                    textDescricao.text = u.descricao
 
                     if (u.urlPerfil.isNotEmpty()) {
                         Glide.with(applicationContext)
@@ -107,6 +104,7 @@ class MeuCanalActivity : AppCompatActivity() {
                             }
                         }
 
+                        textNCursosDisponibilizados.text = listCursos.size.toString()
                         adapter.notifyDataSetChanged()
                         viewDialog.hideDialog()
 

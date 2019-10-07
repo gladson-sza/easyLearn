@@ -32,7 +32,7 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
 }
 
 //Nome do curso
-var cursoGlobal: Curso? = null
+lateinit var cursoGlobal: Curso
 
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
 fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")
