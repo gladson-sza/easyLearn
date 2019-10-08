@@ -60,7 +60,7 @@ class TodosCursosActivity : AppCompatActivity() {
                             if (!(c?.idCanal.equals("${auth!!.uid}")) && c?.disciplina.equals(listarPor)) {
                                 listCursos.add(c!!)
                             }else{
-                                if(listarPor.equals("todos"))
+                                if(listarPor.equals("todos") && !(c?.idCanal.equals("${auth!!.uid}")))
                                     listCursos.add(c!!)
                             }
                         }

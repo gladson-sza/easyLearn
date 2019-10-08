@@ -15,6 +15,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.helper.*
 import com.gmmp.easylearn.model.Modulo
 import com.gmmp.easylearn.model.Video
 import com.google.firebase.database.DataSnapshot
@@ -26,9 +27,7 @@ import java.util.ArrayList
 import iammert.com.expandablelib.ExpandableLayout
 import iammert.com.expandablelib.Section
 
-import com.gmmp.easylearn.helper.cursoGlobal
-import com.gmmp.easylearn.helper.modulosReferencia
-import com.gmmp.easylearn.helper.videosReferencia
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_modulo.*
 import kotlinx.android.synthetic.main.layout_child.view.*
 import kotlinx.android.synthetic.main.layout_parent.view.*
@@ -104,7 +103,22 @@ class ModuloActivity : AppCompatActivity() {
 
         alertDialog = builderDialog.create()
 
-        btnNovoModulo.setOnClickListener { alertDialog.show() }
+        val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        if (!(auth.equals(cursoGlobal.idCanal))) {
+            btnNovoModulo.text = "Adicionar"
+        }
+
+        btnNovoModulo.setOnClickListener {
+            if (!(auth.equals(cursoGlobal.idCanal))) {
+                // Registra a referência de usuário no curso
+                cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
+
+                // Registra a referência do curso no usuário
+                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.idCanal).setValue(cursoGlobal.idCanal)
+            } else {
+                alertDialog.show()
+            }
+        }
 
         // Lista de modulos
         layout = findViewById(R.id.expandable)

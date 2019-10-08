@@ -47,11 +47,11 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
             val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
 
-            if(auth.equals(idCanal)) {
+//            if(auth.equals(idCanal)) {
                 context.startActivity(Intent(context, ModuloActivity::class.java))
-            } else {
-
-            }
+//            } else {
+//
+//            }
 
 
         }
