@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.model.Curso
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,7 +25,14 @@ class TodosCursosActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
         supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar?.setTitle("Todos os cursos")
+
+        if(listarPor.equals("todos")) {
+            supportActionBar?.title = "Todos os cursos"
+            text_disciplina.text = "Todos os cursos"
+        }else{
+            text_disciplina.text = listarPor
+            supportActionBar?.setTitle(listarPor)
+        }
 
         iniciar()
     }
@@ -49,8 +57,11 @@ class TodosCursosActivity : AppCompatActivity() {
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
 
-                            if (!(c?.idCanal.equals("${auth!!.uid}"))) {
+                            if (!(c?.idCanal.equals("${auth!!.uid}")) && c?.disciplina.equals(listarPor)) {
                                 listCursos.add(c!!)
+                            }else{
+                                if(listarPor.equals("todos"))
+                                    listCursos.add(c!!)
                             }
                         }
                         adapter.notifyDataSetChanged()

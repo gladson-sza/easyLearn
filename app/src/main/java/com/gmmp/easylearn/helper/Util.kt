@@ -31,8 +31,11 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
     return true
 }
 
+// Variaeis do Paulo (não mexa)
 //Nome do curso
 lateinit var cursoGlobal: Curso
+//listar por
+var listarPor: String? = null
 
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
 fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")
