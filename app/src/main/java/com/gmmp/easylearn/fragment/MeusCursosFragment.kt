@@ -81,12 +81,34 @@ class MeusCursosFragment : Fragment() {
 
     fun encherMeusCursos() {
 
+        val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        usuariosReferencia().child(auth).child("matriculados").addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        listMeusCursos.clear()
+
+                        if (dataSnapshot.exists()) {
+                            for (ds in dataSnapshot.children) {
+                                val c = ds.getValue(Curso::class.java)
+                                if (c != null) listMeusCursos.add(c)
+                            }
+                        }
+
+                        cursosAdapter?.notifyDataSetChanged()
+
+                    }
+
+                    override fun onCancelled(de: DatabaseError) {
+
+                    }
+                }
+        )
 
 //        val viewDialog = ViewDialog(activity)
 //        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
 //
-//        // Firebase
-//        val auth = FirebaseAuth.getInstance().currentUser
+
+
 //        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
 //
 //        // Quando clicar em ver todos ele vai listar todos

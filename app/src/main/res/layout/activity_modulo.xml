@@ -92,7 +92,7 @@
                     android:fontFamily="@font/sfprodisplay_bold"
                     android:paddingLeft="10dp"
                     android:paddingRight="8dp"
-                    android:text="Novo Modulo"
+                    android:text="Novo Módulo"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
 

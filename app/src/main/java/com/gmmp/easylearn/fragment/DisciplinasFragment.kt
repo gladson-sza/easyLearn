@@ -6,33 +6,24 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.DisciplinasAdapter
-import com.gmmp.easylearn.adapter.MensagensAdapter
 import com.gmmp.easylearn.model.Disciplina
-import com.gmmp.easylearn.model.Mensagen
-import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_disciplinas.*
-import java.util.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.fragment_disciplinas.view.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class DisciplinasFragment : Fragment()  {
+class DisciplinasFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
     private var disciplinaAdapter: DisciplinasAdapter? = null
@@ -58,7 +49,7 @@ class DisciplinasFragment : Fragment()  {
 
         disciplinas.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (d  in dataSnapshot.children) {
+                for (d in dataSnapshot.children) {
                     var u = d.getValue(Disciplina::class.java)
                     if (u != null) {
                         listaDisciplinas.add(u)
@@ -67,10 +58,8 @@ class DisciplinasFragment : Fragment()  {
                 }
 
                 disciplinaAdapter?.notifyDataSetChanged()
-                val progressBar = progress_circular
-                val textCarregando = textCarregando
-                progressBar?.visibility = View.GONE
-                textCarregando.visibility = View.GONE
+                view.progress_circular.visibility = View.GONE
+                view.textCarregando.visibility = View.GONE
                 recyclerView?.visibility = View.VISIBLE
 
             }

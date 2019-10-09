@@ -111,9 +111,10 @@ class ModuloActivity : AppCompatActivity() {
             if (!(auth.equals(cursoGlobal.idCanal))) {
                 // Registra a referência de usuário no curso
                 cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
-
                 // Registra a referência do curso no usuário
-                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.idCanal).setValue(cursoGlobal.idCanal)
+                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
+
+                toast("Matrícula realizada com sucesso")
             } else {
                 alertDialog.show()
             }
