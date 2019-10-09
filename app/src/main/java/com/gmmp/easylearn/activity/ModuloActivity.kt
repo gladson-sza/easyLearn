@@ -53,9 +53,7 @@ class ModuloActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     private fun iniciar() {
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar?.title = cursoGlobal.nome
+        supportActionBar?.hide()
 
         Glide.with(applicationContext)
                 .load(cursoGlobal.thumbUrl)
@@ -105,7 +103,8 @@ class ModuloActivity : AppCompatActivity() {
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         if (!(auth.equals(cursoGlobal.idCanal))) {
-            btnNovoModulo.text = "Adicionar"
+            btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
+
         }
 
         btnNovoModulo.setOnClickListener {
@@ -137,7 +136,7 @@ class ModuloActivity : AppCompatActivity() {
 
             // Video do modulo
             override fun renderChild(view: View, model: Video, parentPosition: Int, childPosition: Int) {
-                if (childPosition == 0) {
+                if (childPosition == 0 && auth.equals(cursoGlobal.idCanal)) {
                     view.tv_child_name.setTypeface(null, Typeface.BOLD)
                     view.tv_child_name.text = "Adicionar vídeo"
                     view.txt_video_duracao.text = " "

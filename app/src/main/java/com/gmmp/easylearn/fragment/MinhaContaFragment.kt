@@ -11,6 +11,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.LoginActivity
 import com.gmmp.easylearn.activity.MainActivity
 import com.gmmp.easylearn.activity.MeuCanalActivity
+import com.gmmp.easylearn.activity.PagamentoActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_perfil.view.*
@@ -38,6 +39,10 @@ class MinhaContaFragment : Fragment() {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.replace(R.id.frameContainer, EditarPerfilFragment())
             transaction?.commit()
+        }
+
+        view.menu_formas_pagamento.setOnClickListener {
+            startActivity(Intent(activity, PagamentoActivity::class.java))
         }
 
         view.menuCompatilharEasyCash.setOnClickListener {

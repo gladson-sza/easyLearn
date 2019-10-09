@@ -82,51 +82,51 @@ class MeusCursosFragment : Fragment() {
     fun encherMeusCursos() {
 
 
-        val viewDialog = ViewDialog(activity)
-        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
+//        val viewDialog = ViewDialog(activity)
+//        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
+//
+//        // Firebase
+//        val auth = FirebaseAuth.getInstance().currentUser
+//        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
+//
+//        // Quando clicar em ver todos ele vai listar todos
+//        listarPor = "todos"
 
-        // Firebase
-        val auth = FirebaseAuth.getInstance().currentUser
-        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
-
-        // Quando clicar em ver todos ele vai listar todos
-        listarPor = "todos"
-
-        usuariosReferencia().child(auth?.uid.toString()).child("matriculados").addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                        listMatriculados.clear()
-                        for (d in dataSnapshot.children) {
-                            val m = d.getValue(String::class.java)
-                            listMatriculados.add(m!!)
-                        }
-
-                        listMeusCursos.clear()
-                        for (m in listMatriculados) {
-                            cursosReferencia().child(m).child("inscritos").addValueEventListener(
-                                    object : ValueEventListener {
-                                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                            for (d in dataSnapshot.children) {
-                                                val i = d.getValue(String::class.java)
-
-                                                if (i.equals()) {
-                                                    listMeusCursos.add(i)
-                                                }
-                                            }
-                                            cursosAdapter?.notifyDataSetChanged()
-                                            viewDialog.hideDialog()
-                                        }
-
-                                        override fun onCancelled(p0: DatabaseError) {
-                                        }
-                                    })
-                        }
-                    }
-
-                    override fun onCancelled(p0: DatabaseError) {
-                    }
-                })
+//        usuariosReferencia().child(auth?.uid.toString()).child("matriculados").addValueEventListener(
+//                object : ValueEventListener {
+//                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                        listMatriculados.clear()
+//                        for (d in dataSnapshot.children) {
+//                            val m = d.getValue(String::class.java)
+//                            listMatriculados.add(m!!)
+//                        }
+//
+//                        listMeusCursos.clear()
+//                        for (m in listMatriculados) {
+//                            cursosReferencia().child(m).child("inscritos").addValueEventListener(
+//                                    object : ValueEventListener {
+//                                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                                            for (d in dataSnapshot.children) {
+//                                                val i = d.getValue(String::class.java)
+//
+//                                                if (i.equals()) {
+//                                                    listMeusCursos.add(i)
+//                                                }
+//                                            }
+//                                            cursosAdapter?.notifyDataSetChanged()
+//                                            viewDialog.hideDialog()
+//                                        }
+//
+//                                        override fun onCancelled(p0: DatabaseError) {
+//                                        }
+//                                    })
+//                        }
+//                    }
+//
+//                    override fun onCancelled(p0: DatabaseError) {
+//                    }
+//                })
 
 
 //        listMeusCursos = ArrayList<Curso>()

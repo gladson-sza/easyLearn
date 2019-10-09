@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@color/white"
+    tools:context=".activity.PagamentoActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Adicionar Cartão"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:textSize="26sp"
+        android:textColor="@color/colorTitulo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preencha os campos abaixo."
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:textSize="14sp"
+        android:textColor="@color/colorCheck"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/text_numero_cartao"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorEditText"
+        android:ems="10"
+        android:hint=" Número do cartão"
+        android:drawableLeft="@drawable/ic_payment_cinza"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/colorDescricao"/>
+
+    <EditText
+        android:id="@+id/text_nome_cartao"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorEditText"
+        android:ems="10"
+        android:hint="Nome do cartão"
+        android:drawableLeft="@drawable/ic_payname_cinza"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/colorDescricao"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/text_data_validade"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorEditText"
+            android:ems="10"
+            android:layout_marginRight="10dp"
+            android:hint="Data de validade"
+            android:drawableLeft="@drawable/ic_pay_date"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/colorDescricao"/>
+
+        <EditText
+            android:id="@+id/text_nome_carta"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorEditText"
+            android:ems="10"
+            android:hint="Código"
+            android:drawableLeft="@drawable/ic_pay_lock"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/colorDescricao"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_confirmar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/button_primary"
+        android:fontFamily="@font/sfprodisplay_bold"
+        android:text="Confirmar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

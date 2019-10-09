@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".fragment.MinhaContaFragment">
@@ -106,6 +106,36 @@
 
         <ImageView
             android:id="@+id/abrir_canal"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_formas_pagamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:srcCompat="@drawable/ic_payment" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/sfprodisplay_medium"
+            android:src="@color/colorTitulo"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="15dp"
+            android:text="Adicionar Catão de Crédito"/>
+
+        <ImageView
             android:layout_width="27dp"
             android:layout_height="27dp"
             app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
