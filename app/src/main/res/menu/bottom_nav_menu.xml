@@ -21,8 +21,8 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/navigation_mensagens"
-        android:icon="@drawable/ic_email_primary_24dp"
-        android:title="@string/mensagens"
+        android:icon="@drawable/ic_conta_canal"
+        android:title="@string/meu_canal"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/navigation_minha_conta"
