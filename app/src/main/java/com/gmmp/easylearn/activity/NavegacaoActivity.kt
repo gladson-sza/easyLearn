@@ -28,7 +28,7 @@ class NavegacaoActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_mensagens -> {
-                mudarFragment(MensagensFragment())
+                mudarFragment(MeuCanalFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_minha_conta -> {

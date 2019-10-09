@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PagamentoActivity"></activity>
+        <activity android:name=".activity.NotificacaoActivity"></activity>
+        <activity android:name=".NotificacoesActivity" />
+        <activity android:name=".activity.PagamentoActivity" />
         <activity android:name=".activity.TodosCursosActivity" />
         <activity android:name=".activity.NovoVideoActivity" />
         <activity android:name=".activity.ModuloActivity" />
