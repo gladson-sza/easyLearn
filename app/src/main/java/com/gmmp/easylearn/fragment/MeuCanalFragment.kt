@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.activity.MainActivity
 import com.gmmp.easylearn.activity.NovoCursoActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
@@ -22,9 +21,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_meu_canal.*
 import kotlinx.android.synthetic.main.fragment_meu_canal.view.*
-
 
 
 /**
@@ -38,13 +35,13 @@ class MeuCanalFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_meu_canal, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_meu_canal, container, false)
 
-        inicializar()
-        return view
+        inicializar(v)
+        return v
     }
 
-    fun inicializar() {
+    fun inicializar(v: View) {
 
         val viewDialog = ViewDialog(activity)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
@@ -60,21 +57,21 @@ class MeuCanalFragment : Fragment() {
 
                 if (u != null) {
 
-                    textNomeCanal.text = u.nome
-                    textDescricao.text = u.descricao
+                    v.textNomeCanal.text = u.nome
+                    v.textDescricao.text = u.descricao
 
                     if (u.urlPerfil.isNotEmpty()) {
                         Glide.with(context)
                                 .load(u.urlPerfil)
                                 .centerCrop()
-                                .into(imageProfile)
+                                .into(v.imageProfile)
                     }
 
                     if (u.urlWallpaper.isNotEmpty()) {
                         Glide.with(context)
                                 .load(u.urlWallpaper)
                                 .centerCrop()
-                                .into(imageThumb)
+                                .into(v.imageThumb)
                     }
                 }
 
@@ -89,13 +86,13 @@ class MeuCanalFragment : Fragment() {
         })
 
         // Botão de novo curso
-        view.buttonNovoCurso.setOnClickListener {
+        v.buttonNovoCurso.setOnClickListener {
             startActivity(Intent(activity, NovoCursoActivity::class.java))
         }
 
         // Configura o RecyclerView de CursosDisponibilizados
         val adapter = CursosAdapter(activity!!, listCursos)
-        var recyclerView = view.recyclerViewCursosDisponibilizados
+        var recyclerView = v.recyclerViewCursosDisponibilizados
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
 
@@ -111,7 +108,7 @@ class MeuCanalFragment : Fragment() {
                             }
                         }
 
-                        textNCursosDisponibilizados.text = listCursos.size.toString()
+                        v.textNCursosDisponibilizados.text = listCursos.size.toString()
                         adapter.notifyDataSetChanged()
                         viewDialog.hideDialog()
 
