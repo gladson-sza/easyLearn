@@ -30,13 +30,14 @@ class MeuCanalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meu_canal)
 
         supportActionBar?.title = "Meu Canal"
+         supportActionBar?.hide()
 
         inicializar()
     }
 
     fun inicializar() {
 
-        supportActionBar!!.hide()
+
 
         val viewDialog = ViewDialog(this)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
