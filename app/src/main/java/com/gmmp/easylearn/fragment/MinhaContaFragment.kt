@@ -30,7 +30,9 @@ class MinhaContaFragment : Fragment() {
     }
 
     private fun iniciar(view: View) {
-        view.menuMeuCanal.setOnClickListener { startActivity(Intent(activity, MeuCanalActivity::class.java)) }
+
+        // Opção meu canal | Paulo Ribeiro
+        //view.menuMeuCanal.setOnClickListener { startActivity(Intent(activity, MeuCanalActivity::class.java)) }
 
         view.menuEditarConta.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()

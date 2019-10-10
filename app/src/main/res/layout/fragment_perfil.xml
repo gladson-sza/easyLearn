@@ -78,6 +78,7 @@
             app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
 
+    <!-- Opção meu canal | Paulo Ribeiro
     <LinearLayout
         android:id="@+id/menuMeuCanal"
         android:layout_width="match_parent"
@@ -110,7 +111,7 @@
             android:layout_height="27dp"
             app:srcCompat="@drawable/ic_arrow_right_black_24dp" />
     </LinearLayout>
-
+    -->
     <LinearLayout
         android:id="@+id/menu_formas_pagamento"
         android:layout_width="match_parent"

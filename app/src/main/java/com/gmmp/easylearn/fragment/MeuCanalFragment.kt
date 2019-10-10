@@ -5,20 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
 import com.bumptech.glide.Glide
 
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.MainActivity
 import com.gmmp.easylearn.activity.NovoCursoActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
-import com.gmmp.easylearn.adapter.MensagensAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.model.Curso
-import com.gmmp.easylearn.model.Mensagen
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,6 +23,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_meu_canal.*
+import kotlinx.android.synthetic.main.fragment_meu_canal.view.*
+
 
 
 /**
@@ -41,14 +40,11 @@ class MeuCanalFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_meu_canal, container, false)
 
-
         inicializar()
         return view
     }
 
     fun inicializar() {
-
-
 
         val viewDialog = ViewDialog(activity)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
@@ -92,17 +88,39 @@ class MeuCanalFragment : Fragment() {
             }
         })
 
-        // Botão de Novo Curso
-        val buttonNovoCurso = buttonNovoCurso
-        buttonNovoCurso.setOnClickListener {
+        // Botão de novo curso
+        view.buttonNovoCurso.setOnClickListener {
             startActivity(Intent(activity, NovoCursoActivity::class.java))
         }
 
         // Configura o RecyclerView de CursosDisponibilizados
+        val adapter = CursosAdapter(activity!!, listCursos)
+        var recyclerView = view.recyclerViewCursosDisponibilizados
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = adapter
 
+        cursos.addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        listCursos.clear()
+                        for (d in dataSnapshot.children) {
+                            val c = d.getValue(Curso::class.java)
 
+                            if (c?.idCanal.equals("${auth.uid}")) {
+                                listCursos.add(c!!)
+                            }
+                        }
 
+                        textNCursosDisponibilizados.text = listCursos.size.toString()
+                        adapter.notifyDataSetChanged()
+                        viewDialog.hideDialog()
+
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
     }
-
 }
