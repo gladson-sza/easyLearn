@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/navigation_disciplinas"
-        android:icon="@drawable/ic_library_books_primary_24dp"
+        android:icon="@drawable/ic_action_name"
         android:title="@string/disciplinas"
         app:showAsAction="ifRoom" />
     <item
