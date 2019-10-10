@@ -74,11 +74,8 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_menu"
-        android:drawableEnd="@drawable/ic_upload_file"
-        android:drawableRight="@drawable/ic_upload_file"
         android:text="Incluir Material de Apoio"
         android:textAllCaps="false"
-        android:paddingRight="50dp"
         android:textColor="@color/white" />
 
     <View
@@ -87,6 +84,8 @@
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="?android:attr/listDivider" />
 
     <Button

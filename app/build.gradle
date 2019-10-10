@@ -47,6 +47,11 @@ dependencies {
     //JieCao Video Player
     implementation 'fm.jiecao:jiecaovideoplayer:5.7'
 
+    implementation 'net.alhazmy13.MediaPicker:libary:2.4.4'
+
+    // FilePicker
+    //implementation 'com.github.jaiselrahman:FilePicker:1.2.2'
+
     // Bibliotecas de Design (Suporte)
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'

@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_meu_canal.*
 import kotlinx.android.synthetic.main.fragment_meu_canal.view.*
 
 
+
 /**
  * A simple [Fragment] subclass.
  */
@@ -39,12 +40,11 @@ class MeuCanalFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_meu_canal, container, false)
 
-        inicializar(view)
-
+        inicializar()
         return view
     }
 
-    fun inicializar(view: View) {
+    fun inicializar() {
 
         val viewDialog = ViewDialog(activity)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
@@ -64,14 +64,14 @@ class MeuCanalFragment : Fragment() {
                     textDescricao.text = u.descricao
 
                     if (u.urlPerfil.isNotEmpty()) {
-                        Glide.with(activity)
+                        Glide.with(context)
                                 .load(u.urlPerfil)
                                 .centerCrop()
                                 .into(imageProfile)
                     }
 
                     if (u.urlWallpaper.isNotEmpty()) {
-                        Glide.with(activity)
+                        Glide.with(context)
                                 .load(u.urlWallpaper)
                                 .centerCrop()
                                 .into(imageThumb)
@@ -88,7 +88,7 @@ class MeuCanalFragment : Fragment() {
             }
         })
 
-        // Botão de Novo Curso
+        // Botão de novo curso
         view.buttonNovoCurso.setOnClickListener {
             startActivity(Intent(activity, NovoCursoActivity::class.java))
         }
