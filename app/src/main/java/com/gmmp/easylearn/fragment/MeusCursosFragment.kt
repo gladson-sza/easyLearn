@@ -12,6 +12,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.helper.comprado
 import com.gmmp.easylearn.helper.cursosReferencia
 import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.helper.usuariosReferencia
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_modulo.*
 
 
 /**
@@ -62,7 +64,6 @@ class MeusCursosFragment : Fragment() {
         recyclerViewMeusCursos.isNestedScrollingEnabled = false
         recyclerViewMeusCursos!!.adapter = cursosAdapter
 
-
     }
 
     fun encherVistoPorUltimo() {
@@ -90,7 +91,10 @@ class MeusCursosFragment : Fragment() {
                         if (dataSnapshot.exists()) {
                             for (ds in dataSnapshot.children) {
                                 val c = ds.getValue(Curso::class.java)
-                                if (c != null) listMeusCursos.add(c)
+                                if (c != null) {
+                                    listMeusCursos.add(c)
+                                    comprado = true
+                                }
                             }
                         }
 
@@ -103,67 +107,6 @@ class MeusCursosFragment : Fragment() {
                     }
                 }
         )
-
-//        val viewDialog = ViewDialog(activity)
-//        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
-//
-
-
-//        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
-//
-//        // Quando clicar em ver todos ele vai listar todos
-//        listarPor = "todos"
-
-//        usuariosReferencia().child(auth?.uid.toString()).child("matriculados").addValueEventListener(
-//                object : ValueEventListener {
-//                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//                        listMatriculados.clear()
-//                        for (d in dataSnapshot.children) {
-//                            val m = d.getValue(String::class.java)
-//                            listMatriculados.add(m!!)
-//                        }
-//
-//                        listMeusCursos.clear()
-//                        for (m in listMatriculados) {
-//                            cursosReferencia().child(m).child("inscritos").addValueEventListener(
-//                                    object : ValueEventListener {
-//                                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                                            for (d in dataSnapshot.children) {
-//                                                val i = d.getValue(String::class.java)
-//
-//                                                if (i.equals()) {
-//                                                    listMeusCursos.add(i)
-//                                                }
-//                                            }
-//                                            cursosAdapter?.notifyDataSetChanged()
-//                                            viewDialog.hideDialog()
-//                                        }
-//
-//                                        override fun onCancelled(p0: DatabaseError) {
-//                                        }
-//                                    })
-//                        }
-//                    }
-//
-//                    override fun onCancelled(p0: DatabaseError) {
-//                    }
-//                })
-
-
-//        listMeusCursos = ArrayList<Curso>()
-//
-//        val curso1 = Curso("1", "", "Emmerson Santa Rita", "Neste cursos voc...", "https://miro.medium.com/max/1200/1*RIANcAESOEI6IbMbxvE5Aw.jpeg", "Linguagem de Programção");
-//        val curso2 = Curso("2", "", "Lucas Silva", "Aprenda a resolv...", "https://fundacaomatiasmachline.org.br/wp-content/uploads/2017/05/Dia-do-F%C3%ADsico.jpg", "Teste");
-//        val curso3 = Curso("2", "", "Marcos Lima", "Aprenda a resolv...", "https://pbs.twimg.com/media/Ddj-mckXcAI8OL2.jpg", "Teste");
-//        val curso4 = Curso("2", "", "Dalva lima de Souza", "Aprenda a resolv...", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF71i_14oPiOR1llgjOpTgKjNRK2nFPLLSdDScAFjhcAqQbGcB", "Teste");
-//
-//        listMeusCursos!!.add(curso1)
-//        listMeusCursos!!.add(curso2)
-//        listMeusCursos!!.add(curso3)
-//        listMeusCursos!!.add(curso4)
-
-
     }
 
 }

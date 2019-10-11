@@ -17,6 +17,7 @@ import com.gmmp.easylearn.activity.TodosCursosActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.helper.comprado
 import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
@@ -119,9 +120,11 @@ class DestaquesFragment : Fragment() {
         // Firebase
         val auth = FirebaseAuth.getInstance().currentUser
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
+        val matriculados = FirebaseDatabase.getInstance().reference.child(auth?.uid.toString()).child("matriculados")
 
         // Quando clicar em ver todos ele vai listar todos
         listarPor = "todos"
+
 
         cursos.addValueEventListener(
                 object : ValueEventListener {
@@ -132,6 +135,7 @@ class DestaquesFragment : Fragment() {
 
                             if (!(c?.idCanal.equals("${auth!!.uid}"))) {
                                 listPrincipais.add(c!!)
+                                comprado = false
                             }
                         }
                         adapter.notifyDataSetChanged()

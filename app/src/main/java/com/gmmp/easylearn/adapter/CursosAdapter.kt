@@ -41,6 +41,8 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
 
         myViewHolder.textNome.text = nome
         myViewHolder.textDescricao.text = descricao
+        myViewHolder.textCategoria.text = disciplina
+
         myViewHolder.btnAbrir.setOnClickListener {
 
             cursoGlobal = listCursos[i]
@@ -67,12 +69,14 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
         var textNome: TextView
         var textDescricao: TextView
         var btnAbrir : Button
+        var textCategoria: TextView
 
         init {
             thumbCurso = itemView.findViewById(R.id.imageThumbnail)
             textNome = itemView.findViewById(R.id.textTitulo)
             textDescricao = itemView.findViewById(R.id.textDescricao)
             btnAbrir = itemView.findViewById(R.id.buttonAbrir)
+            textCategoria = itemView.findViewById(R.id.textCategoria)
         }
 
     }
