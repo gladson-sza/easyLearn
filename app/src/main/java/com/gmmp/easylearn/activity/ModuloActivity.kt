@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.gmmp.easylearn.DialogCompraFragment
 
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.helper.*
@@ -29,6 +31,9 @@ import iammert.com.expandablelib.Section
 
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_modulo.*
+import kotlinx.android.synthetic.main.dialog_compra_fragment.*
+import kotlinx.android.synthetic.main.dialog_compra_fragment.view.*
+import kotlinx.android.synthetic.main.dialog_compra_fragment.view.text_nome_curso
 import kotlinx.android.synthetic.main.layout_child.view.*
 import kotlinx.android.synthetic.main.layout_parent.view.*
 import org.jetbrains.anko.imageView
@@ -103,16 +108,26 @@ class ModuloActivity : AppCompatActivity() {
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         if (!(auth.equals(cursoGlobal.idCanal))) {
-            btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
+            if(comprado == true){
+                btnNovoModulo.text = "comprado"
+            }else btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
 
         }
 
         btnNovoModulo.setOnClickListener {
             if (!(auth.equals(cursoGlobal.idCanal))) {
+                // Caixa de dialogo
+                var dialogCompraFragment = DialogCompraFragment()
+                dialogCompraFragment.setCancelable(false)
+                var transaction = getSupportFragmentManager().beginTransaction()
+
+                dialogCompraFragment.show(transaction, "")
+
+
                 // Registra a referência de usuário no curso
-                cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
+                //cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
                 // Registra a referência do curso no usuário
-                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
+                //usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
 
                 toast("Matrícula realizada com sucesso")
             } else {

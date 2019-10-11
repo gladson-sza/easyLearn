@@ -36,6 +36,7 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
 lateinit var cursoGlobal: Curso
 //listar por
 var listarPor: String? = null
+var comprado: Boolean? = false
 
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
 fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")

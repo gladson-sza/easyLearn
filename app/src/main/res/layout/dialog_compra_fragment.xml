@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DialogCompraFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:text="Comprar curso"
+            android:textColor="@color/colorTitulo"
+            android:textSize="26sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="25dp">
+
+            <TextView
+                android:id="@+id/text_nome_curso"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Nome"
+                android:textColor="@color/colorTitulo"
+                android:textSize="22sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:layout_marginTop="22dp"
+                android:text="Total: R$"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/text_valor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:layout_marginTop="22dp"
+                android:text="100"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
