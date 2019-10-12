@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.gmmp.easylearn.R;
 
 public class ViewDialog {
@@ -42,13 +41,11 @@ public class ViewDialog {
         }
         ImageView gifImageView = dialog.findViewById(R.id.custom_loading_imageView);
 
-        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(gifImageView);
         Glide.with(activity)
                 .load(R.drawable.ic_loading)
                 .placeholder(R.drawable.ic_loading)
                 .centerCrop()
-                .crossFade()
-                .into(imageViewTarget);
+                .into(gifImageView);
         dialog.show();
     }
 

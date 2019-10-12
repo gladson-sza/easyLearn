@@ -6,19 +6,17 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.activity.MeuCanalActivity
-import com.gmmp.easylearn.activity.NovoCursoActivity
 import com.gmmp.easylearn.activity.TodosCursosActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.comprado
 import com.gmmp.easylearn.helper.listarPor
+import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 import com.google.firebase.auth.FirebaseAuth
@@ -26,8 +24,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_destaques.*
 import kotlinx.android.synthetic.main.fragment_destaques.view.*
+import org.jetbrains.anko.support.v4.toast
 
 
 /**
@@ -38,7 +36,6 @@ class DestaquesFragment : Fragment() {
     private var listEmAlta: ArrayList<Aula>? = null
     private var listRecomendados: ArrayList<Aula>? = null
     private var listPrincipais = arrayListOf<Curso>()
-    private var cursosAdapter: CursosAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -76,8 +73,6 @@ class DestaquesFragment : Fragment() {
         recyclerViewPrincipais.adapter = adapter
 
         encherPrincipais(adapter)
-
-
 
 
     }
@@ -120,7 +115,7 @@ class DestaquesFragment : Fragment() {
         // Firebase
         val auth = FirebaseAuth.getInstance().currentUser
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
-        val matriculados = FirebaseDatabase.getInstance().reference.child(auth?.uid.toString()).child("matriculados")
+        val matriculados = usuariosReferencia().child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("matriculados")
 
         // Quando clicar em ver todos ele vai listar todos
         listarPor = "todos"
@@ -130,17 +125,45 @@ class DestaquesFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         listPrincipais.clear()
+
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
 
-                            if (!(c?.idCanal.equals("${auth!!.uid}"))) {
-                                listPrincipais.add(c!!)
-                                comprado = false
+                            if (c != null) {
+                                if (!(c.idCanal.equals("${auth!!.uid}"))) {
+                                    listPrincipais.add(c)
+                                    comprado = false
+                                }
                             }
+
                         }
-                        adapter.notifyDataSetChanged()
-                        viewDialog.hideDialog()
+
+                        matriculados.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                                if (dataSnapshot.exists()) {
+                                    for (ds in dataSnapshot.children) {
+                                        val c = ds.getValue(Curso::class.java)
+                                        if (c != null) {
+                                            listPrincipais.remove(c)
+                                        }
+                                    }
+                                }
+
+                                adapter.notifyDataSetChanged()
+                                viewDialog.hideDialog()
+
+                            }
+
+
+                            override fun onCancelled(ds: DatabaseError) {
+
+                            }
+                        })
+
+
                     }
+
                     override fun onCancelled(p0: DatabaseError) {
                     }
                 })

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#fcfcfc">
 
-    <android.support.design.widget.AppBarLayout
+    <!-- <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -23,24 +24,74 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:title="Nome do Curso">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarid"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
         </android.support.design.widget.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>-->
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageCurso"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/thumbnail_placeholder"
+            android:src="@drawable/gradient_shape"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tituloCurso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:maxLines="3"
+            android:text="Nome do Curso"
+            android:textColor="@android:color/white"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageCurso"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageCurso"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Sobre este curso"
+        android:textColor="@color/colorTitulo"
+        android:fontFamily="@font/sfprodisplay_semibold"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/descricaoCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Descrição do Curso"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:textSize="18sp"
+        android:maxLines="3" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,16 +110,16 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="4dp"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/sfprodisplay_bold"
                         android:text="Conteúdo do curso"
                         android:textColor="@color/colorTitulo"
                         android:textSize="26sp" />
 
-                    <TextView
+                    <!-- TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -76,26 +127,87 @@
                         android:fontFamily="@font/sfprodisplay_regular"
                         android:text="Deslize para baixo para ver mais"
                         android:textColor="@color/colorCheck"
-                        android:textSize="14sp" />
+                        android:textSize="14sp" />-->
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical">
+
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnNovoModulo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_primary_outline"
                     android:fontFamily="@font/sfprodisplay_bold"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="10dp"
                     android:text="Novo Módulo"
-                    android:textColor="@color/colorPrimary" />
+                    android:drawableStart="@drawable/ic_add_primary_24dp"
+                    android:drawableLeft="@drawable/ic_playlist_add_black_24dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="visible"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnAdicionar"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_primary_outline"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="16dp"
+                    android:text="Adicionar"
+                    android:textAlignment="center"
+                    android:drawableEnd="@drawable/ic_playlist_add_black_24dp"
+                    android:drawableRight="@drawable/ic_playlist_add_black_24dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_primary"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="16dp"
+                    android:text="Adicionado"
+                    android:textAlignment="center"
+                    android:drawableEnd="@drawable/ic_playlist_add_check_black_24dp"
+                    android:drawableRight="@drawable/ic_playlist_add_check_black_24dp"
+                    android:drawableTint="@android:color/white"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textPreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:text="Por R$ 000,00"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:gravity="end"
+                android:visibility="gone"/>
 
             <iammert.com.expandablelib.ExpandableLayout
                 android:id="@+id/expandable"
@@ -106,4 +218,4 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

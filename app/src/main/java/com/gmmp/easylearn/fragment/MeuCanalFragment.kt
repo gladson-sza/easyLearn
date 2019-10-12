@@ -61,14 +61,14 @@ class MeuCanalFragment : Fragment() {
                     v.textDescricao.text = u.descricao
 
                     if (u.urlPerfil.isNotEmpty()) {
-                        Glide.with(context)
+                        Glide.with(activity!!)
                                 .load(u.urlPerfil)
                                 .centerCrop()
                                 .into(v.imageProfile)
                     }
 
                     if (u.urlWallpaper.isNotEmpty()) {
-                        Glide.with(context)
+                        Glide.with(activity!!)
                                 .load(u.urlWallpaper)
                                 .centerCrop()
                                 .into(v.imageThumb)

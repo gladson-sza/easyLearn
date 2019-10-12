@@ -1,4 +1,4 @@
-package com.gmmp.easylearn;
+package com.gmmp.easylearn.dialog;
 
 import android.arch.lifecycle.ViewModel;
 

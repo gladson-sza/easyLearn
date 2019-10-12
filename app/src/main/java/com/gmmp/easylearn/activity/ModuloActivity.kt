@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -12,38 +11,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.gmmp.easylearn.DialogCompraFragment
-
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.*
+import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
 import com.gmmp.easylearn.model.Video
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-
-import java.util.ArrayList
-
 import iammert.com.expandablelib.ExpandableLayout
 import iammert.com.expandablelib.Section
-
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_modulo.*
-import kotlinx.android.synthetic.main.dialog_compra_fragment.*
-import kotlinx.android.synthetic.main.dialog_compra_fragment.view.*
-import kotlinx.android.synthetic.main.dialog_compra_fragment.view.text_nome_curso
 import kotlinx.android.synthetic.main.layout_child.view.*
 import kotlinx.android.synthetic.main.layout_parent.view.*
-import org.jetbrains.anko.imageView
 import org.jetbrains.anko.toast
+import java.util.*
 
 class ModuloActivity : AppCompatActivity() {
 
     private lateinit var alertDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
     private lateinit var layout: ExpandableLayout
+    private var inscrito = false
 
     private val listaModulos = ArrayList<Modulo>()
 
@@ -63,9 +55,10 @@ class ModuloActivity : AppCompatActivity() {
         Glide.with(applicationContext)
                 .load(cursoGlobal.thumbUrl)
                 .centerCrop()
-                .into(imageThumbCurso.imageView())
+                .into(imageCurso)
 
-        imageThumbCurso.title = cursoGlobal.nome
+        tituloCurso.text = cursoGlobal.nome
+        descricaoCurso.text = cursoGlobal.descricao
 
         //Btn novo modulo
         val builderDialog = AlertDialog.Builder(this)
@@ -108,18 +101,115 @@ class ModuloActivity : AppCompatActivity() {
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         if (!(auth.equals(cursoGlobal.idCanal))) {
-            if(comprado == true){
+
+            val dialog = ViewDialog(this)
+            dialog.showDialog("Aguarde", "Obtendo dados")
+
+            usuariosReferencia().child(auth).child("matriculados").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val c = ds.getValue(Curso::class.java)
+                        if (c?.id == cursoGlobal.id) {
+                            inscrito = true
+                            break
+                        }
+                    }
+
+                    if (inscrito) {
+                        btnCancelar.visibility = View.VISIBLE
+                        btnNovoModulo.visibility = View.GONE
+                        btnAdicionar.visibility = View.GONE
+                        textPreco.visibility = View.GONE
+
+                        /*
+
+                        O curso não poderá ser removido, apenas arquivado | GLADSON
+
+                        btnCancelar.setOnClickListener {
+                            // Remove a referência de usuário no curso
+                            cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
+                            // Remove a referência do curso no usuário
+                            usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                        }
+                        */
+
+                    } else {
+                        btnAdicionar.visibility = View.VISIBLE
+                        btnNovoModulo.visibility = View.GONE
+                        btnCancelar.visibility = View.GONE
+                        textPreco.visibility = View.GONE
+
+                        if (cursoGlobal.preco != 0.0) { //Se o curso não for gratuito
+                            toast(cursoGlobal.preco.toString())
+                            textPreco.visibility = View.VISIBLE
+                            textPreco.text = "Por R$ ${cursoGlobal.preco}"
+                        }
+
+                        btnAdicionar.setOnClickListener {
+
+                            // Registra a referência de usuário no curso
+                            cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
+                            // Registra a referência do curso no usuário
+                            usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
+
+                            btnAdicionar.visibility = View.GONE
+                            btnNovoModulo.visibility = View.GONE
+                            btnCancelar.visibility = View.VISIBLE
+                            textPreco.visibility = View.GONE
+                            toast("'${cursoGlobal.nome}' foi adicionado aos seus cursos")
+
+                            btnCancelar.visibility = View.VISIBLE
+                            btnNovoModulo.visibility = View.GONE
+                            btnAdicionar.visibility = View.GONE
+                            textPreco.visibility = View.GONE
+
+                            /*
+
+                            O curso não poderá ser removido, apenas arquivado | GLADSON
+
+                            btnCancelar.setOnClickListener {
+                                // Remove a referência de usuário no curso
+                                cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
+                                // Remove a referência do curso no usuário
+                                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                            }
+                            */
+                        }
+                    }
+
+                    dialog.hideDialog()
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+
+                }
+            })
+
+
+        } else {
+            btnNovoModulo.visibility = View.VISIBLE
+            btnCancelar.visibility = View.GONE
+            btnAdicionar.visibility = View.GONE
+            textPreco.visibility = View.GONE
+            btnNovoModulo.setOnClickListener {
+                alertDialog.show()
+            }
+        }
+
+        if (!(auth.equals(cursoGlobal.idCanal))) {
+            if (comprado == true) {
                 btnNovoModulo.text = "comprado"
-            }else btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
+            } else btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
 
         }
 
+        /*
         btnNovoModulo.setOnClickListener {
             if (!(auth.equals(cursoGlobal.idCanal))) {
                 // Caixa de dialogo
                 var dialogCompraFragment = DialogCompraFragment()
-                dialogCompraFragment.setCancelable(false)
-                var transaction = getSupportFragmentManager().beginTransaction()
+                dialogCompraFragment.isCancelable = false
+                var transaction = supportFragmentManager.beginTransaction()
 
                 dialogCompraFragment.show(transaction, "")
 
@@ -133,7 +223,7 @@ class ModuloActivity : AppCompatActivity() {
             } else {
                 alertDialog.show()
             }
-        }
+        } */
 
         // Lista de modulos
         layout = findViewById(R.id.expandable)

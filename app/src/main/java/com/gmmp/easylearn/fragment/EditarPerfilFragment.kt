@@ -69,14 +69,14 @@ class EditarPerfilFragment : Fragment() {
                     view.editDescricao.setText(u.descricao)
 
                     if (u.urlPerfil.isNotEmpty()) {
-                        Glide.with(activity)
+                        Glide.with(context!!)
                                 .load(u.urlPerfil)
                                 .centerCrop()
                                 .into(view.editImageProfile)
                     }
 
                     if (u.urlWallpaper.isNotEmpty()) {
-                        Glide.with(activity)
+                        Glide.with(context!!)
                                 .load(u.urlWallpaper)
                                 .centerCrop()
                                 .into(view.editImageWallpaper)
