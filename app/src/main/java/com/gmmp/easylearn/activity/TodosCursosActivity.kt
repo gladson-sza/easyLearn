@@ -1,13 +1,14 @@
 package com.gmmp.easylearn.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.listarPor
+import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Curso
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,10 +27,10 @@ class TodosCursosActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
         supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
 
-        if(listarPor.equals("todos")) {
+        if (listarPor.equals("todos")) {
             supportActionBar?.title = "Todos os cursos"
             text_disciplina.text = "Todos os cursos"
-        }else{
+        } else {
             text_disciplina.text = listarPor
             supportActionBar?.setTitle(listarPor)
         }
@@ -37,7 +38,7 @@ class TodosCursosActivity : AppCompatActivity() {
         iniciar()
     }
 
-    fun iniciar(){
+    fun iniciar() {
 
         val adapter = CursosAdapter(this, listCursos)
         recyclerViewTodosCursos.layoutManager = LinearLayoutManager(this)
@@ -47,8 +48,9 @@ class TodosCursosActivity : AppCompatActivity() {
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
 
         // Firebase
-        val auth = FirebaseAuth.getInstance().currentUser
+        val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
+        val matriculados = usuariosReferencia().child(auth).child("matriculados")
 
         cursos.addValueEventListener(
                 object : ValueEventListener {
@@ -57,17 +59,39 @@ class TodosCursosActivity : AppCompatActivity() {
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
 
-                            if (!(c?.idCanal.equals("${auth!!.uid}")) && c?.disciplina.equals(listarPor)) {
+                            if (!(c?.idCanal.equals(auth)) && c?.disciplina.equals(listarPor)) {
                                 listCursos.add(c!!)
-                            }else{
-                                if(listarPor.equals("todos") && !(c?.idCanal.equals("${auth!!.uid}")))
+                            } else {
+                                if (listarPor.equals("todos") && !(c?.idCanal.equals(auth))) {
                                     listCursos.add(c!!)
+                                }
                             }
                         }
-                        adapter.notifyDataSetChanged()
-                        adapter.notifyDataSetChanged()
-                        viewDialog.hideDialog()
+
+                        matriculados.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                                if (dataSnapshot.exists()) {
+                                    for (ds in dataSnapshot.children) {
+                                        val c = ds.getValue(Curso::class.java)
+                                        if (c != null) {
+                                            listCursos.remove(c)
+                                        }
+                                    }
+                                }
+
+                                adapter.notifyDataSetChanged()
+                                viewDialog.hideDialog()
+
+                            }
+
+
+                            override fun onCancelled(ds: DatabaseError) {
+
+                            }
+                        })
                     }
+
                     override fun onCancelled(p0: DatabaseError) {
                     }
                 })

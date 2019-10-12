@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_destaques.view.*
-import org.jetbrains.anko.support.v4.toast
 
 
 /**
@@ -113,9 +112,9 @@ class DestaquesFragment : Fragment() {
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
 
         // Firebase
-        val auth = FirebaseAuth.getInstance().currentUser
+        val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
-        val matriculados = usuariosReferencia().child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("matriculados")
+        val matriculados = usuariosReferencia().child(auth).child("matriculados")
 
         // Quando clicar em ver todos ele vai listar todos
         listarPor = "todos"
@@ -130,7 +129,7 @@ class DestaquesFragment : Fragment() {
                             val c = d.getValue(Curso::class.java)
 
                             if (c != null) {
-                                if (!(c.idCanal.equals("${auth!!.uid}"))) {
+                                if (c.idCanal != auth) {
                                     listPrincipais.add(c)
                                     comprado = false
                                 }
