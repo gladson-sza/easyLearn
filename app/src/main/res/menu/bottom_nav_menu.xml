@@ -6,28 +6,28 @@
         android:id="@+id/navigation_destaques"
         android:icon="@drawable/ic_star_border_primary_24dp"
         android:title="@string/destaques"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/navigation_meus_cursos"
         android:icon="@drawable/ic_play_circle_outline_primary_24dp"
-        android:title="@string/meus_cursos"
-        app:showAsAction="ifRoom" />
+        android:title="Subscrições"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/navigation_disciplinas"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/ic_subscriptions_black_24dp"
         android:title="@string/disciplinas"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/navigation_mensagens"
-        android:icon="@drawable/ic_conta_canal"
+        android:icon="@drawable/ic_person_primary_24dp"
         android:title="@string/meu_canal"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/navigation_minha_conta"
-        android:icon="@drawable/ic_adjusts"
+        android:icon="@drawable/ic_tune_black_24dp"
         android:title="@string/preferencias"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 </menu>

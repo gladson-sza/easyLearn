@@ -22,10 +22,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_meu_canal.*
 import kotlinx.android.synthetic.main.fragment_editar_perfil.view.*
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
 
@@ -162,7 +160,7 @@ class EditarPerfilFragment : Fragment() {
 
                             // Volta para o fragment de MinhaConta
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
-                            transaction?.replace(R.id.frameContainer, MinhaContaFragment())
+                            transaction?.replace(R.id.frameContainer, PreferenciasFragment())
                             transaction?.commit()
 
                         }

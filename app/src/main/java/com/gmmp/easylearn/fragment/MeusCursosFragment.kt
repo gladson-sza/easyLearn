@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_modulo.*
+import kotlinx.android.synthetic.main.fragment_meus_cursos.*
 
 
 /**
@@ -35,6 +38,7 @@ class MeusCursosFragment : Fragment() {
     private var cursosAdapter: CursosAdapter? = null
     private var listMeusCursos = arrayListOf<Curso>()
     private var listMatriculados = arrayListOf<String>()
+    private lateinit var textView : TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -55,6 +59,7 @@ class MeusCursosFragment : Fragment() {
         val adapterVistoPorUltimo = HorizontalAdapter(activity!!, listVistoPorUltimo!!)
         recyclerViewVistoPorUltimo.adapter = adapterVistoPorUltimo
 
+        textView = view.findViewById(R.id.semCursos)
         val recyclerViewMeusCursos = view.findViewById<RecyclerView>(R.id.recyclerViewMeusCursos)
         val linearManager = LinearLayoutManager(activity)
 
@@ -99,7 +104,7 @@ class MeusCursosFragment : Fragment() {
                         }
 
                         cursosAdapter?.notifyDataSetChanged()
-
+                        verificaCursos()
                     }
 
                     override fun onCancelled(de: DatabaseError) {
@@ -107,6 +112,15 @@ class MeusCursosFragment : Fragment() {
                     }
                 }
         )
+    }
+
+    fun verificaCursos(){
+        if(listMeusCursos.size == 0){
+            Log.i("MEUCURSOS", listMeusCursos.size.toString())
+            textView.visibility = View.VISIBLE
+        }else{
+            textView.visibility = View.GONE
+        }
     }
 
 }

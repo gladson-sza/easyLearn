@@ -3,10 +3,7 @@ package com.gmmp.easylearn.activity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
-import android.widget.TextView
 
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.*
@@ -32,7 +29,7 @@ class NavegacaoActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_minha_conta -> {
-                mudarFragment(MinhaContaFragment())
+                mudarFragment(PreferenciasFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }

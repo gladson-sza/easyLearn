@@ -33,6 +33,7 @@ import java.util.*
 class ModuloActivity : AppCompatActivity() {
 
     private lateinit var alertDialog: AlertDialog
+    private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
     private lateinit var layout: ExpandableLayout
     private var inscrito = false
@@ -121,17 +122,29 @@ class ModuloActivity : AppCompatActivity() {
                         btnAdicionar.visibility = View.GONE
                         textPreco.visibility = View.GONE
 
-                        /*
-
-                        O curso não poderá ser removido, apenas arquivado | GLADSON
+                        //O curso não poderá ser removido, apenas arquivado | GLADSON
+                        //Só se ele for pago | JÚNIOR
 
                         btnCancelar.setOnClickListener {
-                            // Remove a referência de usuário no curso
-                            cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
-                            // Remove a referência do curso no usuário
-                            usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                            val deletarDialog = AlertDialog.Builder(this@ModuloActivity)
+                            deletarDialog.setTitle("Tem certeza que deseja cancelar sua inscrição?")
+                            deletarDialog.setMessage("Se você remover da sua lista de cursos, não poderá desfazer")
+                            deletarDialog.setView(container)
+                            deletarDialog.setPositiveButton("Excluir") { dialogInterface, i ->
+                                if(cursoGlobal.preco.equals(0)){
+                                    inscrito = false
+                                    // Remove a referência de usuário no curso
+                                    cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
+                                    // Remove a referência do curso no usuário
+                                    usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                                }else{
+                                    //Arquiva o curso
+                                }
+                            }
+                            deletarDialog.setNegativeButton("Cancelar", null)
+                            deleteDialog = deletarDialog.create()
+
                         }
-                        */
 
                     } else {
                         btnAdicionar.visibility = View.VISIBLE
@@ -146,7 +159,7 @@ class ModuloActivity : AppCompatActivity() {
                         }
 
                         btnAdicionar.setOnClickListener {
-
+                            inscrito = true
                             // Registra a referência de usuário no curso
                             cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
                             // Registra a referência do curso no usuário
@@ -162,18 +175,6 @@ class ModuloActivity : AppCompatActivity() {
                             btnNovoModulo.visibility = View.GONE
                             btnAdicionar.visibility = View.GONE
                             textPreco.visibility = View.GONE
-
-                            /*
-
-                            O curso não poderá ser removido, apenas arquivado | GLADSON
-
-                            btnCancelar.setOnClickListener {
-                                // Remove a referência de usuário no curso
-                                cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
-                                // Remove a referência do curso no usuário
-                                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
-                            }
-                            */
                         }
                     }
 
