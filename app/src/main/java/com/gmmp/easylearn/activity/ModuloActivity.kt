@@ -131,10 +131,10 @@ class ModuloActivity : AppCompatActivity() {
                             deletarDialog.setMessage("Se você remover da sua lista de cursos, não poderá desfazer")
                             deletarDialog.setView(container)
                             deletarDialog.setPositiveButton("Excluir") { dialogInterface, i ->
-                                if(cursoGlobal.preco.equals(0)){
+                                if(cursoGlobal.preco.equals(0.0)){
                                     inscrito = false
                                     // Remove a referência de usuário no curso
-                                    cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).removeValue()
+                                    cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).removeValue()
                                     // Remove a referência do curso no usuário
                                     usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
                                 }else{
@@ -161,7 +161,7 @@ class ModuloActivity : AppCompatActivity() {
                         btnAdicionar.setOnClickListener {
                             inscrito = true
                             // Registra a referência de usuário no curso
-                            cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
+                            cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).setValue(auth)
                             // Registra a referência do curso no usuário
                             usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
 

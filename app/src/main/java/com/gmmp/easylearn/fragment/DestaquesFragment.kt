@@ -36,7 +36,7 @@ class DestaquesFragment : Fragment() {
     private var listEmAlta: ArrayList<Aula>? = null
     private var listRecomendados: ArrayList<Aula>? = null
     private var listPrincipais = arrayListOf<Curso>()
-    private var listCursosInscritos = arrayListOf<Curso>()
+    // private var listCursosInscritos = arrayListOf<Curso>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -126,7 +126,7 @@ class DestaquesFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         listPrincipais.clear()
-                        listCursosInscritos.clear()
+                        // listCursosInscritos.clear()
 
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
@@ -148,7 +148,7 @@ class DestaquesFragment : Fragment() {
                                         val c = ds.getValue(Curso::class.java)
                                         if (c != null) {
                                             listPrincipais.remove(c)
-                                            listCursosInscritos.add(c)
+                                            // listCursosInscritos.add(c)
                                         }
                                     }
                                 }

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MeusCursosFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/linearLayoutPesquisa"
@@ -23,35 +22,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="Buscar"
                 android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="26sp"
-                android:textColor="@color/colorTitulo"/>
+                android:text="Buscar"
+                android:textColor="@color/colorTitulo"
+                android:textSize="26sp" />
 
             <include
                 android:id="@+id/search_bar"
-                layout="@layout/search_bar"/>
+                layout="@layout/search_bar" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Visto por último"
                 android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="26sp"
-                android:textColor="@color/colorTitulo"/>
+                android:text="Visto por último"
+                android:textColor="@color/colorTitulo"
+                android:textSize="26sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Deslize para o lado para ver mais"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:textSize="14sp"
-                android:textColor="@color/colorCheck"/>
+                android:text="Deslize para o lado para ver mais"
+                android:textColor="@color/colorCheck"
+                android:textSize="14sp" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -67,8 +66,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp">
 
                     </android.support.v7.widget.RecyclerView>
@@ -80,13 +79,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:text="Subscrições"
                 android:fontFamily="@font/sfprodisplay_bold"
-                android:textSize="26sp"
-                android:textColor="@color/colorTitulo"/>
+                android:text="Subscrições"
+                android:textColor="@color/colorTitulo"
+                android:textSize="26sp" />
 
 
             <android.support.v7.widget.RecyclerView
@@ -94,27 +93,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:visibility="visible">
+                android:layout_marginEnd="20dp"
+                android:scrollbars="none"
+                android:layout_marginBottom="20dp">
 
             </android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/semCursos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:textSize="16sp"
-                android:textColor="@color/colorInativo"
-                android:textAlignment="center"
                 android:text="Você não adicionou nenhum curso à sua lista"
-                android:visibility="gone"/>
+                android:textAlignment="center"
+                android:textColor="@color/colorInativo"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 

@@ -31,8 +31,6 @@ class NovoCursoActivity : AppCompatActivity() {
     private val GALERIA = 100
     private val SPINNER_VAZIO = "Selecione uma disciplina"
 
-    private var listaCursos = arrayListOf<String>()
-
     private lateinit var imageThumb: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,23 +86,6 @@ class NovoCursoActivity : AppCompatActivity() {
                     }
                 })
 
-        val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
-        cursos.addValueEventListener(
-                object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        for (d in dataSnapshot.children) {
-                            val c = d.getValue(Curso::class.java)
-                            listaCursos.add(c?.nome.toString())
-                        }
-
-                        viewDialog.hideDialog()
-
-                    }
-
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                })
 
         buttonSalvar.setOnClickListener {
 
@@ -117,9 +98,8 @@ class NovoCursoActivity : AppCompatActivity() {
             when {
                 editNomeCurso.text.isEmpty() -> toast("Nome do curso obrigatório")
                 editNomeCurso.text.length < 4 -> toast("O nome do curso deve ter ao menos 4 caracteres")
-                listaCursos.contains(editNomeCurso.text.toString()) -> toast("O nome deste curso já existe")
                 editDescricaoCurso.text.isEmpty() -> toast("Descrição obrigatória")
-                disciplinaSelecionada === SPINNER_VAZIO -> toast("Você não selecionou a disciplina")
+                disciplinaSelecionada == SPINNER_VAZIO -> toast("Você não selecionou a disciplina")
 
                 else -> {
                     val viewDialog = ViewDialog(this)

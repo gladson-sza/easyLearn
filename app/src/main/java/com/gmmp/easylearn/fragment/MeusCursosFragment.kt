@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_modulo.*
 import kotlinx.android.synthetic.main.fragment_meus_cursos.*
+import org.jetbrains.anko.margin
 
 
 /**
@@ -37,7 +39,6 @@ class MeusCursosFragment : Fragment() {
     private var listVistoPorUltimo: ArrayList<Aula>? = null
     private var cursosAdapter: CursosAdapter? = null
     private var listMeusCursos = arrayListOf<Curso>()
-    private var listMatriculados = arrayListOf<String>()
     private lateinit var textView : TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
