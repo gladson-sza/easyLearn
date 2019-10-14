@@ -78,7 +78,7 @@
             android:textColor="@color/colorDescricao"/>
 
         <EditText
-            android:id="@+id/text_nome_carta"
+            android:id="@+id/text_codigo"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_centerVertical="true"
