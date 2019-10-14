@@ -13,6 +13,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.TodosCursosActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
+import com.gmmp.easylearn.adapter.VerticalAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.comprado
 import com.gmmp.easylearn.helper.listarPor
@@ -35,6 +36,7 @@ class DestaquesFragment : Fragment() {
     private var listEmAlta: ArrayList<Aula>? = null
     private var listRecomendados: ArrayList<Aula>? = null
     private var listPrincipais = arrayListOf<Curso>()
+    private var listCursosInscritos = arrayListOf<Curso>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -67,7 +69,7 @@ class DestaquesFragment : Fragment() {
         recyclerViewRecomendados.adapter = adapterRecomendados
 
         //Inicializa Canais Principais
-        val adapter = CursosAdapter(context!!, listPrincipais)
+        val adapter = VerticalAdapter(context!!, listPrincipais)
         recyclerViewPrincipais.layoutManager = LinearLayoutManager(context!!)
         recyclerViewPrincipais.adapter = adapter
 
@@ -106,7 +108,7 @@ class DestaquesFragment : Fragment() {
         listRecomendados?.add(aula4)
     }
 
-    fun encherPrincipais(adapter: CursosAdapter) {
+    fun encherPrincipais(adapter: VerticalAdapter) {
 
         val viewDialog = ViewDialog(activity)
         viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
@@ -124,6 +126,7 @@ class DestaquesFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         listPrincipais.clear()
+                        listCursosInscritos.clear()
 
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
@@ -145,6 +148,7 @@ class DestaquesFragment : Fragment() {
                                         val c = ds.getValue(Curso::class.java)
                                         if (c != null) {
                                             listPrincipais.remove(c)
+                                            listCursosInscritos.add(c)
                                         }
                                     }
                                 }
@@ -167,12 +171,5 @@ class DestaquesFragment : Fragment() {
                     }
                 })
 
-//        val curso1 = Curso("2", "", "Stoodi", "Preparatório para Vestibulares", "https://cadernodoenem.com.br/wp-content/uploads/2016/09/stoodi-1024x576.png", "", 0.0)
-//        val curso2 = Curso("3", "", "Pro ENEM", "Preparatório para Vestibulares", "https://www.concurseirosdamadrugada.com.br/wp-content/uploads/2018/09/logo-proenem-vale-a-pena.png", "", 120.0)
-//        val curso3 = Curso("4", "", "AulaLivre.net", "Preparatório para Vestibulares", "https://sambatech.com/blog/wp-content/uploads/2015/01/banner-2-case-aula-livre1.png", "", 0.0)
-//
-//        listPrincipais?.add(curso1)
-//        listPrincipais?.add(curso2)
-//        listPrincipais?.add(curso3)
     }
 }

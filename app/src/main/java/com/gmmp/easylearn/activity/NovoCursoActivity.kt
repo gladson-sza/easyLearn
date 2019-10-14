@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.gmmp.easylearn.R
@@ -22,12 +23,13 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_novo_curso.*
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 class NovoCursoActivity : AppCompatActivity() {
 
     private val GALERIA = 100
-    private val SPINNER_VAZIO = "---------"
+    private val SPINNER_VAZIO = "Selecione uma disciplina"
 
     private var listaCursos = arrayListOf<String>()
 
@@ -36,11 +38,7 @@ class NovoCursoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_curso)
-
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar!!.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar!!.setTitle("Novo curso")
-
+        supportActionBar?.hide()
         inicializar()
     }
 
@@ -63,6 +61,14 @@ class NovoCursoActivity : AppCompatActivity() {
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item)
         adapter.add(SPINNER_VAZIO)
         spinnerDisciplinas.adapter = adapter
+
+        groupCurso.setOnCheckedChangeListener { group, checkedId ->
+            if(checkedId.equals(R.id.Pago)){
+                editPreco.visibility = View.VISIBLE
+            }else{
+                editPreco.visibility = View.GONE
+            }
+        }
 
         val disciplinas = FirebaseDatabase.getInstance().reference.child("disciplinas")
         disciplinas.addValueEventListener(
@@ -103,6 +109,10 @@ class NovoCursoActivity : AppCompatActivity() {
         buttonSalvar.setOnClickListener {
 
             val disciplinaSelecionada = spinnerDisciplinas.selectedItem as String
+            var preco = 0.0
+            if(editPreco.text.isNotEmpty()){
+                preco = editPreco.text.toString().toDouble()
+            }
 
             when {
                 editNomeCurso.text.isEmpty() -> toast("Nome do curso obrigatório")
@@ -115,13 +125,14 @@ class NovoCursoActivity : AppCompatActivity() {
                     val viewDialog = ViewDialog(this)
                     viewDialog.showDialog("Carregando", "Aguarde, estamos preparando as coisas por aqui")
 
-                    val cursoId = editNomeCurso.text.toString()
+                    val cursoId = UUID.randomUUID().toString()
 
-                    novoCurso.child(cursoId).child("id").setValue(editNomeCurso.text.toString())
+                    novoCurso.child(cursoId).child("id").setValue(cursoId)
                     novoCurso.child(cursoId).child("idCanal").setValue(idCanal)
                     novoCurso.child(cursoId).child("nome").setValue(editNomeCurso.text.toString())
                     novoCurso.child(cursoId).child("descricao").setValue(editDescricaoCurso.text.toString())
                     novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
+                    novoCurso.child(cursoId).child("preco").setValue(preco)
 
                     val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
                     val outputStream = ByteArrayOutputStream()

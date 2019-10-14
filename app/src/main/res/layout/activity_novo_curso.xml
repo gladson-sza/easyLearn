@@ -3,122 +3,236 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorFundo"
     android:orientation="vertical"
     tools:context=".activity.NovoCursoActivity">
 
-    <!--
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorToolbar"
-        android:elevation="1dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Novo Curso"
-        app:titleTextColor="@color/colorTituloActionBar" />
-        -->
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageThumb"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/thumbnail_placeholder" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="6dp"
-        android:fontFamily="@font/sfprodisplay_semibold"
-        android:text="Nome do Curso"
-        android:textColor="@color/colorDescricao"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/editNomeCurso"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorEditText"
-        android:ems="10"
-        android:hint="Meu curso super legal"
-        android:inputType="text"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@color/colorDescricao" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/sfprodisplay_semibold"
-            android:text="Disciplina"
-            android:textColor="@color/colorDescricao"
-            android:textSize="16sp" />
-
-        <Spinner
-            android:id="@+id/spinnerDisciplinas"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorToolbar"
+                android:elevation="1dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="Novo Curso"
+                app:titleTextColor="@color/colorTituloActionBar" />
+
+            <ImageView
+                android:id="@+id/imageThumb"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/thumbnail_placeholder" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/sfprodisplay_semibold"
+                android:text="Nome do Curso"
+                android:textColor="@color/colorDescricao"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editNomeCurso"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorEditText"
+                android:ems="10"
+                android:hint="Nome do Curso"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorDescricao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/sfprodisplay_semibold"
+                android:text="Descrição do Curso"
+                android:textColor="@color/colorDescricao"
+                android:textSize="16sp" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="6dp"
-        android:fontFamily="@font/sfprodisplay_semibold"
-        android:text="Descrição"
-        android:textColor="@color/colorDescricao"
-        android:textSize="16sp" />
+            <EditText
+                android:id="@+id/editDescricaoCurso"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/colorEditText"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:ems="10"
+                android:hint="Uma breve descrição deste curso"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorDescricao" />
 
-    <EditText
-        android:id="@+id/editDescricaoCurso"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorEditText"
-        android:ems="10"
-        android:hint="Uma breve descrição deste curso"
-        android:inputType="text"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@color/colorDescricao" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/sfprodisplay_semibold"
+                android:text="Disciplina"
+                android:textColor="@color/colorDescricao"
+                android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/buttonSalvar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/button_primary"
-        android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Salvar"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+            <Spinner
+                android:id="@+id/spinnerDisciplinas"
+                android:layout_width="match_parent"
+                android:background="@color/colorEditText"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="16dp"
+                android:paddingVertical="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/sfprodisplay_semibold"
+                    android:text="Forma de aquisição"
+                    android:textColor="@color/colorDescricao"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/groupCurso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/Gratuito"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:checked="true"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Gratuito"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:id="@+id/Pago"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Pago"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:textSize="16sp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editPreco"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/colorEditText"
+                android:ems="10"
+                android:hint="Valor a ser cobrado (R$)"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorDescricao"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/layoutTermos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp">
+
+                <CheckBox
+                    android:id="@+id/checkTermos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/colorCheck"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:fontFamily="@font/sfprodisplay_semibold"
+                    android:text="Eu aceito os"
+                    android:textColor="@color/colorBold"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="Termos de uso "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonSalvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/button_primary"
+                android:fontFamily="@font/sfprodisplay_bold"
+                android:text="Salvar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 </LinearLayout>
