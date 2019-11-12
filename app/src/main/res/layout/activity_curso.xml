@@ -202,6 +202,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginEnd="20dp"
                 android:text="Por R$ 000,00"
                 android:textStyle="bold"
@@ -209,12 +212,21 @@
                 android:gravity="end"
                 android:visibility="gone"/>
 
-            <iammert.com.expandablelib.ExpandableLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerModulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:overScrollMode="never"/>
+
+            <!-- iammert.com.expandablelib.ExpandableLayout
                 android:id="@+id/expandable"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:childLayout="@layout/layout_child"
-                app:parentLayout="@layout/layout_parent" />
+                app:childLayout="@layout/adapter_aulas"
+                app:parentLayout="@layout/layout_parent" />-->
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
