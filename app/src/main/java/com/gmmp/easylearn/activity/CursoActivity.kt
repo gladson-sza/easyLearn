@@ -1,8 +1,6 @@
 package com.gmmp.easylearn.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -24,25 +22,23 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import iammert.com.expandablelib.ExpandableLayout
 import iammert.com.expandablelib.Section
-import kotlinx.android.synthetic.main.activity_modulo.*
-import kotlinx.android.synthetic.main.layout_child.view.*
-import kotlinx.android.synthetic.main.layout_parent.view.*
+import kotlinx.android.synthetic.main.activity_curso.*
+import org.jetbrains.anko.padding
 import org.jetbrains.anko.toast
 import java.util.*
 
-class ModuloActivity : AppCompatActivity() {
+class CursoActivity : AppCompatActivity() {
 
     private lateinit var alertDialog: AlertDialog
     private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
-    private lateinit var layout: ExpandableLayout
     private var inscrito = false
 
     private val listaModulos = ArrayList<Modulo>()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_modulo)
+        setContentView(R.layout.activity_curso)
 
         iniciar()
         carregarModulos()
@@ -52,7 +48,6 @@ class ModuloActivity : AppCompatActivity() {
     private fun iniciar() {
 
         supportActionBar?.hide()
-
         Glide.with(applicationContext)
                 .load(cursoGlobal.thumbUrl)
                 .centerCrop()
@@ -69,35 +64,32 @@ class ModuloActivity : AppCompatActivity() {
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         params.leftMargin = resources.getDimensionPixelSize(R.dimen.dialog_margin)
-        params.rightMargin = resources.getDimensionPixelSize(R.dimen.fab_margin)
+        params.rightMargin = resources.getDimensionPixelSize(R.dimen.dialog_margin)
         params.topMargin = resources.getDimensionPixelSize(R.dimen.fab_margin)
 
         txtNomeModulo = EditText(this)
         txtNomeModulo.hint = "Nome do módulo"
+        txtNomeModulo.padding = 8
         txtNomeModulo.setBackgroundResource(R.color.colorEditText)
         txtNomeModulo.setTextColor(R.color.colorDescricao)
         txtNomeModulo.layoutParams = params
 
-
         container.addView(txtNomeModulo)
-
         builderDialog.setView(container)
         builderDialog.setPositiveButton("Confirmar") { dialogInterface, i ->
             val nome = txtNomeModulo.text.toString()
             if (nome.isEmpty())
                 txtNomeModulo.error = "Por favor, entre com o nome do módulo"
             else {
-                val modulo = Modulo(nome)
-                modulosReferencia(cursoGlobal.nome).child(nome).setValue(modulo)
+                val modulo = Modulo(UUID.randomUUID().toString(),cursoGlobal.id, nome, 0)
+                modulosReferencia(modulo.cursoId).child(modulo.id).setValue(modulo)
 
                 toast("Módulo adicionado")
             }
-
             txtNomeModulo.setText("")
         }
 
         builderDialog.setNegativeButton("Cancelar", null)
-
         alertDialog = builderDialog.create()
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -126,10 +118,9 @@ class ModuloActivity : AppCompatActivity() {
                         //Só se ele for pago | JÚNIOR
 
                         btnCancelar.setOnClickListener {
-                            val deletarDialog = AlertDialog.Builder(this@ModuloActivity)
+                            val deletarDialog = AlertDialog.Builder(this@CursoActivity)
                             deletarDialog.setTitle("Tem certeza que deseja cancelar sua inscrição?")
                             deletarDialog.setMessage("Se você remover da sua lista de cursos, não poderá desfazer")
-                            deletarDialog.setView(container)
                             deletarDialog.setPositiveButton("Excluir") { dialogInterface, i ->
                                 if(cursoGlobal.preco.equals(0.0)){
                                     inscrito = false
@@ -226,57 +217,14 @@ class ModuloActivity : AppCompatActivity() {
             }
         } */
 
-        // Lista de modulos
-        layout = findViewById(R.id.expandable)
-
-        layout.setRenderer(object : ExpandableLayout.Renderer<Modulo, Video> {
-
-            // Modulo
-            override fun renderParent(view: View, model: Modulo, isExpanded: Boolean, parentPosition: Int) {
-                view.tv_parent_name.text = "Seção ${(parentPosition + 1)} ${model.nome}"
-
-                if (isExpanded) view.arrow.setBackgroundResource(R.drawable.ic_seta_para_cima)
-                else view.arrow.setBackgroundResource(R.drawable.ic_seta_para_baixo)
-
-            }
-
-
-            // Video do modulo
-            override fun renderChild(view: View, model: Video, parentPosition: Int, childPosition: Int) {
-                if (childPosition == 0 && auth.equals(cursoGlobal.idCanal)) {
-                    view.tv_child_name.setTypeface(null, Typeface.BOLD)
-                    view.tv_child_name.text = "Adicionar vídeo"
-                    view.txt_video_duracao.text = " "
-
-                    view.tv_child_name.setOnClickListener {
-                        val intent = Intent(applicationContext, NovoVideoActivity::class.java)
-                        intent.putExtra("modulo", listaModulos[parentPosition].nome)
-                        intent.putExtra("curso", cursoGlobal.nome)
-                        startActivity(intent)
-
-                        finish()
-                    }
-
-                } else {
-                    view.txt_video_duracao.text = model.duracao
-                    view.tv_child_name.text = model.nome
-                    view.tv_child_name.setOnClickListener {
-                        startActivity(Intent(applicationContext, AulaActivity::class.java))
-                    }
-                }
-            }
-        })
-
     }
 
     /**
      * Método responsável por carregar os métodos.
      */
     private fun carregarModulos() {
-
         listaModulos.clear()
-
-        modulosReferencia(cursoGlobal.nome).addValueEventListener(object : ValueEventListener {
+        modulosReferencia(cursoGlobal.id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if (dataSnapshot.exists()) {
@@ -319,11 +267,6 @@ class ModuloActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-                val section = Section<Modulo, Video>()
-                section.parent = modulo
-                section.children.addAll(videos)
-                layout.addSection(section)
 
             }
 

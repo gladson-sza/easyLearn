@@ -6,17 +6,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.activity.ModuloActivity
+import com.gmmp.easylearn.activity.CursoActivity
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
-import com.google.firebase.auth.FirebaseAuth
 
 
 import java.util.ArrayList
@@ -44,7 +42,7 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
 
         myViewHolder.linearLayout.setOnClickListener {
             cursoGlobal = listCursos[i]
-            context.startActivity(Intent(context, ModuloActivity::class.java))
+            context.startActivity(Intent(context, CursoActivity::class.java))
         }
     }
 

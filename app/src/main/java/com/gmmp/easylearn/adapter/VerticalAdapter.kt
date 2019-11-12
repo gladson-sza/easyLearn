@@ -13,13 +13,9 @@ import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.activity.ModuloActivity
+import com.gmmp.easylearn.activity.CursoActivity
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
-import com.google.firebase.auth.FirebaseAuth
-import com.gmmp.easylearn.helper.usuariosReferencia
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 import java.util.ArrayList
 
@@ -55,7 +51,7 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
 
         viewHolder.linearLayout.setOnClickListener {
             cursoGlobal = listCursos[i]
-            context.startActivity(Intent(context, ModuloActivity::class.java))
+            context.startActivity(Intent(context, CursoActivity::class.java))
         }
     }
 
