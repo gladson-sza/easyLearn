@@ -34,9 +34,7 @@ class PreferenciasFragment : Fragment() {
         //view.menuMeuCanal.setOnClickListener { startActivity(Intent(activity, MeuCanalActivity::class.java)) }
 
         view.menuEditarConta.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frameContainer, EditarPerfilFragment())
-            transaction?.commit()
+            startActivity(Intent(activity, EditarPerfilActivity::class.java))
         }
 
         view.menu_formas_pagamento.setOnClickListener {
