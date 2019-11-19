@@ -36,12 +36,21 @@
             android:id="@+id/imageCurso"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@drawable/thumbnail_placeholder"
-            android:src="@drawable/gradient_shape"
+            android:src="@drawable/thumbnail_placeholder"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gradient_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tituloCurso"

@@ -1,6 +1,7 @@
 package com.gmmp.easylearn.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -91,7 +92,10 @@ class CursoActivity : AppCompatActivity() {
                 val modulo = Modulo(UUID.randomUUID().toString(),cursoGlobal.id, nome, 0)
                 modulosReferencia(modulo.cursoId).child(modulo.id).setValue(modulo)
 
-                toast("Módulo adicionado")
+                toast("${txtNomeModulo.text} adicionado")
+                finish()
+                startActivity(Intent(applicationContext, CursoActivity::class.java))
+
             }
             txtNomeModulo.setText("")
         }
@@ -243,7 +247,6 @@ class CursoActivity : AppCompatActivity() {
 
                         if (modulo != null) {
                             listaModulos.add(modulo)
-                            setSection(modulo)
                         }
 
                     }
@@ -260,35 +263,6 @@ class CursoActivity : AppCompatActivity() {
 
             }
         })
-
-    }
-
-    private fun setSection(modulo: Modulo) {
-
-        videosReferencia(cursoGlobal.nome, modulo.nome).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                // Primeiro vídeo obrigatório para que seja substituído pelo "Adicionar Vídeo" | GLADSON
-                val videos = ArrayList<Video>()
-                videos.add(Video())
-
-                if (dataSnapshot.exists()) {
-                    for (ds in dataSnapshot.children) {
-                        val video = ds.getValue(Video::class.java)
-
-                        if (video != null) {
-                            videos.add(video)
-                        }
-                    }
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
-        })
-
 
     }
 
