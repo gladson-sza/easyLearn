@@ -1,4 +1,6 @@
 package com.gmmp.easylearn.model
 
-data class Cartao(val numeroCartao: String, val nomeCartao: String, val dataValidade: String, val codigo: String) {
+data class Cartao(val codigo: String, val dataValidade: String, val nomeCartao: String, val numeroCartao: String) {
+
+    constructor() : this("", "", "", "")
 }
