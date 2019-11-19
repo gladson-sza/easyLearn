@@ -4,6 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +15,8 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.adapter.HorizontalAdapter
+import com.gmmp.easylearn.adapter.ModuloAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.*
 import com.gmmp.easylearn.model.Curso
@@ -32,6 +38,7 @@ class CursoActivity : AppCompatActivity() {
     private lateinit var alertDialog: AlertDialog
     private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
+    private lateinit var recyclerModulo : RecyclerView
     private var inscrito = false
 
     private val listaModulos = ArrayList<Modulo>()
@@ -63,13 +70,13 @@ class CursoActivity : AppCompatActivity() {
         val container = FrameLayout(this)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        params.leftMargin = resources.getDimensionPixelSize(R.dimen.dialog_margin)
-        params.rightMargin = resources.getDimensionPixelSize(R.dimen.dialog_margin)
+        params.leftMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
+        params.rightMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
         params.topMargin = resources.getDimensionPixelSize(R.dimen.fab_margin)
 
         txtNomeModulo = EditText(this)
         txtNomeModulo.hint = "Nome do módulo"
-        txtNomeModulo.padding = 8
+        txtNomeModulo.padding = 16
         txtNomeModulo.setBackgroundResource(R.color.colorEditText)
         txtNomeModulo.setTextColor(R.color.colorDescricao)
         txtNomeModulo.layoutParams = params
@@ -183,8 +190,10 @@ class CursoActivity : AppCompatActivity() {
             btnCancelar.visibility = View.GONE
             btnAdicionar.visibility = View.GONE
             textPreco.visibility = View.GONE
+
             btnNovoModulo.setOnClickListener {
                 alertDialog.show()
+                Log.i("MODULO", "TAMANHO: ${listaModulos.size}")
             }
         }
 
@@ -240,6 +249,11 @@ class CursoActivity : AppCompatActivity() {
                     }
 
                 }
+
+                recyclerModulo = findViewById(R.id.recyclerModulo)
+                recyclerModulo.layoutManager = LinearLayoutManager(this@CursoActivity, LinearLayoutManager.VERTICAL, false)
+                val adapterModulo = ModuloAdapter(this@CursoActivity, listaModulos)
+                recyclerModulo.adapter = adapterModulo
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
