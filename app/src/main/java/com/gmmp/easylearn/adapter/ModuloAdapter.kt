@@ -17,7 +17,7 @@ import com.gmmp.easylearn.model.Disciplina
 import com.gmmp.easylearn.model.Modulo
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ModuloAdapter(private val modulos: ArrayList<Modulo>, private val context: Context) : RecyclerView.Adapter<ModuloAdapter.MyViewHolder>() {
+class ModuloAdapter(private val context: Context, private val modulos: ArrayList<Modulo>) : RecyclerView.Adapter<ModuloAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         val itemList = LayoutInflater.from(viewGroup.context)
