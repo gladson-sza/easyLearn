@@ -15,14 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Adicionar Cartão"
+        android:text="Cartão de crédito"
         android:fontFamily="@font/sfprodisplay_bold"
         android:textSize="26sp"
         android:textColor="@color/colorTitulo"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Preencha os campos abaixo."
+        android:text="Preencha os campos abaixo para cadastrar ou editar."
         android:fontFamily="@font/sfprodisplay_regular"
         android:textSize="14sp"
         android:textColor="@color/colorCheck"/>
@@ -75,6 +75,7 @@
             android:drawableLeft="@drawable/ic_pay_date"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:inputType="date"
             android:textColor="@color/colorDescricao"/>
 
         <EditText
@@ -89,6 +90,7 @@
             android:drawableLeft="@drawable/ic_pay_lock"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:inputType="number"
             android:textColor="@color/colorDescricao"/>
 
     </LinearLayout>
@@ -101,7 +103,7 @@
         android:layout_gravity="bottom"
         android:background="@drawable/button_primary"
         android:fontFamily="@font/sfprodisplay_bold"
-        android:text="Confirmar"
+        android:text="Salvar"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
