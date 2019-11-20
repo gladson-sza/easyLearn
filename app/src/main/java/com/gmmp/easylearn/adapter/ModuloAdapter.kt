@@ -19,6 +19,18 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class ModuloAdapter(private val context: Context, private val modulos: ArrayList<Modulo>) : RecyclerView.Adapter<ModuloAdapter.MyViewHolder>() {
 
+    fun removeItem(position: Int) {
+        modulos.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, modulos.size)
+    }
+
+    fun restoreItem(modulo: Modulo, position: Int) {
+        modulos.add(position, modulo)
+        // notify item added by position
+        notifyItemInserted(position)
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         val itemList = LayoutInflater.from(viewGroup.context)
                 .inflate(R.layout.adapter_modulo, viewGroup, false)

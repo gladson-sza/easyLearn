@@ -2,7 +2,9 @@ package com.gmmp.easylearn.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.*
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -40,7 +42,11 @@ class CursoActivity : AppCompatActivity() {
     private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
     private lateinit var recyclerModulo : RecyclerView
+    private var recyclerView: RecyclerView? = null
+    private var adapter: ModuloAdapter? = null
+    private val p = Paint()
     private var inscrito = false
+    private lateinit var simpleItemTouchCallback : ItemTouchHelper.SimpleCallback
 
     private val listaModulos = ArrayList<Modulo>()
 
@@ -89,7 +95,7 @@ class CursoActivity : AppCompatActivity() {
             if (nome.isEmpty())
                 txtNomeModulo.error = "Por favor, entre com o nome do módulo"
             else {
-                val modulo = Modulo(UUID.randomUUID().toString(),cursoGlobal.id, nome, 0)
+                val modulo = Modulo(UUID.randomUUID().toString(), cursoGlobal.id, nome, 0)
                 modulosReferencia(modulo.cursoId).child(modulo.id).setValue(modulo)
 
                 toast("${txtNomeModulo.text} adicionado")
@@ -133,13 +139,13 @@ class CursoActivity : AppCompatActivity() {
                             deletarDialog.setTitle("Tem certeza que deseja cancelar sua inscrição?")
                             deletarDialog.setMessage("Se você remover da sua lista de cursos, não poderá desfazer")
                             deletarDialog.setPositiveButton("Excluir") { dialogInterface, i ->
-                                if(cursoGlobal.preco.equals(0.0)){
+                                if (cursoGlobal.preco.equals(0.0)) {
                                     inscrito = false
                                     // Remove a referência de usuário no curso
                                     cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).removeValue()
                                     // Remove a referência do curso no usuário
                                     usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
-                                }else{
+                                } else {
                                     //Arquiva o curso
                                 }
                             }
@@ -230,6 +236,67 @@ class CursoActivity : AppCompatActivity() {
             }
         } */
 
+        simpleItemTouchCallback =
+                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+
+                    override fun onMove(
+                            recyclerView: RecyclerView,
+                            viewHolder: RecyclerView.ViewHolder,
+                            target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        val position = viewHolder.adapterPosition
+
+                        if (direction == ItemTouchHelper.LEFT) {
+                            val deletedModel = listaModulos[position]
+                            adapter!!.removeItem(position)
+
+                            toast("'${deletedModel.nome}' removido com sucesso!")
+                        } else {
+                            val deletedModel = listaModulos[position]
+                            adapter!!.removeItem(position)
+
+                        }
+                    }
+
+                    override fun onChildDraw(
+                            c: Canvas,
+                            recyclerView: RecyclerView,
+                            viewHolder: RecyclerView.ViewHolder,
+                            dX: Float,
+                            dY: Float,
+                            actionState: Int,
+                            isCurrentlyActive: Boolean
+                    ) {
+
+                        val icon: Bitmap
+                        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+
+                            val itemView = viewHolder.itemView
+                            val height = itemView.bottom.toFloat() - itemView.top.toFloat()
+                            val width = height / 3
+
+                            if (dX > 0) {
+                                p.color = Color.parseColor("#bdbdbd")
+                                val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(), dX, itemView.bottom.toFloat())
+                                c.drawRect(background, p)
+
+                                icon = BitmapFactory.decodeResource(resources, R.drawable.ic_email_primary_24dp)
+                                val icon_dest = RectF(
+                                        itemView.left.toFloat() + width,
+                                        itemView.top.toFloat() + width,
+                                        itemView.left.toFloat() + 2 * width,
+                                        itemView.bottom.toFloat() - width
+                                )
+                                c.drawBitmap(icon, null, icon_dest, p)
+                            }
+                        }
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    }
+                }
     }
 
     /**
@@ -255,8 +322,11 @@ class CursoActivity : AppCompatActivity() {
 
                 recyclerModulo = findViewById(R.id.recyclerModulo)
                 recyclerModulo.layoutManager = LinearLayoutManager(this@CursoActivity, LinearLayoutManager.VERTICAL, false)
-                val adapterModulo = ModuloAdapter(this@CursoActivity, listaModulos)
-                recyclerModulo.adapter = adapterModulo
+                adapter = ModuloAdapter(this@CursoActivity, listaModulos)
+                recyclerModulo.adapter = adapter
+
+                val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+                itemTouchHelper.attachToRecyclerView(recyclerModulo)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
