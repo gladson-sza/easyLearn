@@ -11,9 +11,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.model.Curso
-import com.gmmp.easylearn.model.Disciplina
 import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.model.Disciplina
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

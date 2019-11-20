@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -16,19 +15,15 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.ModuloAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.*
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
-import com.gmmp.easylearn.model.Video
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import iammert.com.expandablelib.ExpandableLayout
-import iammert.com.expandablelib.Section
 import kotlinx.android.synthetic.main.activity_curso.*
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.toast

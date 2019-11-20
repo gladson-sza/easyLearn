@@ -8,18 +8,15 @@ import android.support.v7.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
+import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
-import com.gmmp.easylearn.model.Video
-import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_aula.*
 import kotlinx.android.synthetic.main.activity_meu_canal.*
-import org.jetbrains.anko.imageView
 
 class MeuCanalActivity : AppCompatActivity() {
 

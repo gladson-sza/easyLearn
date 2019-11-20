@@ -1,11 +1,9 @@
 package com.gmmp.easylearn.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog

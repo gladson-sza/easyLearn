@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.TodosCursosActivity
-import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.VerticalAdapter
 import com.gmmp.easylearn.dialog.ViewDialog

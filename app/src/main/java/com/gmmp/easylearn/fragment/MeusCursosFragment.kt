@@ -9,26 +9,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
-import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.comprado
-import com.gmmp.easylearn.helper.cursosReferencia
-import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_curso.*
-import kotlinx.android.synthetic.main.fragment_meus_cursos.*
-import org.jetbrains.anko.margin
 
 
 /**

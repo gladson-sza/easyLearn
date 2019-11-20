@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
 import com.gmmp.easylearn.model.Curso
+import com.gmmp.easylearn.model.Modulo
 import com.google.firebase.database.FirebaseDatabase
 
 /**
@@ -37,6 +38,9 @@ lateinit var cursoGlobal: Curso
 //listar por
 var listarPor: String? = null
 var comprado: Boolean? = false
+
+// Modulo Selecionado | GLADSON
+lateinit var moduloGlobal: Modulo
 
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
 fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")
