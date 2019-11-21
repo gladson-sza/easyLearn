@@ -1,10 +1,11 @@
 package com.gmmp.easylearn.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.AulaAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
@@ -53,7 +54,6 @@ class ListarAulasActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    toast("DENTRO")
                     listaVideo.clear()
                     for (ds in dataSnapshot.children) {
 
@@ -63,11 +63,9 @@ class ListarAulasActivity : AppCompatActivity() {
                             listaVideo.add(video)
                         }
 
-                        toast("LAÇO")
                     }
 
-                    toast("FORA")
-                    recyclerAulas.layoutManager = LinearLayoutManager(applicationContext, LinearLayout.VERTICAL, false)
+                    recyclerAulas.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
                     recyclerAulas.adapter = AulaAdapter(listaVideo, applicationContext)
                     // dialog.hideDialog()
                 }

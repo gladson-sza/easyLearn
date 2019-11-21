@@ -55,7 +55,7 @@
                 android:textColor="@color/colorCheck"/>
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewEmAlta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
 
             <LinearLayout
@@ -98,7 +98,7 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewPrincipais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/colorCheck"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewRecomendados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="30dp"
                 android:orientation="horizontal">
 
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 

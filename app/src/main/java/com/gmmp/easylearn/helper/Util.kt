@@ -4,9 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Build
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
+import com.gmmp.easylearn.model.Video
 import com.google.firebase.database.FirebaseDatabase
 
 /**
@@ -39,9 +40,12 @@ lateinit var cursoGlobal: Curso
 var listarPor: String? = null
 var comprado: Boolean? = false
 
-// Modulo Selecionado | GLADSON
+// Globeleza | GLADSON
 lateinit var moduloGlobal: Modulo
+lateinit var videoGlobal: Video
 
+// Referências mais rápidas para o Firebase
+// PS: Use em conjunto com as variáveis globais do Gladson e do Paulo
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
 fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("disciplinas")
 fun usuariosReferencia() = FirebaseDatabase.getInstance().reference.child("usuarios")

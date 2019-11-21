@@ -1,7 +1,7 @@
 package com.gmmp.easylearn.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.firebase.auth.*
