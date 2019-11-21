@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.TodosCursosActivity
+import com.gmmp.easylearn.adapter.CanaisAdapter
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.VerticalAdapter
@@ -20,11 +23,13 @@ import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
+import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_destaques.*
 import kotlinx.android.synthetic.main.fragment_destaques.view.*
 
 
@@ -33,9 +38,9 @@ import kotlinx.android.synthetic.main.fragment_destaques.view.*
  */
 class DestaquesFragment : Fragment() {
 
-    private var listEmAlta: ArrayList<Aula>? = null
     private var listRecomendados: ArrayList<Aula>? = null
     private var listPrincipais = arrayListOf<Curso>()
+    private var listEmAlta = arrayListOf<Usuario>()
     // private var listCursosInscritos = arrayListOf<Curso>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +52,7 @@ class DestaquesFragment : Fragment() {
     }
 
     fun inicializar(view: View) {
-        encherEmAlta()
+
         encherRecomendados()
 
         view.textVerTudo.setOnClickListener {
@@ -58,11 +63,6 @@ class DestaquesFragment : Fragment() {
         val recyclerViewPrincipais = view.findViewById<RecyclerView>(R.id.recyclerViewPrincipais)
         val recyclerViewRecomendados = view.findViewById<RecyclerView>(R.id.recyclerViewRecomendados)
 
-        //Inicializa Aulas em Alta
-        recyclerViewEmAlta.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        val adapterEmAlta = HorizontalAdapter(activity!!, listEmAlta!!)
-        recyclerViewEmAlta.adapter = adapterEmAlta
-
         //Inicializa Canais Recomendados
         recyclerViewRecomendados.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val adapterRecomendados = HorizontalAdapter(activity!!, listRecomendados!!)
@@ -72,26 +72,35 @@ class DestaquesFragment : Fragment() {
         val adapter = VerticalAdapter(context!!, listPrincipais)
         recyclerViewPrincipais.layoutManager = LinearLayoutManager(context!!)
         recyclerViewPrincipais.adapter = adapter
-
         encherPrincipais(adapter)
 
-
+        //Inicializa Aulas em Alta
+        val adapterEmAlta = CanaisAdapter(context!!, listEmAlta)
+        recyclerViewEmAlta.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewEmAlta.adapter = adapterEmAlta
+        encherEmAlta(adapterEmAlta, view)
     }
 
-    fun encherEmAlta() {
-        listEmAlta = ArrayList()
+    fun encherEmAlta(adapter: CanaisAdapter, view: View) {
+        val usuarios = FirebaseDatabase.getInstance().reference.child("usuarios")
+        usuarios.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                listEmAlta.clear()
+                for (d in dataSnapshot.children) {
+                    var u = d.getValue(Usuario::class.java)
 
-        val aula1 = Aula("1", "Unidades de Medidas", "Leo Gomes", "https://www.jovensestudantes.com.br/wp-content/uploads/2018/07/gratis-unidades-de-medidas-e-ord.jpg", "25:35")
-        val aula2 = Aula("5", "Porcentagem", "Ferretto", "https://images.passeidireto.com/thumbnails/video/65117545/thumb.jpg.xlarge", "11:46")
-        val aula3 = Aula("3", "Teorema de Tales", "Alex", "https://www.jovensestudantes.com.br/wp-content/uploads/2018/07/gratis-teorema-de-tales-matemati.jpg", "25:35")
-        val aula4 = Aula("2", "Multiplicação e Divisão", "Ferretto", "https://img.youtube.com/vi/0UGJRHq2PS4/maxresdefault.jpg", "15:32")
-        val aula5 = Aula("4", "Adição e Subtração", "Ferretto", "https://images.passeidireto.com/thumbnails/video/65117508/thumb.jpg.xlarge", "23:22")
+                    if (u != null) {
+                        listEmAlta.add(u)
+                    }
 
-        listEmAlta?.add(aula2)
-        listEmAlta?.add(aula4)
-        listEmAlta?.add(aula5)
-        listEmAlta?.add(aula3)
-        listEmAlta?.add(aula1)
+                }
+                view.progress_em_alta.visibility = View.GONE
+                view.recyclerViewEmAlta?.visibility = View.VISIBLE
+                adapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
     }
 
     fun encherRecomendados() {
@@ -109,10 +118,6 @@ class DestaquesFragment : Fragment() {
     }
 
     fun encherPrincipais(adapter: VerticalAdapter) {
-
-        val viewDialog = ViewDialog(activity)
-        viewDialog.showDialog("Aguarde", "Obtendo informações de nossos servidores")
-
         // Firebase
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
@@ -154,8 +159,9 @@ class DestaquesFragment : Fragment() {
                                 }
 
                                 adapter.notifyDataSetChanged()
-                                viewDialog.hideDialog()
+                                progress_circular.visibility = View.GONE
 
+                                recyclerViewPrincipais.visibility = View.VISIBLE
                             }
 
 
