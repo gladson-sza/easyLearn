@@ -59,7 +59,6 @@ class DisciplinasFragment : Fragment() {
 
                 disciplinaAdapter?.notifyDataSetChanged()
                 view.progress_circular.visibility = View.GONE
-                view.textCarregando.visibility = View.GONE
                 recyclerView?.visibility = View.VISIBLE
 
             }

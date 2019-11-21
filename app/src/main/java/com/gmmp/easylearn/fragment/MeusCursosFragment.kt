@@ -1,6 +1,7 @@
 package com.gmmp.easylearn.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.SubscricoesActivity
 import com.gmmp.easylearn.adapter.CursosAdapter
 import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.helper.comprado
@@ -21,6 +23,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_curso.*
+import kotlinx.android.synthetic.main.fragment_meus_cursos.*
+import kotlinx.android.synthetic.main.fragment_meus_cursos.view.*
+import org.jetbrains.anko.margin
 
 
 /**
@@ -61,6 +67,10 @@ class MeusCursosFragment : Fragment() {
         recyclerViewMeusCursos!!.layoutManager = linearManager
         recyclerViewMeusCursos.isNestedScrollingEnabled = false
         recyclerViewMeusCursos!!.adapter = cursosAdapter
+
+        view.textVerSubs.setOnClickListener {
+            startActivity(Intent(context, SubscricoesActivity::class.java))
+        }
 
     }
 

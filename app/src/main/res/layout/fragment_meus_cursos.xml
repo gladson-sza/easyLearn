@@ -76,17 +76,33 @@
 
             </ScrollView>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:text="Subscrições"
-                android:textColor="@color/colorTitulo"
-                android:textSize="26sp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="Subscrições"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTitulo"
+                    android:textSize="26sp" />
 
+                <TextView
+                    android:id="@+id/textVerSubs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="Ver tudo"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="gravity"/>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMeusCursos"

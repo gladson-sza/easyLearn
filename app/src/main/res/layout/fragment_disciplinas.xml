@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DisciplinasFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollViewo"
+        <TextView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/sfprodisplay_bold"
+            android:text="Buscar"
+            android:textColor="@color/colorTitulo"
+            android:textSize="26sp" />
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -58,25 +64,37 @@
 
         </ScrollView>
 
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_centerInParent="true"
-            android:indeterminate="true"
-            android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/colorPrimary"/>
+        <include
+            android:id="@+id/search_bar"
+            layout="@layout/search_bar" />
 
         <TextView
-            android:id="@+id/textCarregando"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progress_circular"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="@font/sfprodisplay_bold"
-            android:text="Carregando..."
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:text="Disciplinas"
+            android:textColor="@color/colorTitulo"
+            android:textSize="26sp" />
 
-    </RelativeLayout>
-</FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewDisciplinas"
+            android:layout_width="match_parent"
+            android:layout_height="510dp"
+            android:layout_margin="20dp"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="155dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary" />
+    </LinearLayout>
+</ScrollView>
