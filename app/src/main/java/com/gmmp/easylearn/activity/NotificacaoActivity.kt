@@ -1,8 +1,8 @@
 package com.gmmp.easylearn.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.gmmp.easylearn.R

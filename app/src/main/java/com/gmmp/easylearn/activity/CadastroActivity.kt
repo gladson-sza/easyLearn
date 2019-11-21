@@ -1,28 +1,22 @@
 package com.gmmp.easylearn.activity
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-
-import com.gmmp.easylearn.R
-import com.gmmp.easylearn.model.Usuario
-import com.gmmp.easylearn.dialog.ViewDialog
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-
 import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.*
+import com.gmmp.easylearn.R
+import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.model.Usuario
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
+import org.jetbrains.anko.toast
 
 
 class CadastroActivity : AppCompatActivity() {
@@ -38,7 +32,7 @@ class CadastroActivity : AppCompatActivity() {
     private lateinit var textLogin: TextView
     private lateinit var btnGoogle: LinearLayout
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var viewDialog : ViewDialog
+    private lateinit var viewDialog: ViewDialog
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,15 +59,15 @@ class CadastroActivity : AppCompatActivity() {
 
         //Inicializa o botão de Continuar
         buttonContinuar = findViewById(R.id.buttonContinuar)
-        buttonContinuar!!.setOnClickListener {
+        buttonContinuar.setOnClickListener {
             //Validação dos campos
-            if (!textNome!!.text.toString().isEmpty()) {
-                if (!textEmail!!.text.toString().isEmpty()) {
-                    if (!textSenha!!.text.toString().isEmpty()) {
-                        if (textSenha!!.text.toString() == textConfirmarSenha!!.text.toString()) {
-                            viewDialog!!.showDialog("Validando os dados", "Por favor, aguarde enquanto validamos os dados")
+            if (textNome.text.toString().isNotEmpty()) {
+                if (textEmail.text.toString().isNotEmpty()) {
+                    if (textSenha.text.toString().isNotEmpty()) {
+                        if (textSenha.text.toString() == textConfirmarSenha.text.toString()) {
+                            viewDialog.showDialog("Validando os dados", "Por favor, aguarde enquanto validamos os dados")
                             //Registra usuário no Firebase
-                            registrarUsuario(textEmail!!.text.toString(), textSenha!!.text.toString())
+                            registrarUsuario(textEmail.text.toString(), textSenha.text.toString())
 
                         } else {
                             Toast.makeText(this@CadastroActivity, "Erro: Senhas não coincidem", Toast.LENGTH_SHORT).show()
@@ -91,7 +85,7 @@ class CadastroActivity : AppCompatActivity() {
 
         //Inicializa o texto "clique aqui"
         textLogin = findViewById(R.id.textLogin)
-        textLogin!!.setOnClickListener { setContentView(R.layout.activity_login) }
+        textLogin.setOnClickListener { setContentView(R.layout.activity_login) }
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -106,7 +100,6 @@ class CadastroActivity : AppCompatActivity() {
         // Configura clique do botão do Google
         btnGoogle = findViewById(R.id.buttonCadastroGoogle)
         btnGoogle.setOnClickListener {
-            Toast.makeText(applicationContext, "AAA", Toast.LENGTH_SHORT)
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
@@ -127,7 +120,7 @@ class CadastroActivity : AppCompatActivity() {
                         val reference = FirebaseDatabase.getInstance().reference.child("usuarios")
 
                         //Cria um objeto de usuário
-                        val usuario = Usuario(firebaseAuth!!.currentUser!!.uid,
+                        val usuario = Usuario(firebaseAuth.currentUser!!.uid,
                                 textNome.text.toString(),
                                 textEmail.text.toString(),
                                 textSenha.text.toString())
@@ -158,7 +151,7 @@ class CadastroActivity : AppCompatActivity() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(applicationContext, "Falha ao tentar autenticar com o google", Toast.LENGTH_SHORT)
+                        toast("Falha ao tentar autenticar com o google")
                     }
                 }
     }

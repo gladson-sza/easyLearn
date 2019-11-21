@@ -1,8 +1,7 @@
 package com.gmmp.easylearn.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.CursoActivity
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
+import org.jetbrains.anko.startActivity
 
 
 import java.util.ArrayList
@@ -28,21 +28,20 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
     }
 
     override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
-        var (id, idCanal, nome, descricao, thumb, disciplina, preco) = listCursos[i]
-        if (!thumb.isEmpty()) {
+        if (!listCursos[i].thumbUrl.isEmpty()) {
             Glide.with(context)
                     .load(listCursos[i].thumbUrl)
                     .centerCrop()
                     .into(myViewHolder.thumbCurso)
         }
 
-        myViewHolder.textNome.text = nome
-        myViewHolder.textDescricao.text = descricao
-        myViewHolder.textCategoria.text = disciplina
+        myViewHolder.textNome.text = listCursos[i].nome
+        myViewHolder.textDescricao.text = listCursos[i].descricao
+        myViewHolder.textCategoria.text = listCursos[i].disciplina
 
         myViewHolder.linearLayout.setOnClickListener {
             cursoGlobal = listCursos[i]
-            context.startActivity(Intent(context, CursoActivity::class.java))
+            context.startActivity<CursoActivity>()
         }
     }
 

@@ -11,21 +11,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome da Aula"
             android:fontFamily="@font/sfprodisplay_bold"
             android:src="@color/colorTitulo"
-            android:textStyle="bold"
+            android:text="Nome da Aula"
             android:textColor="@color/colorTitulo"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txt_video_duracao"
+            android:id="@+id/txtDuracao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -33,14 +34,14 @@
             android:src="@color/colorSubtitulo"
             android:text="Duração 0:00 "
             android:textColor="@color/colorDescricao"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_play_circle_outline_primary_24dp"
+        app:srcCompat="@drawable/ic_play_circle_outline_primary_24dp"
         android:scaleType="center"
         android:layout_weight="1"/>
 

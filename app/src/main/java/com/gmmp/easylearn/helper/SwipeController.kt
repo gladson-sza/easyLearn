@@ -1,10 +1,10 @@
 package com.gmmp.easylearn.helper
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 
-import android.support.v7.widget.helper.ItemTouchHelper.LEFT
-import android.support.v7.widget.helper.ItemTouchHelper.RIGHT
+import androidx.recyclerview.widget.ItemTouchHelper.LEFT
+import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 
 class SwipeController : ItemTouchHelper.Callback() {
 

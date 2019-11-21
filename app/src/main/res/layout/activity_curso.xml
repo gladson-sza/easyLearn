@@ -28,7 +28,7 @@
 
     </android.support.design.widget.AppBarLayout>-->
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageCurso"
             app:layout_constraintVertical_bias="1.0" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
         android:textSize="18sp"
         android:maxLines="3" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
@@ -146,7 +146,7 @@
                     android:orientation="vertical"
                     android:layout_gravity="center_vertical">
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnNovoModulo"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
@@ -164,7 +164,7 @@
                     android:textColor="@color/colorPrimary"
                     android:visibility="visible"/>
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnAdicionar"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
@@ -183,7 +183,7 @@
                     android:textColor="@color/colorPrimary"
                     android:visibility="gone"/>
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCancelar"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
@@ -221,7 +221,7 @@
                 android:gravity="end"
                 android:visibility="gone"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerModulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -237,6 +237,6 @@
                 app:parentLayout="@layout/layout_parent" />-->
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
