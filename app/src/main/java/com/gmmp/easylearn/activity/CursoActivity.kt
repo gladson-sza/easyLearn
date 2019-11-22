@@ -325,7 +325,9 @@ class CursoActivity : AppCompatActivity() {
                 adapter = ModuloAdapter(this@CursoActivity, listaModulos)
                 recyclerModulo.adapter = adapter
 
-                val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+
+                val sc = SwipeController()
+                val itemTouchHelper = ItemTouchHelper(sc)
                 itemTouchHelper.attachToRecyclerView(recyclerModulo)
             }
 
