@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
-        android:layout_width="215dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="4dp"
             android:paddingTop="4dp"
+            android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:paddingBottom="6dp">
+            android:paddingBottom="6dp"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imageFundo"
-                    android:layout_width="215dp"
+                    android:id="@+id/imageThumbnail1"
+                    android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:src="@color/colorCinza"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgPerfil"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:src="@drawable/ic_default_avatar"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/text_nome"
+                android:id="@+id/textTitulo1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/sfprodisplay_bold"
+                android:text="Título"
                 android:maxLines="1"
-                android:text="Nome do cnac"
                 android:textColor="@color/colorTitulo"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/textDescricao1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:text="Descrição"
+                android:maxLines="1"
+                android:textColor="@color/colorCheck"
+                android:textSize="14sp"/>
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
