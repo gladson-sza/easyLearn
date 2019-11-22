@@ -19,11 +19,12 @@ import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import kotlinx.android.synthetic.main.activity_novo_video.*
 import org.jetbrains.anko.toast
 import java.io.File
+import java.util.*
 
 class NovoVideoActivity : AppCompatActivity() {
 
-    private val VIDEO = 500
     private var URL_VIDEO = ""
+    private val idVideo = UUID.randomUUID().toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +53,7 @@ class NovoVideoActivity : AppCompatActivity() {
                         val videoRef = FirebaseStorage.getInstance().reference
                                 .child(cursoGlobal.id)
                                 .child(moduloGlobal.id)
-                                .child("videos/${file.lastPathSegment}")
+                                .child(idVideo)
 
                         val uploadTask = videoRef.putFile(file)
 
@@ -94,13 +95,13 @@ class NovoVideoActivity : AppCompatActivity() {
 
                 if (URL_VIDEO.isNotEmpty()) {
 
-                    val video = Video(nomeVideo,
+                    val video = Video(idVideo,
                             nomeVideo,
                             "",
                             descricaoVideo,
                             URL_VIDEO)
 
-                    videosReferencia(cursoGlobal.id, moduloGlobal.id).child(nomeVideo).setValue(video).toString()
+                    videosReferencia(cursoGlobal.id, moduloGlobal.id).child(idVideo).setValue(video).toString()
                     toast("Aula adicionada com sucesso!")
 
 
