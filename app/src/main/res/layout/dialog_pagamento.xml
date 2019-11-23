@@ -60,7 +60,7 @@
             android:orientation="horizontal"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="6dp">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -93,31 +93,6 @@
                 android:text="0000"
                 android:textColor="@color/colorTitulo"
                 android:textSize="16sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/addCupom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="6dp">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="4dp"
-                android:gravity="center_vertical"
-                android:text="Utilizar meu EasyCash"
-                android:textColor="@color/colorTitulo"
-                android:textSize="16sp" />
 
         </LinearLayout>
 

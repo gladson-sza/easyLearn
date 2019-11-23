@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gmmp.easylearn">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CuponsActivity"></activity>
-        <activity android:name=".activity.SubscricoesActivity" />
-        <activity android:name=".activity.ListarAulasActivity" />
+        <activity android:name=".activity.SubscricoesActivity"></activity>
+        <activity android:name=".activity.ListarAulasActivity"></activity>
         <activity android:name=".activity.EditarPerfilActivity" />
         <activity android:name=".activity.NotificacaoActivity" />
         <activity android:name=".activity.PagamentoActivity" />
@@ -20,6 +26,7 @@
         <activity android:name=".activity.CursoActivity" />
         <activity
             android:name=".activity.AulaActivity"
+            android:configChanges="orientation|screenLayout"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.EsqueciMinhaSenhaActivity">
             <meta-data
@@ -63,11 +70,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
