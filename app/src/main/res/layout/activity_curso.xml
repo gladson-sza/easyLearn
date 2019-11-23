@@ -178,8 +178,7 @@
                         android:drawableEnd="@drawable/ic_playlist_add_check_black_24dp"
                         android:drawableRight="@drawable/ic_playlist_add_check_black_24dp"
                         android:drawableTint="@android:color/white"
-                        android:textColor="@android:color/white"
-                        android:visibility="gone"/>
+                        android:textColor="@android:color/white"/>
 
                 </LinearLayout>
 

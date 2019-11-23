@@ -111,19 +111,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_confirmar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/button_primary"
-            android:fontFamily="@font/sfprodisplay_bold"
-            android:text="Salvar"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
     </LinearLayout>
 
 </LinearLayout>
