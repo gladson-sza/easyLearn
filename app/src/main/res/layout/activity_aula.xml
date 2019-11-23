@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".activity.AulaActivity">
 
-    <!-- https://github.com/AriesHoo/JieCaoVideoPlayer -->
-    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-        android:id="@+id/videoplayer"
+    <FrameLayout
+        android:id="@+id/videoPlayer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp" />
+
+    <!-- https://github.com/AriesHoo/JieCaoVideoPlayer -->
+    <!-- <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/> -->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/videoplayer">
+        android:layout_below="@id/videoPlayer">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,9 +1,6 @@
 package com.gmmp.easylearn.activity
 
-import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
@@ -12,13 +9,11 @@ import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.helper.moduloGlobal
 import com.gmmp.easylearn.helper.videosReferencia
 import com.gmmp.easylearn.model.Video
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.greentoad.turtlebody.mediapicker.MediaPicker
 import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig
 import kotlinx.android.synthetic.main.activity_novo_video.*
 import org.jetbrains.anko.toast
-import java.io.File
 import java.util.*
 
 class NovoVideoActivity : AppCompatActivity() {
@@ -48,7 +43,7 @@ class NovoVideoActivity : AppCompatActivity() {
                     .onResult()
                     .subscribe({
 
-                        var file = it[0]
+                        val file = it[0]
 
                         val videoRef = FirebaseStorage.getInstance().reference
                                 .child(cursoGlobal.id)
