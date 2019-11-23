@@ -5,46 +5,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.NotificacaoActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarModulo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorToolbar"
+        android:elevation="1dp"
+        app:title="Notificações"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/colorTituloActionBar" />
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:fontFamily="@font/sfprodisplay_bold"
-            android:text="Buscar"
-            android:textColor="@color/colorTitulo"
-            android:textSize="26sp" />
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/search_bar"
-            layout="@layout/search_bar"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewNotificacoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/sfprodisplay_bold"
-            android:text="Notificações"
-            android:textColor="@color/colorTitulo"
-            android:textSize="26sp" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewNotificacoes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

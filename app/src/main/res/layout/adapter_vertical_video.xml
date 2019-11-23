@@ -33,7 +33,7 @@
                 android:layout_marginLeft="6dp"
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:text="Título"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="@color/colorTitulo"
                 android:textSize="16sp"/>
 
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:text="Descrição"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:layout_marginLeft="6dp"
                 android:textColor="@color/colorDescricao"
                 android:textSize="14sp"/>
@@ -65,7 +65,7 @@
             android:id="@+id/buttonAbrir"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_weight="3"
+            android:layout_weight="2.5"
             android:background="@drawable/button_primary"
             android:fontFamily="@font/sfprodisplay_bold"
             android:text="Preço"

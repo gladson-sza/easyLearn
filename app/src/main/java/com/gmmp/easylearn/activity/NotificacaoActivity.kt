@@ -19,9 +19,7 @@ class NotificacaoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notificacao)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar?.title = "Notificações"
+        supportActionBar?.hide()
 
         listaMensagens.add(Mensagen("321", "Fala Galera!!!", "Nossa Mano!", Date()))
         listaMensagens.add(Mensagen("123", "Mensagem aleatoria", "serio mesmo", Date()))

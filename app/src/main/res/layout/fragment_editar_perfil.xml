@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/editImageWallpaper"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="130dp"
         android:scaleType="centerCrop"
         android:src="@drawable/thumbnail_placeholder"

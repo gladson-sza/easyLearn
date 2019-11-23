@@ -22,6 +22,12 @@ import org.jetbrains.anko.startActivity
 
 class ModuloAdapter(private val context: Context, private val modulos: ArrayList<Modulo>) : RecyclerView.Adapter<ModuloAdapter.MyViewHolder>() {
 
+    fun removeItem(position: Int) {
+        modulos.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, modulos.size)
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         val itemList = LayoutInflater.from(viewGroup.context)
                 .inflate(R.layout.adapter_modulo, viewGroup, false)
@@ -32,7 +38,17 @@ class ModuloAdapter(private val context: Context, private val modulos: ArrayList
         val (id , cursoId, nome, qtdAulas) = modulos[i]
 
         myViewHolder.txt_nomeModulos.text = nome
-        myViewHolder.txt_qtdAulas.text = "$qtdAulas aulas"
+        var qtd = ""
+        if(qtdAulas > 1){
+            qtd = "$qtdAulas aulas"
+        }else{
+            if(qtdAulas == 1){
+                qtd = "1 aula"
+            }else{
+                qtd = "Nenhuma aula disponível"
+            }
+        }
+        myViewHolder.txt_qtdAulas.text = qtd
         myViewHolder.itemView.setOnClickListener {
             moduloGlobal = modulos[i]
             context.startActivity<ListarAulasActivity>()
