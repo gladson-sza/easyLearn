@@ -5,8 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -24,7 +24,10 @@
         <activity android:name=".activity.TodosCursosActivity" />
         <activity android:name=".activity.NovoVideoActivity" />
         <activity android:name=".activity.CursoActivity" />
-        <activity android:name=".activity.AulaActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".activity.AulaActivity"
+            android:configChanges="orientation|screenLayout"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.EsqueciMinhaSenhaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
