@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_editar_perfil.*
+import kotlinx.android.synthetic.main.activity_novo_video.*
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -35,6 +36,7 @@ class EditarPerfilActivity : AppCompatActivity() {
 
     fun inicializar() {
 
+        supportActionBar?.hide()
         val viewDialog = ViewDialog(this)
 
         // Carrega as Informações do Usuário no Seu Perfil
@@ -89,9 +91,9 @@ class EditarPerfilActivity : AppCompatActivity() {
             }
         }
 
-        // Configuração do Botão de Salvar
-        buttonSalvar.setOnClickListener {
 
+        toolbarPerfil.inflateMenu(R.menu.salvar)
+        toolbarPerfil.setOnMenuItemClickListener{
             viewDialog.showDialog("Aguarde", "Salvando Informações")
 
             usuario.child("nome").setValue(editNome?.text.toString())
@@ -148,8 +150,9 @@ class EditarPerfilActivity : AppCompatActivity() {
                     }
                 }
             }
-
+            false
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

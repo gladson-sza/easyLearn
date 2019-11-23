@@ -26,12 +26,16 @@ class AulaAdapter(private val aulaList: ArrayList<Video>, private val context: C
         return MyViewHolder(itemList)
     }
 
+    fun removeItem(position: Int) {
+        aulaList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, aulaList.size)
+    }
+
     override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
 
         myViewHolder.txtNomeAula.text = aulaList[i].nome
         myViewHolder.txtDuracao.text = aulaList[i].duracao
-
-
 
         myViewHolder.itemView.setOnClickListener {
             videoGlobal = aulaList[i]

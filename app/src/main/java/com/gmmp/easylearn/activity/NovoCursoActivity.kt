@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.model.Disciplina
@@ -30,7 +30,7 @@ class NovoCursoActivity : AppCompatActivity() {
     private val GALERIA = 100
     private val SPINNER_VAZIO = "Selecione uma disciplina"
 
-    private lateinit var imageThumb: ImageView
+    private lateinit var uploadVideo: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +45,9 @@ class NovoCursoActivity : AppCompatActivity() {
 
         val idCanal = FirebaseAuth.getInstance().currentUser?.uid
         val novoCurso = FirebaseDatabase.getInstance().reference.child("cursos")
-        imageThumb = findViewById(R.id.imageThumb)
+        uploadVideo = findViewById(R.id.uploadVideo)
 
-        imageThumb.setOnClickListener {
-
+        uploadVideo.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             if (intent.resolveActivity(applicationContext.packageManager) != null) {
                 startActivityForResult(intent, GALERIA)
@@ -113,10 +112,10 @@ class NovoCursoActivity : AppCompatActivity() {
                     novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
                     novoCurso.child(cursoId).child("preco").setValue(preco)
 
-                    val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
-                    val outputStream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
-                    val imageBytes = outputStream.toByteArray()
+                    /*val bitmap = (uploadVideo.drawable as BitmapDrawable).bitmap
+                    //val outputStream = ByteArrayOutputStream()
+                    //bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+                    //val imageBytes = outputStream.toByteArray()
 
                     val imageRef = FirebaseStorage.getInstance().reference
                             .child("imagens")
@@ -141,7 +140,7 @@ class NovoCursoActivity : AppCompatActivity() {
                         }
 
 
-                    }
+                    }*/
                 }
             }
 
@@ -164,7 +163,7 @@ class NovoCursoActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            if (image != null) imageThumb.setImageBitmap(image)
+            //if (image != null) uploadVideo.setImageBitmap(image)
 
         }
 

@@ -32,6 +32,7 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
 
         viewHolder.textTitulo.text = titulo
         viewHolder.textDescricao.text = descricao
+        viewHolder.textCategoria.text = disciplina
 
         if (!thumbUrl.isEmpty()) {
             Glide.with(context)
@@ -42,7 +43,12 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
 
         var txtBotao = ""
         if (preco != 0.0) {
-            txtBotao = "R$ $preco"
+            val price = preco.toString()
+            if(price.substring(price.length-1).equals("0")){
+                txtBotao = "R$ ${price.substring(0, price.length-2)},00"
+            }else{
+                txtBotao = "R$ ${price.substring(0,price.length-2)},${price.substring(price.length-1)}0"
+            }
         } else {
             txtBotao = "Gratuito"
         }
