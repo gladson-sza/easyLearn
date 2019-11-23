@@ -5,7 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.helper.validaPermissoes
@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     private val permissoes = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET,
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_NETWORK_STATE)
 

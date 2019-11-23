@@ -14,6 +14,7 @@ import com.gmmp.easylearn.R;
 
 public class ViewDialog {
 
+
     private Activity activity;
     private Dialog dialog;
 

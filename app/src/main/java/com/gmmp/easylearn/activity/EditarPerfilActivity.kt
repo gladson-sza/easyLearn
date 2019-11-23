@@ -3,13 +3,12 @@ package com.gmmp.easylearn.activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
-import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -18,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_editar_perfil.*
+import kotlinx.android.synthetic.main.activity_novo_video.*
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -36,6 +36,7 @@ class EditarPerfilActivity : AppCompatActivity() {
 
     fun inicializar() {
 
+        supportActionBar?.hide()
         val viewDialog = ViewDialog(this)
 
         // Carrega as Informações do Usuário no Seu Perfil
@@ -90,9 +91,9 @@ class EditarPerfilActivity : AppCompatActivity() {
             }
         }
 
-        // Configuração do Botão de Salvar
-        buttonSalvar.setOnClickListener {
 
+        toolbarPerfil.inflateMenu(R.menu.salvar)
+        toolbarPerfil.setOnMenuItemClickListener{
             viewDialog.showDialog("Aguarde", "Salvando Informações")
 
             usuario.child("nome").setValue(editNome?.text.toString())
@@ -149,8 +150,9 @@ class EditarPerfilActivity : AppCompatActivity() {
                     }
                 }
             }
-
+            false
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

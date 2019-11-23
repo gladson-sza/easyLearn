@@ -1,8 +1,8 @@
 package com.gmmp.easylearn.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.gmmp.easylearn.R
@@ -19,9 +19,7 @@ class NotificacaoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notificacao)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar?.title = "Notificações"
+        supportActionBar?.hide()
 
         listaMensagens.add(Mensagen("321", "Fala Galera!!!", "Nossa Mano!", Date()))
         listaMensagens.add(Mensagen("123", "Mensagem aleatoria", "serio mesmo", Date()))

@@ -4,33 +4,31 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import android.text.Html
 import android.util.Log
+import android.view.GestureDetector
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.adapter.HorizontalAdapter
 import com.gmmp.easylearn.adapter.ModuloAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.*
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
-import com.gmmp.easylearn.model.Video
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import iammert.com.expandablelib.ExpandableLayout
-import iammert.com.expandablelib.Section
 import kotlinx.android.synthetic.main.activity_curso.*
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.toast
@@ -42,12 +40,8 @@ class CursoActivity : AppCompatActivity() {
     private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
     private lateinit var recyclerModulo : RecyclerView
-    private var recyclerView: RecyclerView? = null
-    private var adapter: ModuloAdapter? = null
-    private val p = Paint()
+    private lateinit var adapterModulo : ModuloAdapter
     private var inscrito = false
-    private lateinit var simpleItemTouchCallback : ItemTouchHelper.SimpleCallback
-
     private val listaModulos = ArrayList<Modulo>()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -214,89 +208,6 @@ class CursoActivity : AppCompatActivity() {
 
         }
 
-        /*
-        btnNovoModulo.setOnClickListener {
-            if (!(auth.equals(cursoGlobal.idCanal))) {
-                // Caixa de dialogo
-                var dialogCompraFragment = DialogCompraFragment()
-                dialogCompraFragment.isCancelable = false
-                var transaction = supportFragmentManager.beginTransaction()
-
-                dialogCompraFragment.show(transaction, "")
-
-
-                // Registra a referência de usuário no curso
-                //cursosReferencia().child(cursoGlobal.nome).child("inscritos").child(auth).setValue(auth)
-                // Registra a referência do curso no usuário
-                //usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
-
-                toast("Matrícula realizada com sucesso")
-            } else {
-                alertDialog.show()
-            }
-        } */
-
-        simpleItemTouchCallback =
-                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-
-                    override fun onMove(
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder,
-                            target: RecyclerView.ViewHolder
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        val position = viewHolder.adapterPosition
-
-                        if (direction == ItemTouchHelper.LEFT) {
-                            val deletedModel = listaModulos[position]
-                            adapter!!.removeItem(position)
-
-                            toast("'${deletedModel.nome}' removido com sucesso!")
-                        } else {
-                            val deletedModel = listaModulos[position]
-                            adapter!!.removeItem(position)
-
-                        }
-                    }
-
-                    override fun onChildDraw(
-                            c: Canvas,
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder,
-                            dX: Float,
-                            dY: Float,
-                            actionState: Int,
-                            isCurrentlyActive: Boolean
-                    ) {
-
-                        val icon: Bitmap
-                        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-
-                            val itemView = viewHolder.itemView
-                            val height = itemView.bottom.toFloat() - itemView.top.toFloat()
-                            val width = height / 3
-
-                            if (dX > 0) {
-                                p.color = Color.parseColor("#bdbdbd")
-                                val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(), dX, itemView.bottom.toFloat())
-                                c.drawRect(background, p)
-
-                                icon = BitmapFactory.decodeResource(resources, R.drawable.ic_email_primary_24dp)
-                                val icon_dest = RectF(
-                                        itemView.left.toFloat() + width,
-                                        itemView.top.toFloat() + width,
-                                        itemView.left.toFloat() + 2 * width,
-                                        itemView.bottom.toFloat() - width
-                                )
-                                c.drawBitmap(icon, null, icon_dest, p)
-                            }
-                        }
-                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    }
-                }
     }
 
     /**
@@ -322,13 +233,17 @@ class CursoActivity : AppCompatActivity() {
 
                 recyclerModulo = findViewById(R.id.recyclerModulo)
                 recyclerModulo.layoutManager = LinearLayoutManager(this@CursoActivity, LinearLayoutManager.VERTICAL, false)
-                adapter = ModuloAdapter(this@CursoActivity, listaModulos)
-                recyclerModulo.adapter = adapter
+                adapterModulo = ModuloAdapter(this@CursoActivity, listaModulos)
+                recyclerModulo.adapter = adapterModulo
+                ativarSlide()
 
-
-                val sc = SwipeController()
-                val itemTouchHelper = ItemTouchHelper(sc)
-                itemTouchHelper.attachToRecyclerView(recyclerModulo)
+                if(listaModulos.size.equals(0)) {
+                    nenhumModulo.visibility = View.VISIBLE
+                    recyclerModulo.visibility = View.GONE
+                }else {
+                    nenhumModulo.visibility = View.GONE
+                    recyclerModulo.visibility = View.VISIBLE
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -349,4 +264,75 @@ class CursoActivity : AppCompatActivity() {
         return true
     }
 
+
+    private fun ativarSlide() {
+        object : SwipeHelper(this, recyclerModulo) {
+            override fun instantiateUnderlayButton(viewHolder: RecyclerView.ViewHolder, underlayButtons: MutableList<SwipeHelper.UnderlayButton>) {
+                val i = viewHolder.adapterPosition
+                underlayButtons.add(SwipeHelper.UnderlayButton(
+                        "Excluir",
+                        0,
+                        Color.parseColor("#FF3C30"),
+                        UnderlayButtonClickListener {
+                            val itemSelected = listaModulos.get(i)
+                            val builder = AlertDialog.Builder(this@CursoActivity)
+                            builder.setTitle("Tem certeza de que deseja excluir este modulo?")
+                            builder.setMessage(Html.fromHtml("Se excluir, todas as aulas registradas em <b>'${itemSelected.nome}'</b> serão perdidas"))
+
+                            // Set a positive button and its click listener on alert dialog
+                            builder.setPositiveButton("Sim"){dialog, which ->
+                                adapterModulo.removeItem(i)
+                                modulosReferencia(itemSelected.cursoId).child(itemSelected.id).removeValue()
+                            }
+
+                            builder.setNegativeButton("Cancelar"){_,_ ->
+                            }
+                            val dialog: AlertDialog = builder.create()
+                            dialog.show()
+
+                        },
+                        this@CursoActivity
+                ))
+
+                underlayButtons.add(SwipeHelper.UnderlayButton(
+                        "Editar",
+                        0,
+                        Color.parseColor("#FF9502"),
+                        UnderlayButtonClickListener {
+                            val builderDialog = AlertDialog.Builder(this@CursoActivity)
+                            val itemSelected = listaModulos.get(i)
+                            builderDialog.setTitle("Editar módulo")
+
+                            val container = FrameLayout(this@CursoActivity)
+                            val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+                            params.leftMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
+                            params.rightMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
+                            params.topMargin = resources.getDimensionPixelSize(R.dimen.fab_margin)
+
+                            txtNomeModulo = EditText(this@CursoActivity)
+                            txtNomeModulo.hint = "Nome do módulo"
+                            txtNomeModulo.padding = 16
+                            txtNomeModulo.setBackgroundResource(R.color.colorEditText)
+                            txtNomeModulo.setTextColor(resources.getColor(R.color.colorDescricao))
+                            txtNomeModulo.layoutParams = params
+                            txtNomeModulo.setText(itemSelected.nome)
+
+                            container.addView(txtNomeModulo)
+                            builderDialog.setView(container)
+                            builderDialog.setPositiveButton("Confirmar") { dialogInterface, i ->
+                                val nome = txtNomeModulo.text.toString()
+                                modulosReferencia(itemSelected.cursoId).child(itemSelected.id).child("nome").setValue(nome)
+                            }
+                            builderDialog.setNegativeButton("Cancelar", null)
+                            alertDialog = builderDialog.create()
+                            alertDialog.show()
+
+
+                        },
+                        this@CursoActivity
+                ))
+            }
+        }
+    }
 }

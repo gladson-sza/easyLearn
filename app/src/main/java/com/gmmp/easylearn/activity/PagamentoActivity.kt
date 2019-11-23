@@ -1,6 +1,6 @@
 package com.gmmp.easylearn.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -24,10 +24,7 @@ class PagamentoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagamento)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
-        supportActionBar?.title = "Forma de pagamento"
-
+        supportActionBar?.hide()
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
