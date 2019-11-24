@@ -65,6 +65,7 @@ class MeuCanalActivity : AppCompatActivity() {
                                 .load(u.urlWallpaper)
                                 .centerCrop()
                                 .into(imageThumb)
+
                     }
                 }
 
@@ -76,7 +77,8 @@ class MeuCanalActivity : AppCompatActivity() {
             override fun onCancelled(p0: DatabaseError) {
 
             }
-        })
+        }
+        )
 
         // Botão de Novo Curso
         val buttonNovoCurso = buttonNovoCurso

@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.core.app.ActivityCompat
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
+import com.gmmp.easylearn.model.Usuario
 import com.gmmp.easylearn.model.Video
 import com.google.firebase.database.FirebaseDatabase
 
@@ -46,6 +47,7 @@ lateinit var videoGlobal: Video
 lateinit var cupomDesconto : String
 lateinit var nomeUsuario : String
 
+
 // Referências mais rápidas para o Firebase
 // PS: Use em conjunto com as variáveis globais do Gladson e do Paulo
 fun cursosReferencia() = FirebaseDatabase.getInstance().reference.child("cursos")
@@ -53,3 +55,5 @@ fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("di
 fun usuariosReferencia() = FirebaseDatabase.getInstance().reference.child("usuarios")
 fun modulosReferencia(idCurso: String) = cursosReferencia().child(idCurso).child("modulos")
 fun videosReferencia(idCurso: String, idModulo: String) = modulosReferencia(idCurso).child(idModulo).child("videos")
+fun comentariosReferencia(idCurso: String, idModulo: String, idVideo: String) =
+        videosReferencia(idCurso, idModulo).child(idVideo).child("comentarios")
