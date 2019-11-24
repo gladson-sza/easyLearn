@@ -92,7 +92,7 @@ class MeuCanalFragment : Fragment() {
 
         // Configura o RecyclerView de CursosDisponibilizados
         val adapter = CursosAdapter(activity!!, listCursos)
-        var recyclerView = v.recyclerViewCursosDisponibilizados
+        val recyclerView = v.recyclerViewCursosDisponibilizados
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
 

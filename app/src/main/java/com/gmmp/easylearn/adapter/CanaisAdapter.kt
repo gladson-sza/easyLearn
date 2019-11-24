@@ -35,7 +35,7 @@ class CanaisAdapter(private val context: Context, private val listCanal: ArrayLi
         }
 
         viewHolder.fundo.setOnClickListener {
-            NavegacaoActivity.canalAlheioGlobal = listCanal[i]
+            NavegacaoActivity.usuarioGlobal = listCanal[i]
             context.startActivity<CanalAlheioActivity>()
         }
 

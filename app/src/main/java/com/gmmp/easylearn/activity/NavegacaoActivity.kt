@@ -14,11 +14,12 @@ import com.gmmp.easylearn.model.Video
 
 class NavegacaoActivity : AppCompatActivity() {
 
+    // Isso aqui evita o problema com as variáveis globais
     companion object {
         var cursoGlobal = Curso()
         var moduloGlobal = Modulo()
         var videoGlobal = Video()
-        var canalAlheioGlobal = Usuario()
+        var usuarioGlobal = Usuario()
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
