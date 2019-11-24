@@ -46,16 +46,8 @@ class PreferenciasFragment : Fragment() {
         }
 
         view.menuCompatilharEasyCash.setOnClickListener {
-            val auth = FirebaseAuth.getInstance().currentUser
-            val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth!!.uid)
-
-            val myIntent = Intent(Intent.ACTION_SEND)
-            myIntent.type = "type/plain"
-            val shareBody = "EasyLearning: Baixe e ganhe promoções na compra de qualquer curso usando o código abaixo, não perca!"
-            val shareSub = "Baixe o app em: https://github.com/Gladson0101/easyLearn \n\n" + "Código promociona: l" + auth.uid
-            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody)
-            myIntent.putExtra(Intent.EXTRA_TEXT, shareSub)
-            startActivity(Intent.createChooser(myIntent, "Compartilhar EasyCash"))
+            startActivity(Intent(activity, CuponsActivity::class.java))
+            /**/
         }
 
         view.menuSair.setOnClickListener {

@@ -139,7 +139,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_local_activity_black_24dp"
+            app:srcCompat="@drawable/ic_cupom"
             android:tint="@color/colorTitulo"/>
 
         <TextView
@@ -152,7 +152,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:textColor="@color/colorTitulo"
-            android:text="Compartilhar EasyCash"
+            android:text="Cupom de Desconto"
             android:textSize="18sp" />
 
         <ImageView
@@ -190,7 +190,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/sfprodisplay_medium"
             android:textColor="@color/colorTitulo"
-            android:text="Sobre o EasyLearning"
+            android:text="Sobre nós"
             android:textSize="18sp" />
 
         <ImageView

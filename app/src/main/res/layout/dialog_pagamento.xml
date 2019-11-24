@@ -89,12 +89,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="3dp"
+                android:fontFamily="@font/sfprodisplay_regular"
                 android:gravity="center_vertical"
                 android:text="0000"
                 android:textColor="@color/colorTitulo"
                 android:textSize="16sp"/>
 
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/usarCupom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:text="Usar meu EasyCash"
+            android:textColor="@color/colorTitulo"
+            android:textSize="16sp"
+            android:fontFamily="@font/sfprodisplay_regular" />
 
         <Button
             android:id="@+id/btn_finalizarCompra"
@@ -104,8 +117,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="16dp"
+            android:textAllCaps="false"
             android:background="@drawable/button_primary"
-            android:text="Finalizar compra"
+            android:text="Confirmar"
+            android:textSize="18sp"
             android:textColor="@color/white"/>
 
         <TextView
