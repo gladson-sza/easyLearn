@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.AulaActivity
 import com.gmmp.easylearn.activity.CursoActivity
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.helper.videoGlobal
 import com.gmmp.easylearn.model.Video
 import kotlinx.android.synthetic.main.adapter_aulas.view.*
@@ -38,7 +39,7 @@ class AulaAdapter(private val aulaList: ArrayList<Video>, private val context: C
         myViewHolder.txtDuracao.text = aulaList[i].duracao
 
         myViewHolder.itemView.setOnClickListener {
-            videoGlobal = aulaList[i]
+            NavegacaoActivity.videoGlobal = aulaList[i]
             context.startActivity(context.intentFor<AulaActivity>().newTask())
         }
     }

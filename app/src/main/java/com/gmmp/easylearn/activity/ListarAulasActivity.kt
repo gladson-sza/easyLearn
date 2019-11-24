@@ -4,17 +4,20 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.FrameLayout
+import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.AulaAdapter
-import com.gmmp.easylearn.helper.*
+import com.gmmp.easylearn.helper.SwipeHelper
+import com.gmmp.easylearn.helper.SwipeHelper.UnderlayButtonClickListener
+import com.gmmp.easylearn.helper.videosReferencia
 import com.gmmp.easylearn.model.Video
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,14 +26,12 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_listar_aulas.*
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.startActivity
-import android.widget.LinearLayout
-import androidx.annotation.RequiresApi
 
 class ListarAulasActivity : AppCompatActivity() {
 
     val listaVideo = arrayListOf<Video>()
     private lateinit var recyclerAulas: RecyclerView
-    private lateinit var adapter : AulaAdapter
+    private lateinit var adapter: AulaAdapter
     private lateinit var alertDialog: AlertDialog
     private lateinit var txtTitulo: EditText
     private lateinit var txtDescricao: EditText
@@ -44,22 +45,25 @@ class ListarAulasActivity : AppCompatActivity() {
 
     fun inicializar() {
 
+
         // Verifica que o Usuário é dono do Canal
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        if (cursoGlobal.idCanal != auth) btnAdicionarNovaAula.visibility = View.GONE
+        if (NavegacaoActivity.cursoGlobal.idCanal != auth) btnAdicionarNovaAula.visibility = View.GONE
         else {
             btnAdicionarNovaAula.setOnClickListener {
-                startActivity<NovoVideoActivity>()
+                startActivity<NovoVideoActivity>(
+                        "idCurso" to NavegacaoActivity.cursoGlobal.id,
+                        "idModulo" to NavegacaoActivity.moduloGlobal.id)
             }
         }
 
         // Configurações básicas de exibição
         supportActionBar?.hide()
-        toolbarModulo.title = moduloGlobal.nome
+        toolbarModulo.title = NavegacaoActivity.moduloGlobal.nome
 
         // val dialog = ViewDialog(this)
         // dialog.showDialog("Carregando", "Aguarde, obtendo dados...")
-        videosReferencia(cursoGlobal.id, moduloGlobal.id).addValueEventListener(object : ValueEventListener {
+        videosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id).addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -81,10 +85,10 @@ class ListarAulasActivity : AppCompatActivity() {
                     recyclerAulas.adapter = adapter
                     ativarSlide()
 
-                    if(listaVideo.size.equals(0)) {
+                    if (listaVideo.size.equals(0)) {
                         nenhumModulo.visibility = View.VISIBLE
                         recyclerAulas.visibility = View.GONE
-                    }else {
+                    } else {
                         nenhumModulo.visibility = View.GONE
                         recyclerAulas.visibility = View.VISIBLE
                     }
@@ -115,12 +119,12 @@ class ListarAulasActivity : AppCompatActivity() {
                             builder.setMessage(Html.fromHtml("Se excluir, todas as aulas registradas em <b>'${itemSelected.nome}'</b> serão perdidas"))
 
                             // Set a positive button and its click listener on alert dialog
-                            builder.setPositiveButton("Sim"){dialog, which ->
+                            builder.setPositiveButton("Sim") { dialog, which ->
                                 adapter.removeItem(i)
-                                videosReferencia(cursoGlobal.id, moduloGlobal.id).child(itemSelected.id).removeValue()
+                                videosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id).child(itemSelected.id).removeValue()
                             }
 
-                            builder.setNegativeButton("Cancelar"){_,_ ->
+                            builder.setNegativeButton("Cancelar") { _, _ ->
                             }
                             val dialog: AlertDialog = builder.create()
                             dialog.show()
@@ -146,8 +150,8 @@ class ListarAulasActivity : AppCompatActivity() {
 
                             linearLayout.setLayoutParams(params)
                             linearLayout.setOrientation(LinearLayout.VERTICAL)
-                            linearLayout.setPadding(20,10,20,10)
-                            
+                            linearLayout.setPadding(20, 10, 20, 10)
+
                             txtTitulo = EditText(this@ListarAulasActivity)
                             txtTitulo.layoutParams = params
                             txtTitulo.hint = "Nome da Aula"
@@ -172,8 +176,8 @@ class ListarAulasActivity : AppCompatActivity() {
                                 val nome = txtTitulo.text.toString()
                                 val descricao = txtDescricao.text.toString()
 
-                                videosReferencia(cursoGlobal.id, moduloGlobal.id).child(itemSelected.id).child("nome").setValue(nome)
-                                videosReferencia(cursoGlobal.id, moduloGlobal.id).child(itemSelected.id).child("descricao").setValue(descricao)
+                                videosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id).child(itemSelected.id).child("nome").setValue(nome)
+                                videosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id).child(itemSelected.id).child("descricao").setValue(descricao)
                             }
                             builderDialog.setNegativeButton("Cancelar", null)
                             alertDialog = builderDialog.create()

@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
-import com.gmmp.easylearn.helper.cursoGlobal
-import com.gmmp.easylearn.helper.moduloGlobal
 import com.gmmp.easylearn.helper.modulosReferencia
 import com.gmmp.easylearn.helper.videosReferencia
 import com.gmmp.easylearn.model.Video
@@ -45,11 +43,14 @@ class NovoVideoActivity : AppCompatActivity() {
                             descricaoVideo,
                             URL_VIDEO)
 
-                    videosReferencia(cursoGlobal.id, moduloGlobal.id).child(idVideo).setValue(video).toString()
+                    val idCurso = intent.getStringExtra("idCurso")
+                    val idModulo = intent.getStringExtra("idModulo")
 
-                    qtdAulas = moduloGlobal.qtdAulas
+                    videosReferencia(idCurso, idModulo).child(idVideo).setValue(video).toString()
+
+                    qtdAulas = NavegacaoActivity.moduloGlobal.qtdAulas
                     qtdAulas++
-                    modulosReferencia(cursoGlobal.id).child(moduloGlobal.id).child("qtdAulas").setValue(qtdAulas)
+                    modulosReferencia(NavegacaoActivity.cursoGlobal.id).child(NavegacaoActivity.moduloGlobal.id).child("qtdAulas").setValue(qtdAulas)
                     toast("'$nomeVideo' foi adicionado com sucesso!")
 
 
@@ -83,8 +84,8 @@ class NovoVideoActivity : AppCompatActivity() {
                         val file = it[0]
 
                         val videoRef = FirebaseStorage.getInstance().reference
-                                .child(cursoGlobal.id)
-                                .child(moduloGlobal.id)
+                                .child(NavegacaoActivity.cursoGlobal.id)
+                                .child(NavegacaoActivity.moduloGlobal.id)
                                 .child(idVideo)
 
                         val uploadTask = videoRef.putFile(file)
