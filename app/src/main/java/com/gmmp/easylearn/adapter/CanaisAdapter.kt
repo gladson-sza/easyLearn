@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
+import com.gmmp.easylearn.activity.CanalAlheioActivity
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.model.Usuario
+import org.jetbrains.anko.startActivity
 
 import java.util.ArrayList
 
@@ -24,21 +27,17 @@ class CanaisAdapter(private val context: Context, private val listCanal: ArrayLi
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.nome.text = listCanal[i].nome
 
-
-        if (!listCanal[i].urlPerfil.isEmpty()) {
-            Glide.with(context)
-                    .load(listCanal[i].urlPerfil)
-                    .centerCrop()
-                    .into(viewHolder.perfil)
-        }
-
-        if (!listCanal[i].urlWallpaper.isEmpty()) {
+        if (listCanal[i].urlWallpaper.isNotEmpty()) {
             Glide.with(context)
                     .load(listCanal[i].urlWallpaper)
                     .centerCrop()
                     .into(viewHolder.fundo)
         }
 
+        viewHolder.fundo.setOnClickListener {
+            NavegacaoActivity.canalAlheioGlobal = listCanal[i]
+            context.startActivity<CanalAlheioActivity>()
+        }
 
     }
 
@@ -52,12 +51,10 @@ class CanaisAdapter(private val context: Context, private val listCanal: ArrayLi
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        internal var perfil: ImageView
         internal var fundo: ImageView
         internal var nome: TextView
 
         init {
-            perfil = itemView.findViewById(R.id.imgPerfil)
             fundo = itemView.findViewById(R.id.imageFundo)
             nome = itemView.findViewById(R.id.text_nome)
         }

@@ -15,9 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.CanalAlheioActivity"></activity>
         <activity android:name=".activity.CuponsActivity" />
-        <activity android:name=".activity.SubscricoesActivity"></activity>
-        <activity android:name=".activity.ListarAulasActivity"></activity>
+        <activity android:name=".activity.SubscricoesActivity" />
+        <activity android:name=".activity.ListarAulasActivity" />
         <activity android:name=".activity.EditarPerfilActivity" />
         <activity android:name=".activity.NotificacaoActivity" />
         <activity android:name=".activity.PagamentoActivity" />
