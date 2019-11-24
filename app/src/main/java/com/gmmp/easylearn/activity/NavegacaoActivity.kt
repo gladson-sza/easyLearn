@@ -7,8 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.*
+import com.gmmp.easylearn.model.Curso
+import com.gmmp.easylearn.model.Modulo
+import com.gmmp.easylearn.model.Video
 
 class NavegacaoActivity : AppCompatActivity() {
+
+    companion object {
+        var cursoGlobal = Curso()
+        var moduloGlobal = Modulo()
+        var videoGlobal = Video()
+    }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {

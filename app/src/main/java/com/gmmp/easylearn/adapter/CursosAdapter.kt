@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.CursoActivity
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
 import org.jetbrains.anko.startActivity
@@ -40,8 +41,17 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
         myViewHolder.textCategoria.text = listCursos[i].disciplina
 
         myViewHolder.linearLayout.setOnClickListener {
-            cursoGlobal = listCursos[i]
-            context.startActivity<CursoActivity>()
+            NavegacaoActivity.cursoGlobal = listCursos[i]
+
+            context.startActivity<CursoActivity>(
+                    "cursoThumbUrl" to listCursos[i].thumbUrl,
+                    "cursoNome" to listCursos[i].nome,
+                    "cursoId" to listCursos[i].id,
+                    "cursoIdCanal" to listCursos[i].idCanal,
+                    "cursoDescricao" to listCursos[i].descricao,
+                    "cursoPreco" to listCursos[i].preco,
+                    "cursoDisciplina" to listCursos[i].disciplina
+            )
         }
     }
 

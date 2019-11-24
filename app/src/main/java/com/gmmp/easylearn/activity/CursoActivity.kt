@@ -55,14 +55,23 @@ class CursoActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     private fun iniciar() {
 
+        val curso = Curso()
+        curso.id = intent.getStringExtra("cursoId")
+        curso.idCanal = intent.getStringExtra("cursoIdCanal")
+        curso.preco = intent.getDoubleExtra("cursoPreco", 0.0)
+        curso.thumbUrl = intent.getStringExtra("cursoThumbUrl")
+        curso.disciplina = intent.getStringExtra("cursoDisciplina")
+        curso.nome = intent.getStringExtra("cursoNome")
+        curso.descricao = intent.getStringExtra("cursoDescricao")
+
         supportActionBar?.hide()
         Glide.with(applicationContext)
-                .load(cursoGlobal.thumbUrl)
+                .load(intent.getStringExtra("cursoThumbUrl"))
                 .centerCrop()
                 .into(imageCurso)
 
-        tituloCurso.text = cursoGlobal.nome
-        descricaoCurso.text = cursoGlobal.descricao
+        tituloCurso.text = intent.getStringExtra("cursoNome")
+        descricaoCurso.text = intent.getStringExtra("cursoDescricao")
 
         //Btn novo modulo
         val builderDialog = AlertDialog.Builder(this)
@@ -89,7 +98,7 @@ class CursoActivity : AppCompatActivity() {
             if (nome.isEmpty())
                 txtNomeModulo.error = "Por favor, entre com o nome do módulo"
             else {
-                val modulo = Modulo(UUID.randomUUID().toString(), cursoGlobal.id, nome, 0)
+                val modulo = Modulo(UUID.randomUUID().toString(), intent.getStringExtra("cursoId"), nome, 0)
                 modulosReferencia(modulo.cursoId).child(modulo.id).setValue(modulo)
 
                 toast("${txtNomeModulo.text} adicionado")
@@ -104,7 +113,7 @@ class CursoActivity : AppCompatActivity() {
         alertDialog = builderDialog.create()
 
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        if (!(auth.equals(cursoGlobal.idCanal))) {
+        if (!(auth.equals(intent.getStringExtra("cursoIdCanal")))) {
 
             val dialog = ViewDialog(this)
             dialog.showDialog("Aguarde", "Obtendo dados")
@@ -113,7 +122,7 @@ class CursoActivity : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
                         val c = ds.getValue(Curso::class.java)
-                        if (c?.id == cursoGlobal.id) {
+                        if (c?.id == intent.getStringExtra("cursoId")) {
                             inscrito = true
                             break
                         }
@@ -128,22 +137,22 @@ class CursoActivity : AppCompatActivity() {
                         btnCancelar.setOnClickListener {
                             val deletarDialog = AlertDialog.Builder(this@CursoActivity)
                             deletarDialog.setTitle("Tem certeza que deseja cancelar sua inscrição?")
-                            deletarDialog.setMessage(Html.fromHtml("Se você remover <b>'${cursoGlobal.nome}'</b> da sua lista de cursos, não será possível recuperar"))
+                            deletarDialog.setMessage(Html.fromHtml("Se você remover <b>'${intent.getStringExtra("cursoNome")}'</b> da sua lista de cursos, não será possível recuperar"))
                             deletarDialog.setPositiveButton("Excluir") { dialogInterface, i ->
-                                if (cursoGlobal.preco.equals(0.0)) {
+                                if (intent.getDoubleExtra("cursoPreco", 0.0).equals(0.0)) {
                                     inscrito = false
                                     // Remove a referência de usuário no curso
-                                    cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).removeValue()
+                                    cursosReferencia().child(intent.getStringExtra("cursoId")).child("inscritos").child(auth).removeValue()
                                     // Remove a referência do curso no usuário
-                                    usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                                    usuariosReferencia().child(auth).child("matriculados").child(intent.getStringExtra("cursoId")).removeValue()
                                 } else {
                                     //Arquiva o curso
                                     //POR ENQUANTO SÓ PRA TESTAR O NGC DO PAGAMENTO E TAL
 
                                     // Remove a referência de usuário no curso
-                                    cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).removeValue()
+                                    cursosReferencia().child(intent.getStringExtra("cursoId")).child("inscritos").child(auth).removeValue()
                                     // Remove a referência do curso no usuário
-                                    usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).removeValue()
+                                    usuariosReferencia().child(auth).child("matriculados").child(intent.getStringExtra("cursoId")).removeValue()
                                 }
                             }
                             deletarDialog.setNegativeButton("Cancelar", null)
@@ -157,13 +166,13 @@ class CursoActivity : AppCompatActivity() {
                         btnCancelar.visibility = View.GONE
                         textPreco.visibility = View.GONE
 
-                        if (cursoGlobal.preco != 0.0) { //Se o curso não for gratuito
+                        if (intent.getDoubleExtra("cursoPreco", 0.0) != 0.0) { //Se o curso não for gratuito
                             textPreco.visibility = View.VISIBLE
-                            textPreco.text = "Por R$ ${cursoGlobal.preco}"
+                            textPreco.text = "Por R$ ${intent.getDoubleExtra("cursoPreco", 0.0)}"
                         }
 
                         btnAdicionar.setOnClickListener {
-                            if (cursoGlobal.preco != 0.0) {
+                            if (intent.getDoubleExtra("cursoPreco", 0.0) != 0.0) {
                                 val usuarioId = FirebaseAuth.getInstance().currentUser!!.uid
                                 var cartao : Cartao
                                 Log.i("TESTE", usuarioId)
@@ -188,23 +197,24 @@ class CursoActivity : AppCompatActivity() {
                                             Log.i("TESTE", "cartao: ${cartao.numeroCartao}")
                                             Log.i("TESTE", "ud: $ultimosDigitos")
 
-                                            val preco = cursoGlobal.preco.toString()
+                                            val preco = intent.getDoubleExtra("cursoPreco", 0.0).toString()
                                             mDialogView.txt_precoCurso.text = "R$ ${preco.substring(0, preco.length-2)},00"
                                             mDialogView.txt_ultimoDigito.text = ultimosDigitos
                                             mDialogView.txt_cancelar.setOnClickListener{mAlertDialog.dismiss()}
 
                                             mDialogView.btn_finalizarCompra.setOnClickListener {
-                                                if(cartao.saldo >= cursoGlobal.preco){
+                                                if(cartao.saldo >= intent.getDoubleExtra("cursoPreco", 0.0)){
                                                     //Desconta o preço no saldo
-                                                    usuariosReferencia().child(auth).child("cartao").child("saldo").setValue(cartao.saldo-cursoGlobal.preco)
+                                                    usuariosReferencia().child(auth).child("cartao").child("saldo").setValue(cartao.saldo-intent.getDoubleExtra("cursoPreco", 0.0))
 
                                                     inscrito = true
                                                     // Registra a referência de usuário no curso
-                                                    cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).setValue(auth)
+                                                    cursosReferencia().child(intent.getStringExtra("cursoId")).child("inscritos").child(auth).setValue(auth)
                                                     // Registra a referência do curso no usuário
-                                                    usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
 
-                                                    toast("'${cursoGlobal.nome}' foi adicionado aos seus cursos")
+                                                    usuariosReferencia().child(auth).child("matriculados").child(intent.getStringExtra("cursoId")).setValue(curso)
+
+                                                    toast("'${intent.getStringExtra("cursoNome")}' foi adicionado aos seus cursos")
 
                                                     btnCancelar.visibility = View.VISIBLE
                                                     btnNovoModulo.visibility = View.GONE
@@ -239,15 +249,15 @@ class CursoActivity : AppCompatActivity() {
                             }else {
                                 inscrito = true
                                 // Registra a referência de usuário no curso
-                                cursosReferencia().child(cursoGlobal.id).child("inscritos").child(auth).setValue(auth)
+                                cursosReferencia().child(intent.getStringExtra("cursoId")).child("inscritos").child(auth).setValue(auth)
                                 // Registra a referência do curso no usuário
-                                usuariosReferencia().child(auth).child("matriculados").child(cursoGlobal.id).setValue(cursoGlobal)
+                                usuariosReferencia().child(auth).child("matriculados").child(intent.getStringExtra("cursoId")).setValue(curso)
 
                                 btnAdicionar.visibility = View.GONE
                                 btnNovoModulo.visibility = View.GONE
                                 btnCancelar.visibility = View.VISIBLE
                                 textPreco.visibility = View.GONE
-                                toast("'${cursoGlobal.nome}' foi adicionado aos seus cursos")
+                                toast("'${intent.getStringExtra("cursoNome")}' foi adicionado aos seus cursos")
 
                                 btnCancelar.visibility = View.VISIBLE
                                 btnNovoModulo.visibility = View.GONE
@@ -278,10 +288,10 @@ class CursoActivity : AppCompatActivity() {
             }
         }
 
-        if (!(auth.equals(cursoGlobal.idCanal))) {
+        if (!(auth.equals(intent.getStringExtra("cursoIdCanal")))) {
             if (comprado == true) {
                 btnNovoModulo.text = "comprado"
-            } else btnNovoModulo.text = "R$ ${cursoGlobal.preco}"
+            } else btnNovoModulo.text = "R$ ${intent.getDoubleExtra("cursoPreco", 0.0)}"
 
         }
 
@@ -292,7 +302,7 @@ class CursoActivity : AppCompatActivity() {
      */
     private fun carregarModulos() {
         listaModulos.clear()
-        modulosReferencia(cursoGlobal.id).addValueEventListener(object : ValueEventListener {
+        modulosReferencia(intent.getStringExtra("cursoId")).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if (dataSnapshot.exists()) {

@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.ListarAulasActivity
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.activity.TodosCursosActivity
 import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.helper.moduloGlobal
@@ -50,7 +51,7 @@ class ModuloAdapter(private val context: Context, private val modulos: ArrayList
         }
         myViewHolder.txt_qtdAulas.text = qtd
         myViewHolder.itemView.setOnClickListener {
-            moduloGlobal = modulos[i]
+            NavegacaoActivity.moduloGlobal = modulos[i]
             context.startActivity<ListarAulasActivity>()
         }
 

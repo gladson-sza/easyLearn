@@ -3,21 +3,20 @@ package com.gmmp.easylearn.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.TodosCursosActivity
-import com.gmmp.easylearn.adapter.*
-import com.gmmp.easylearn.dialog.ViewDialog
+import com.gmmp.easylearn.adapter.CanaisAdapter
+import com.gmmp.easylearn.adapter.HorizontalCursosAdapter
+import com.gmmp.easylearn.adapter.VerticalAdapter
 import com.gmmp.easylearn.helper.comprado
 import com.gmmp.easylearn.helper.listarPor
 import com.gmmp.easylearn.helper.usuariosReferencia
-import com.gmmp.easylearn.model.Aula
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth

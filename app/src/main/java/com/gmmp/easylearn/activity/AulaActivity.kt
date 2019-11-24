@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.gmmp.easylearn.R
-import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.helper.cursosReferencia
 import com.gmmp.easylearn.helper.usuariosReferencia
-import com.gmmp.easylearn.helper.videoGlobal
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -32,10 +30,10 @@ class AulaActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        txt_nomeAula.text = videoGlobal.nome
-        txt_nomeCurso.text = cursoGlobal.nome
+        txt_nomeAula.text = NavegacaoActivity.videoGlobal.nome
+        txt_nomeCurso.text = NavegacaoActivity.cursoGlobal.nome
 
-        videoView.setVideoURI(Uri.parse(videoGlobal.midiaUrl))
+        videoView.setVideoURI(Uri.parse(NavegacaoActivity.videoGlobal.midiaUrl))
         videoView.setMediaController(mediaControler)
         videoView.setVideoViewCallback(object : UniversalVideoView.VideoViewCallback {
             override fun onBufferingStart(mediaPlayer: MediaPlayer?) {
@@ -95,8 +93,8 @@ class AulaActivity : AppCompatActivity() {
     fun verificacaoDeCurtida() {
 
         val auth = FirebaseAuth.getInstance().currentUser
-        val gosteiReferencia = cursosReferencia().child(cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid)
-        val naoGosteiReferencia = cursosReferencia().child(cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid)
+        val gosteiReferencia = cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid)
+        val naoGosteiReferencia = cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid)
 
         // verifica o usuário logado
         usuariosReferencia().child(auth.uid).addValueEventListener(object : ValueEventListener {
@@ -143,10 +141,10 @@ class AulaActivity : AppCompatActivity() {
         img_dislike.setColorFilter((ContextCompat.getColor(this@AulaActivity, R.color.colorInativo)))
 
         // remove o dislike
-        cursosReferencia().child(cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid).removeValue()
+        cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid).removeValue()
 
         // salva como gostei
-        cursosReferencia().child(cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid).setValue(usuarioLogado)
+        cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("gostei").child(auth.uid).setValue(usuarioLogado)
     }
 
     fun naoGostei() {
@@ -155,9 +153,9 @@ class AulaActivity : AppCompatActivity() {
         img_like.setColorFilter((ContextCompat.getColor(this@AulaActivity, R.color.colorInativo)))
 
         // remove do like
-        cursosReferencia().child(cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid).removeValue()
+        cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid).removeValue()
         // salva o dislike
-        cursosReferencia().child(cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid).setValue(usuarioLogado)
+        cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("naoGostei").child(auth.uid).setValue(usuarioLogado)
 
     }
 }
