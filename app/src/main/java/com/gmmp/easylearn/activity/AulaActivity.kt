@@ -56,7 +56,6 @@ class AulaActivity : AppCompatActivity() {
 
         iniciarBotaoNovoComentario()
 
-
         supportActionBar?.hide()
 
         txt_nomeAula.text = NavegacaoActivity.videoGlobal.nome

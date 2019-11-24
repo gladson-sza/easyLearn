@@ -85,6 +85,7 @@ class DestaquesFragment : Fragment() {
                     var u = d.getValue(Usuario::class.java)
 
                     if (u != null) {
+                        if (u.id != FirebaseAuth.getInstance().currentUser?.uid.toString())
                         listEmAlta.add(u)
                     }
 
