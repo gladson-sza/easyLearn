@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/show_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sfprodisplay_semibold"
+        android:text="Adquira mais cursos pagando menos!"
+        android:textColor="@color/colorTitulo"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Indique um amigo para experimentar a EasyLearning e ganhe até 15% de desconto em compras de cursos"
+        android:textSize="16sp"
+        android:textColor="@color/colorCheck"/>
+
+    <LinearLayout
+        android:id="@+id/txt_comoFunciona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Como funciona"
+            android:fontFamily="@font/sfprodisplay_regular"
+            android:textColor="@android:color/holo_orange_dark"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="1dp"
+            android:layout_gravity="center_vertical"
+            android:tint="@android:color/holo_orange_dark"
+            android:src="@drawable/ic_arrow_right_black_24dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_share"
+        android:scaleType="fitEnd"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Compartilhe seu código promocional"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/cupom_edit_text"
+        android:padding="0.5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/txt_cupom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginEnd="0.5dp"
+            android:background="@drawable/cupom_edit_text"
+            android:fontFamily="@font/sfprodisplay_regular"
+            android:inputType="none"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="@color/colorBold" />
+
+        <Button
+            android:id="@+id/btn_copiar"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:text="Copiar"
+            android:background="@drawable/cupom_edit_text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:drawableTint="@color/colorPrimary"
+            android:drawablePadding="6dp"
+            android:textColor="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_content_copy_black_24dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_convidar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_primary"
+        android:textAllCaps="false"
+        android:text="Convidar amigos"
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

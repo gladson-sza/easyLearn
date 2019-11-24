@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/shape_my">
     <corners
-        android:topRightRadius="16dp"
-        android:topLeftRadius="16dp"/>
+        android:topRightRadius="20dp"
+        android:topLeftRadius="20dp"/>
     <solid android:color="#FFFFFF" />
 </shape>

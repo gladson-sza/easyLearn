@@ -43,6 +43,8 @@ var comprado: Boolean? = false
 // Globeleza | GLADSON
 lateinit var moduloGlobal: Modulo
 lateinit var videoGlobal: Video
+lateinit var cupomDesconto : String
+lateinit var nomeUsuario : String
 
 // Referências mais rápidas para o Firebase
 // PS: Use em conjunto com as variáveis globais do Gladson e do Paulo
