@@ -5,8 +5,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.helper.validaPermissoes
 import com.google.firebase.auth.FirebaseAuth

@@ -1,10 +1,9 @@
 package com.gmmp.easylearn.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.CursosAdapter
@@ -27,13 +26,12 @@ class MeuCanalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meu_canal)
 
         supportActionBar?.title = "Meu Canal"
-         supportActionBar?.hide()
+        supportActionBar?.hide()
 
         inicializar()
     }
 
     fun inicializar() {
-
 
 
         val viewDialog = ViewDialog(this)
@@ -88,7 +86,7 @@ class MeuCanalActivity : AppCompatActivity() {
 
         // Configura o RecyclerView de CursosDisponibilizados
         val adapter = CursosAdapter(this, listCursos)
-        var recyclerView = recyclerViewCursosDisponibilizados
+        val recyclerView = recyclerViewCursosDisponibilizados
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -99,7 +97,7 @@ class MeuCanalActivity : AppCompatActivity() {
                         for (d in dataSnapshot.children) {
                             val c = d.getValue(Curso::class.java)
 
-                            if (c?.idCanal.equals("${auth.uid}")) {
+                            if (c?.idCanal.equals(auth.uid)) {
                                 listCursos.add(c!!)
                             }
                         }

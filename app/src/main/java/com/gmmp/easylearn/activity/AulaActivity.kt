@@ -7,7 +7,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
-import com.gmmp.easylearn.activity.NavegacaoActivity
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -23,9 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.ComentarioAdapter
-import com.gmmp.easylearn.helper.*
+import com.gmmp.easylearn.helper.SwipeHelper
+import com.gmmp.easylearn.helper.SwipeHelper.UnderlayButtonClickListener
+import com.gmmp.easylearn.helper.comentariosReferencia
+import com.gmmp.easylearn.helper.cursosReferencia
+import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Comentario
-import com.gmmp.easylearn.model.Modulo
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -44,8 +45,8 @@ class AulaActivity : AppCompatActivity() {
     val auth = FirebaseAuth.getInstance().currentUser
     private lateinit var txtComentario: EditText
     private lateinit var alertDialog: AlertDialog
-    private lateinit var recyclerComentario : RecyclerView
-    private lateinit var adapterComentario : ComentarioAdapter
+    private lateinit var recyclerComentario: RecyclerView
+    private lateinit var adapterComentario: ComentarioAdapter
     private lateinit var adapter: ComentarioAdapter
     private val listaComentarios = ArrayList<Comentario>()
 
@@ -62,7 +63,6 @@ class AulaActivity : AppCompatActivity() {
         txt_nomeCurso.text = NavegacaoActivity.cursoGlobal.nome
 
         carregarComentarios()
-
 
         videoView.setVideoURI(Uri.parse(NavegacaoActivity.videoGlobal.midiaUrl))
         videoView.setMediaController(mediaControler)
@@ -176,7 +176,7 @@ class AulaActivity : AppCompatActivity() {
 
         val auth = FirebaseAuth.getInstance().currentUser
         val gosteiReferencia = cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("gostei").child(auth!!.uid)
-        val naoGosteiReferencia = cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("naoGostei").child(auth!!.uid)
+        val naoGosteiReferencia = cursosReferencia().child(NavegacaoActivity.cursoGlobal.id).child("reacao").child("naoGostei").child(auth.uid)
 
         // verifica o usuário logado
         usuariosReferencia().child(auth.uid).addValueEventListener(object : ValueEventListener {
@@ -275,12 +275,13 @@ class AulaActivity : AppCompatActivity() {
         })
 
     }
+
     private fun ativarSlide() {
         object : SwipeHelper(this, recyclerComentario) {
             @RequiresApi(Build.VERSION_CODES.KITKAT)
             override fun instantiateUnderlayButton(viewHolder: RecyclerView.ViewHolder, underlayButtons: MutableList<SwipeHelper.UnderlayButton>) {
                 val i = viewHolder.adapterPosition
-                underlayButtons.add(SwipeHelper.UnderlayButton(
+                underlayButtons.add(UnderlayButton(
                         "Excluir",
                         0,
                         Color.parseColor("#FF3C30"),
@@ -337,7 +338,7 @@ class AulaActivity : AppCompatActivity() {
 
                             builderDialog.setView(linearLayout)
                             builderDialog.setPositiveButton("Confirmar") { dialogInterface, i ->
-                                val com= txtComentario.text.toString()
+                                val com = txtComentario.text.toString()
 
                                 comentariosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id, NavegacaoActivity.videoGlobal.id).child(itemSelected.id).child("comentario").setValue(com)
                             }
