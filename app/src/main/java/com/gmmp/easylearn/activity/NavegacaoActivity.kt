@@ -9,6 +9,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.*
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
+import com.gmmp.easylearn.model.Usuario
 import com.gmmp.easylearn.model.Video
 
 class NavegacaoActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class NavegacaoActivity : AppCompatActivity() {
         var cursoGlobal = Curso()
         var moduloGlobal = Modulo()
         var videoGlobal = Video()
+        var usuarioGlobal = Usuario()
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
