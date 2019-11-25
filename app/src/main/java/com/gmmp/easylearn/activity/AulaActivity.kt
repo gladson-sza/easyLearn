@@ -62,6 +62,11 @@ class AulaActivity : AppCompatActivity() {
         txt_nomeAula.text = NavegacaoActivity.videoGlobal.nome
         txt_nomeCurso.text = NavegacaoActivity.cursoGlobal.nome
 
+        recyclerComentario = findViewById(R.id.recyclerComentarios)
+        recyclerComentario.layoutManager = LinearLayoutManager(this@AulaActivity, LinearLayoutManager.VERTICAL, false)
+        adapterComentario = ComentarioAdapter(this@AulaActivity, listaComentarios)
+        recyclerComentario.adapter = adapterComentario
+
         carregarComentarios()
 
         videoView.setVideoURI(Uri.parse(NavegacaoActivity.videoGlobal.midiaUrl))
@@ -238,10 +243,10 @@ class AulaActivity : AppCompatActivity() {
     }
 
     private fun carregarComentarios() {
-        listaComentarios.clear()
+        ativarSlide()
         comentariosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id, NavegacaoActivity.videoGlobal.id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+                listaComentarios.clear()
                 if (dataSnapshot.exists()) {
 
                     for (ds in dataSnapshot.children) {
@@ -256,12 +261,10 @@ class AulaActivity : AppCompatActivity() {
                 }
 
 
-                recyclerComentario = findViewById(R.id.recyclerComentarios)
-                recyclerComentario.layoutManager = LinearLayoutManager(this@AulaActivity, LinearLayoutManager.VERTICAL, false)
-                adapterComentario = ComentarioAdapter(this@AulaActivity, listaComentarios)
-                recyclerComentario.adapter = adapterComentario
+
+                adapterComentario.notifyDataSetChanged()
                 recyclerComentario.visibility = View.VISIBLE
-                ativarSlide()
+
 
             }
 

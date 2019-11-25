@@ -66,6 +66,11 @@ class CursoActivity : AppCompatActivity() {
         tituloCurso.text = NavegacaoActivity.cursoGlobal.nome
         descricaoCurso.text = NavegacaoActivity.cursoGlobal.descricao
 
+        recyclerModulo = findViewById(R.id.recyclerModulo)
+        recyclerModulo.layoutManager = LinearLayoutManager(this@CursoActivity, LinearLayoutManager.VERTICAL, false)
+        adapterModulo = ModuloAdapter(this@CursoActivity, listaModulos)
+        recyclerModulo.adapter = adapterModulo
+
         //Btn novo modulo
         val builderDialog = AlertDialog.Builder(this)
         builderDialog.setTitle("Novo módulo")
@@ -294,10 +299,13 @@ class CursoActivity : AppCompatActivity() {
      * Método responsável por carregar os métodos.
      */
     private fun carregarModulos() {
-        listaModulos.clear()
+
+        ativarSlide()
+
         modulosReferencia(NavegacaoActivity.cursoGlobal.id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                listaModulos.clear()
                 if (dataSnapshot.exists()) {
 
                     for (ds in dataSnapshot.children) {
@@ -311,11 +319,8 @@ class CursoActivity : AppCompatActivity() {
 
                 }
 
-                recyclerModulo = findViewById(R.id.recyclerModulo)
-                recyclerModulo.layoutManager = LinearLayoutManager(this@CursoActivity, LinearLayoutManager.VERTICAL, false)
-                adapterModulo = ModuloAdapter(this@CursoActivity, listaModulos)
-                recyclerModulo.adapter = adapterModulo
-                ativarSlide()
+
+                adapterModulo.notifyDataSetChanged()
 
                 if (listaModulos.size.equals(0)) {
                     nenhumModulo.visibility = View.VISIBLE
@@ -416,7 +421,4 @@ class CursoActivity : AppCompatActivity() {
         }
     }
 
-    fun getCartao() {
-
-    }
 }

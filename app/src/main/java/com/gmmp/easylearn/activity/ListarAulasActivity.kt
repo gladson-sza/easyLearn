@@ -61,6 +61,12 @@ class ListarAulasActivity : AppCompatActivity() {
         supportActionBar?.hide()
         toolbarModulo.title = NavegacaoActivity.moduloGlobal.nome
 
+        recyclerAulas = findViewById(R.id.recyclerAulas)
+        recyclerAulas.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        adapter = AulaAdapter(listaVideo, applicationContext)
+        recyclerAulas.adapter = adapter
+        ativarSlide()
+
         // val dialog = ViewDialog(this)
         // dialog.showDialog("Carregando", "Aguarde, obtendo dados...")
         videosReferencia(NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id).addValueEventListener(object : ValueEventListener {
@@ -79,11 +85,6 @@ class ListarAulasActivity : AppCompatActivity() {
 
                     }
 
-                    recyclerAulas = findViewById(R.id.recyclerAulas)
-                    recyclerAulas.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-                    adapter = AulaAdapter(listaVideo, applicationContext)
-                    recyclerAulas.adapter = adapter
-                    ativarSlide()
 
                     if (listaVideo.size.equals(0)) {
                         nenhumModulo.visibility = View.VISIBLE

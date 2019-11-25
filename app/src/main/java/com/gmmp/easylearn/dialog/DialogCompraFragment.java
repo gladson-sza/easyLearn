@@ -16,7 +16,7 @@ import com.gmmp.easylearn.activity.NavegacaoActivity;
 public class DialogCompraFragment extends DialogFragment {
 
     private DialogCompraViewModel mViewModel;
-    public View viewRoot = null;
+    private View viewRoot = null;
 
     public static DialogCompraFragment newInstance() {
         return new DialogCompraFragment();
