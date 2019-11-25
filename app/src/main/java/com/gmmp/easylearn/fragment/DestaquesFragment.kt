@@ -82,9 +82,10 @@ class DestaquesFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listEmAlta.clear()
                 for (d in dataSnapshot.children) {
-                    var u = d.getValue(Usuario::class.java)
+                    val u = d.getValue(Usuario::class.java)
 
                     if (u != null) {
+                        if (u.id != FirebaseAuth.getInstance().currentUser?.uid.toString())
                         listEmAlta.add(u)
                     }
 

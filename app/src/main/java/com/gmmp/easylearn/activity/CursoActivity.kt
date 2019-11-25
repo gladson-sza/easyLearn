@@ -2,11 +2,14 @@ package com.gmmp.easylearn.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +21,7 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.ModuloAdapter
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.helper.*
+import com.gmmp.easylearn.helper.SwipeHelper.UnderlayButtonClickListener
 import com.gmmp.easylearn.model.Cartao
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
@@ -26,9 +30,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_curso.*
-import kotlinx.android.synthetic.main.activity_curso.descricaoCurso
 import kotlinx.android.synthetic.main.dialog_pagamento.view.*
-import kotlinx.android.synthetic.main.dialog_pagamento.view.txt_ultimoDigito
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.toast
 import java.util.*
@@ -39,8 +41,8 @@ class CursoActivity : AppCompatActivity() {
     private lateinit var alertDialog: AlertDialog
     private lateinit var deleteDialog: AlertDialog
     private lateinit var txtNomeModulo: EditText
-    private lateinit var recyclerModulo : RecyclerView
-    private lateinit var adapterModulo : ModuloAdapter
+    private lateinit var recyclerModulo: RecyclerView
+    private lateinit var adapterModulo: ModuloAdapter
     private var inscrito = false
     private val listaModulos = ArrayList<Modulo>()
 
@@ -174,16 +176,16 @@ class CursoActivity : AppCompatActivity() {
                         btnAdicionar.setOnClickListener {
                             if (intent.getDoubleExtra("cursoPreco", 0.0) != 0.0) {
                                 val usuarioId = FirebaseAuth.getInstance().currentUser!!.uid
-                                var cartao : Cartao
+                                var cartao: Cartao
                                 Log.i("TESTE", usuarioId)
 
-                                usuariosReferencia().child(usuarioId).child("cartao").addValueEventListener(object : ValueEventListener{
+                                usuariosReferencia().child(usuarioId).child("cartao").addValueEventListener(object : ValueEventListener {
                                     override fun onCancelled(p0: DatabaseError) {
                                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                                     }
 
                                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                        if(dataSnapshot.exists()) {
+                                        if (dataSnapshot.exists()) {
                                             val c = dataSnapshot.getValue(Cartao::class.java)
                                             cartao = Cartao(c)
                                             Log.i("TESTE", "nome ${cartao.nomeCartao}")
@@ -191,21 +193,21 @@ class CursoActivity : AppCompatActivity() {
                                             val mDialogView = LayoutInflater.from(this@CursoActivity).inflate(R.layout.dialog_pagamento, null)
                                             val mBuilder = AlertDialog.Builder(this@CursoActivity)
                                                     .setView(mDialogView)
-                                            val  mAlertDialog = mBuilder.show()
+                                            val mAlertDialog = mBuilder.show()
 
-                                            val ultimosDigitos = cartao.numeroCartao.substring(cartao.numeroCartao.length-4)
+                                            val ultimosDigitos = cartao.numeroCartao.substring(cartao.numeroCartao.length - 4)
                                             Log.i("TESTE", "cartao: ${cartao.numeroCartao}")
                                             Log.i("TESTE", "ud: $ultimosDigitos")
 
                                             val preco = intent.getDoubleExtra("cursoPreco", 0.0).toString()
-                                            mDialogView.txt_precoCurso.text = "R$ ${preco.substring(0, preco.length-2)},00"
+                                            mDialogView.txt_precoCurso.text = "R$ ${preco.substring(0, preco.length - 2)},00"
                                             mDialogView.txt_ultimoDigito.text = ultimosDigitos
-                                            mDialogView.txt_cancelar.setOnClickListener{mAlertDialog.dismiss()}
+                                            mDialogView.txt_cancelar.setOnClickListener { mAlertDialog.dismiss() }
 
                                             mDialogView.btn_finalizarCompra.setOnClickListener {
-                                                if(cartao.saldo >= intent.getDoubleExtra("cursoPreco", 0.0)){
+                                                if (cartao.saldo >= intent.getDoubleExtra("cursoPreco", 0.0)) {
                                                     //Desconta o preço no saldo
-                                                    usuariosReferencia().child(auth).child("cartao").child("saldo").setValue(cartao.saldo-intent.getDoubleExtra("cursoPreco", 0.0))
+                                                    usuariosReferencia().child(auth).child("cartao").child("saldo").setValue(cartao.saldo - intent.getDoubleExtra("cursoPreco", 0.0))
 
                                                     inscrito = true
                                                     // Registra a referência de usuário no curso
@@ -220,33 +222,33 @@ class CursoActivity : AppCompatActivity() {
                                                     btnNovoModulo.visibility = View.GONE
                                                     btnAdicionar.visibility = View.GONE
                                                     textPreco.visibility = View.GONE
-                                                }else{
+                                                } else {
                                                     val builder = AlertDialog.Builder(this@CursoActivity)
                                                     builder.setTitle("Você não possui saldo suficiente para realizar esta compra")
-                                                    builder.setPositiveButton("Entendi"){dialog, which ->
+                                                    builder.setPositiveButton("Entendi") { dialog, which ->
                                                         startActivity(Intent(this@CursoActivity, PagamentoActivity::class.java))
                                                     }
-                                                    builder.setNegativeButton("Cancelar"){_,_ -> }
+                                                    builder.setNegativeButton("Cancelar") { _, _ -> }
                                                     builder.show()
                                                 }
                                                 mAlertDialog.dismiss()
                                             }
 
-                                        }else{ //Se não possui
+                                        } else { //Se não possui
                                             val builder = AlertDialog.Builder(this@CursoActivity)
                                             builder.setTitle("Nenhuma forma de pagamento foi encontrada!")
                                             builder.setMessage("Para adquirir cursos pagos, você deve adicionar uma forma de pagamento")
-                                            builder.setPositiveButton("Entendi"){dialog, which ->
+                                            builder.setPositiveButton("Entendi") { dialog, which ->
                                                 startActivity(Intent(this@CursoActivity, PagamentoActivity::class.java))
 
                                             }
-                                            builder.setNegativeButton("Cancelar"){_,_ -> }
+                                            builder.setNegativeButton("Cancelar") { _, _ -> }
                                             builder.show()
                                         }
                                     }
                                 })
 
-                            }else {
+                            } else {
                                 inscrito = true
                                 // Registra a referência de usuário no curso
                                 cursosReferencia().child(intent.getStringExtra("cursoId")).child("inscritos").child(auth).setValue(auth)
@@ -324,10 +326,10 @@ class CursoActivity : AppCompatActivity() {
                 recyclerModulo.adapter = adapterModulo
                 ativarSlide()
 
-                if(listaModulos.size.equals(0)) {
+                if (listaModulos.size.equals(0)) {
                     nenhumModulo.visibility = View.VISIBLE
                     recyclerModulo.visibility = View.GONE
-                }else {
+                } else {
                     nenhumModulo.visibility = View.GONE
                     recyclerModulo.visibility = View.VISIBLE
                 }
@@ -367,12 +369,12 @@ class CursoActivity : AppCompatActivity() {
                             builder.setMessage(Html.fromHtml("Se excluir, todas as aulas registradas em <b>'${itemSelected.nome}'</b> serão perdidas"))
 
                             // Set a positive button and its click listener on alert dialog
-                            builder.setPositiveButton("Sim"){dialog, which ->
+                            builder.setPositiveButton("Sim") { dialog, which ->
                                 adapterModulo.removeItem(i)
                                 modulosReferencia(itemSelected.cursoId).child(itemSelected.id).removeValue()
                             }
 
-                            builder.setNegativeButton("Cancelar"){_,_ ->
+                            builder.setNegativeButton("Cancelar") { _, _ ->
                             }
                             val dialog: AlertDialog = builder.create()
                             dialog.show()
@@ -423,7 +425,7 @@ class CursoActivity : AppCompatActivity() {
         }
     }
 
-    fun getCartao (){
+    fun getCartao() {
 
     }
 }

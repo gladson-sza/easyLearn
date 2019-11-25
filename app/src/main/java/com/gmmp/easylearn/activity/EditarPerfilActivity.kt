@@ -3,9 +3,9 @@ package com.gmmp.easylearn.activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_editar_perfil.*
-import kotlinx.android.synthetic.main.activity_novo_video.*
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -93,7 +92,7 @@ class EditarPerfilActivity : AppCompatActivity() {
 
 
         toolbarPerfil.inflateMenu(R.menu.salvar)
-        toolbarPerfil.setOnMenuItemClickListener{
+        toolbarPerfil.setOnMenuItemClickListener {
             viewDialog.showDialog("Aguarde", "Salvando Informações")
 
             usuario.child("nome").setValue(editNome?.text.toString())
@@ -158,8 +157,8 @@ class EditarPerfilActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == AppCompatActivity.RESULT_OK) {
-            var image: Bitmap? = null
+        if (resultCode == RESULT_OK) {
+            val image: Bitmap?
 
             try {
                 if (requestCode == WALLPAPER) {

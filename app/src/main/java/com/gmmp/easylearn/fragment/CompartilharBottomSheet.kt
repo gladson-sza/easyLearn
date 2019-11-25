@@ -35,7 +35,6 @@ class CompartilharBottomSheet : BottomSheetDialogFragment() {
         txt_cupom.isEnabled = false
 
         btn_copiar.setOnClickListener {
-            Log.i("TESTE", "clicou")
             val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("EditText", cupomDesconto.toUpperCase())
             clipboard.setPrimaryClip(clip)

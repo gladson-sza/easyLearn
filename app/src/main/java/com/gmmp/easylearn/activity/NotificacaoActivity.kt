@@ -1,10 +1,9 @@
 package com.gmmp.easylearn.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.adapter.MensagensAdapter
 import com.gmmp.easylearn.model.Mensagen
@@ -28,7 +27,7 @@ class NotificacaoActivity : AppCompatActivity() {
         listaMensagens.add(Mensagen("123", "Bolsolixo", "Birolo ataca novamente", Date()))
 
         // Configura o Adapter
-        var mensagensAdapter = this?.let { MensagensAdapter(listaMensagens, it) }
+        val mensagensAdapter = this.let { MensagensAdapter(listaMensagens, it) }
         recyclerViewNotificacoes!!.layoutManager = LinearLayoutManager(this)
         recyclerViewNotificacoes!!.adapter = mensagensAdapter
 

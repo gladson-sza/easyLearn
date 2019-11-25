@@ -2,9 +2,8 @@ package com.gmmp.easylearn.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -14,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import org.jetbrains.anko.toast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -72,9 +72,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         txtCadastro = findViewById(R.id.textCadastro)
-        txtCadastro!!.setOnClickListener(View.OnClickListener {
+        txtCadastro.setOnClickListener {
             startActivity(Intent(applicationContext, CadastroActivity::class.java))
-        })
+        }
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(applicationContext, "Falha ao tentar autenticar com o google", Toast.LENGTH_SHORT)
+                        toast("Falha ao tentar autenticar com o google")
                     }
                 }
     }

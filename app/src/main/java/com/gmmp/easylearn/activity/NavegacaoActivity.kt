@@ -1,22 +1,24 @@
 package com.gmmp.easylearn.activity
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-
+import androidx.fragment.app.Fragment
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.*
 import com.gmmp.easylearn.model.Curso
 import com.gmmp.easylearn.model.Modulo
+import com.gmmp.easylearn.model.Usuario
 import com.gmmp.easylearn.model.Video
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NavegacaoActivity : AppCompatActivity() {
 
+    // Isso aqui evita o problema com as variáveis globais
     companion object {
         var cursoGlobal = Curso()
         var moduloGlobal = Modulo()
         var videoGlobal = Video()
+        var usuarioGlobal = Usuario()
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

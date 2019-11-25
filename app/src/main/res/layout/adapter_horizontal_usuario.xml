@@ -33,17 +33,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgPerfil"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:src="@drawable/ic_default_avatar"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="2dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -53,7 +42,7 @@
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:maxLines="1"
-                android:text="Nome do cnac"
+                android:text="Nome do canal"
                 android:textColor="@color/colorTitulo"
                 android:textSize="16sp" />
         </LinearLayout>
