@@ -2,7 +2,6 @@ package com.gmmp.easylearn.adapter
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.CursoActivity
-import com.gmmp.easylearn.helper.cursoGlobal
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.model.Curso
-
-import java.util.ArrayList
+import java.util.*
 
 class VerticalAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<VerticalAdapter.ViewHolder>() {
 
@@ -44,10 +42,10 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
         var txtBotao = ""
         if (preco != 0.0) {
             val price = preco.toString()
-            if(price.substring(price.length-1).equals("0")){
-                txtBotao = "R$ ${price.substring(0, price.length-2)},00"
-            }else{
-                txtBotao = "R$ ${price.substring(0,price.length-2)},${price.substring(price.length-1)}0"
+            if (price.substring(price.length - 1).equals("0")) {
+                txtBotao = "R$ ${price.substring(0, price.length - 2)},00"
+            } else {
+                txtBotao = "R$ ${price.substring(0, price.length - 2)},${price.substring(price.length - 1)}0"
             }
         } else {
             txtBotao = "Gratuito"
@@ -56,7 +54,7 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
         viewHolder.buttonPreco.text = txtBotao
 
         viewHolder.linearLayout.setOnClickListener {
-            cursoGlobal = listCursos[i]
+            NavegacaoActivity.cursoGlobal = listCursos[i]
             context.startActivity(Intent(context, CursoActivity::class.java))
         }
     }
@@ -71,8 +69,8 @@ class VerticalAdapter(private val context: Context, private val listCursos: Arra
         var textTitulo: TextView
         var textDescricao: TextView
         var textCategoria: TextView
-        var buttonPreco : Button
-        var linearLayout : LinearLayout
+        var buttonPreco: Button
+        var linearLayout: LinearLayout
 
         init {
             imageThumbnail = itemView.findViewById(R.id.imageThumbnail)

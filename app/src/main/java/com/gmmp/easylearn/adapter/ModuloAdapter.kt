@@ -1,24 +1,15 @@
 package com.gmmp.easylearn.adapter
 
 import android.content.Context
-import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.ListarAulasActivity
 import com.gmmp.easylearn.activity.NavegacaoActivity
-import com.gmmp.easylearn.activity.TodosCursosActivity
-import com.gmmp.easylearn.helper.listarPor
-import com.gmmp.easylearn.helper.moduloGlobal
-import com.gmmp.easylearn.model.Disciplina
 import com.gmmp.easylearn.model.Modulo
-import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.startActivity
 
 class ModuloAdapter(private val context: Context, private val modulos: ArrayList<Modulo>) : RecyclerView.Adapter<ModuloAdapter.MyViewHolder>() {
@@ -36,15 +27,15 @@ class ModuloAdapter(private val context: Context, private val modulos: ArrayList
     }
 
     override fun onBindViewHolder(myViewHolder: MyViewHolder, i: Int) {
-        val (id , cursoId, nome, qtdAulas) = modulos[i]
+        val (id, cursoId, nome, qtdAulas) = modulos[i]
         myViewHolder.txt_nomeModulos.text = nome
         var qtd = ""
-        if(qtdAulas > 1){
+        if (qtdAulas > 1) {
             qtd = "$qtdAulas aulas"
-        }else{
-            if(qtdAulas == 1){
+        } else {
+            if (qtdAulas == 1) {
                 qtd = "1 aula"
-            }else{
+            } else {
                 qtd = "Nenhuma aula disponível"
             }
         }

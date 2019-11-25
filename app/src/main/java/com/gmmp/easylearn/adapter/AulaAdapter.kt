@@ -1,22 +1,17 @@
 package com.gmmp.easylearn.adapter
 
 import android.content.Context
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.AulaActivity
-import com.gmmp.easylearn.activity.CursoActivity
 import com.gmmp.easylearn.activity.NavegacaoActivity
-import com.gmmp.easylearn.helper.videoGlobal
 import com.gmmp.easylearn.model.Video
 import kotlinx.android.synthetic.main.adapter_aulas.view.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
-import org.jetbrains.anko.startActivity
 
 class AulaAdapter(private val aulaList: ArrayList<Video>, private val context: Context) : RecyclerView.Adapter<AulaAdapter.MyViewHolder>() {
 

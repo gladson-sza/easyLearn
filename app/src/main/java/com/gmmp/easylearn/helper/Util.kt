@@ -36,14 +36,12 @@ fun validaPermissoes(permissoes: Array<String>, activity: Activity, requestCode:
 
 // Variaeis do Paulo (não mexa)
 //Nome do curso
-lateinit var cursoGlobal: Curso
+// lateinit var cursoGlobal: Curso
 //listar por
 var listarPor: String? = null
 var comprado: Boolean? = false
 
 // Globeleza | GLADSON
-lateinit var moduloGlobal: Modulo
-lateinit var videoGlobal: Video
 lateinit var cupomDesconto : String
 lateinit var nomeUsuario : String
 

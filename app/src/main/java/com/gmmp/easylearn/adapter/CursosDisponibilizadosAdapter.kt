@@ -2,19 +2,17 @@ package com.gmmp.easylearn.adapter
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.EditarCursoActivity
-import com.gmmp.easylearn.helper.cursoGlobal
+import com.gmmp.easylearn.activity.NavegacaoActivity
 import com.gmmp.easylearn.model.Curso
-
 import kotlinx.android.synthetic.main.adapter_cursos_disponibilizados.view.*
 
 class CursosDisponibilizadosAdapter(private val cursoList: List<Curso>, private val context: Context) : RecyclerView.Adapter<CursosDisponibilizadosAdapter.MyViewHolder>() {
@@ -33,8 +31,8 @@ class CursosDisponibilizadosAdapter(private val cursoList: List<Curso>, private 
         myViewHolder.textDescricao.text = descricao
         myViewHolder.buttonEdit.setOnClickListener {
 
-            cursoGlobal = cursoList[i]
-            var intent = Intent(context, EditarCursoActivity::class.java)
+            NavegacaoActivity.cursoGlobal = cursoList[i]
+            val intent = Intent(context, EditarCursoActivity::class.java)
             intent.putExtra("idCurso", id)
             context.startActivity(intent)
 

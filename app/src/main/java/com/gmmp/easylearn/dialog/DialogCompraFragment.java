@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gmmp.easylearn.R;
+import com.gmmp.easylearn.activity.NavegacaoActivity;
 
-import static com.gmmp.easylearn.helper.UtilKt.cursoGlobal;
 
 public class DialogCompraFragment extends DialogFragment {
 
@@ -35,8 +35,10 @@ public class DialogCompraFragment extends DialogFragment {
         viewRoot = inflater.inflate(R.layout.dialog_compra_fragment, null);
         TextView nome = viewRoot.findViewById(R.id.text_nome_curso);
         TextView valor = viewRoot.findViewById(R.id.text_valor);
-        nome.setText(cursoGlobal.getNome());
-        valor.setText("" + cursoGlobal.getPreco());
+        nome.setText(NavegacaoActivity.Companion.getCursoGlobal().getNome());
+        valor.setText("" + NavegacaoActivity.Companion.getCursoGlobal().getPreco());
+
+
 
         builder.setView(viewRoot);
 

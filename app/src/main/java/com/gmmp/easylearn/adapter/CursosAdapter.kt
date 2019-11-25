@@ -1,24 +1,21 @@
 package com.gmmp.easylearn.adapter
 
+
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.CursoActivity
 import com.gmmp.easylearn.activity.NavegacaoActivity
-import com.gmmp.easylearn.helper.cursoGlobal
 import com.gmmp.easylearn.model.Curso
 import org.jetbrains.anko.startActivity
-
-
-import java.util.ArrayList
+import java.util.*
 
 
 class CursosAdapter(private val context: Context, private val listCursos: ArrayList<Curso>) : RecyclerView.Adapter<CursosAdapter.MyViewHolder>() {
@@ -65,7 +62,7 @@ class CursosAdapter(private val context: Context, private val listCursos: ArrayL
         var textNome: TextView
         var textDescricao: TextView
         var textCategoria: TextView
-        var linearLayout : LinearLayout
+        var linearLayout: LinearLayout
 
         init {
             thumbCurso = itemView.findViewById(R.id.imageThumbnail)
