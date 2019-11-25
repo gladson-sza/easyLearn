@@ -55,7 +55,7 @@ fun disciplinasReferencia() = FirebaseDatabase.getInstance().reference.child("di
 fun usuariosReferencia() = FirebaseDatabase.getInstance().reference.child("usuarios")
 fun modulosReferencia(idCurso: String) = cursosReferencia().child(idCurso).child("modulos")
 fun videosReferencia(idCurso: String, idModulo: String) = modulosReferencia(idCurso).child(idModulo).child("videos")
-fun comentariosReferencia(idCurso: String, idModulo: String, idVideo: String) =
-        videosReferencia(idCurso, idModulo).child(idVideo).child("comentarios")
+fun comentariosReferencia(idCurso: String, idModulo: String, idVideo: String) = videosReferencia(idCurso, idModulo).child(idVideo).child("comentarios")
 fun cuponsReferencia(codigoCupom : String) = FirebaseDatabase.getInstance().reference.child("cupons").child(codigoCupom)
 fun meusCuponsReferencia(usuarioId : String) = usuariosReferencia().child(usuarioId).child("cupons")
+

@@ -9,6 +9,9 @@ import com.gmmp.easylearn.R
 import com.gmmp.easylearn.fragment.CompartilharBottomSheet
 import com.gmmp.easylearn.helper.*
 import com.gmmp.easylearn.model.Cupom
+import com.gmmp.easylearn.helper.cupomDesconto
+import com.gmmp.easylearn.helper.nomeUsuario
+import com.gmmp.easylearn.helper.usuariosReferencia
 import com.gmmp.easylearn.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -55,7 +58,7 @@ class CuponsActivity : AppCompatActivity() {
                     override fun onDataChange(ds: DataSnapshot) {
                         if(ds.exists()){
                             var remetenteId = ""
-
+                          
                             for(datasnapshot in ds.children){
                                 val c = datasnapshot.key!!
                                 listCodigos.add(c)
@@ -80,6 +83,7 @@ class CuponsActivity : AppCompatActivity() {
 
             }
         }
+      
         usuariosReferencia().child(usuarioId).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

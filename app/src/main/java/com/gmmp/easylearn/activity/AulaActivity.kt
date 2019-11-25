@@ -101,6 +101,57 @@ class AulaActivity : AppCompatActivity() {
 
         })
 
+        iniciar()
+
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun iniciarBotaoNovoComentario() {
+        //Btn novo modulo
+        val builderDialog = AlertDialog.Builder(this)
+        builderDialog.setTitle("Novo comentário")
+
+        val container = FrameLayout(this)
+        val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        params.leftMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
+        params.rightMargin = resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin)
+        params.topMargin = resources.getDimensionPixelSize(R.dimen.fab_margin)
+
+        txtComentario = EditText(this)
+        txtComentario.hint = "Escreva o comentário"
+        txtComentario.padding = 16
+        txtComentario.setBackgroundResource(R.color.colorEditText)
+        txtComentario.setTextColor(R.color.colorDescricao)
+        txtComentario.layoutParams = params
+
+        container.addView(txtComentario)
+        builderDialog.setView(container)
+        builderDialog.setPositiveButton("Confirmar") { dialogInterface, i ->
+            val com = txtComentario.text.toString()
+            if (com.isEmpty())
+                txtComentario.error = "Por favor, escreva um comentário"
+            else {
+                val comentario = Comentario(UUID.randomUUID().toString(), NavegacaoActivity.cursoGlobal.id, NavegacaoActivity.moduloGlobal.id, NavegacaoActivity.videoGlobal.id, com)
+                comentariosReferencia(comentario.cursoId, comentario.moduloId, comentario.videoId).child(comentario.id).setValue(comentario)
+
+                toast("Comentário adicionado")
+                finish()
+                startActivity(Intent(applicationContext, AulaActivity::class.java))
+
+            }
+            txtComentario.setText("")
+        }
+
+        builderDialog.setNegativeButton("Cancelar", null)
+
+        alertDialog = builderDialog.create()
+
+        btnNovoComentario.setOnClickListener {
+            alertDialog.show()
+            Log.i("Comentario", "TAMANHO: ${listaComentarios.size}")
+        }
+
     }
 
     @SuppressLint("ResourceAsColor")

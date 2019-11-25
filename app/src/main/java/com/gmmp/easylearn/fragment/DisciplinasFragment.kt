@@ -47,7 +47,7 @@ class DisciplinasFragment : Fragment() {
         recyclerView!!.adapter = disciplinaAdapter
         recyclerView!!.addItemDecoration(DividerItemDecoration(recyclerView!!.context, layoutManager.orientation))
 
-        disciplinas.addValueEventListener(object : ValueEventListener {
+        disciplinas.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (d in dataSnapshot.children) {
                     var u = d.getValue(Disciplina::class.java)

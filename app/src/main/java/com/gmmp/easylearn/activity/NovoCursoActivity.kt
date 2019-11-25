@@ -5,11 +5,10 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.dialog.ViewDialog
 import com.gmmp.easylearn.model.Disciplina
@@ -30,8 +29,6 @@ class NovoCursoActivity : AppCompatActivity() {
     private val GALERIA = 100
     private val SPINNER_VAZIO = "Selecione uma disciplina"
 
-    private lateinit var uploadVideo: ConstraintLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_novo_curso)
@@ -45,33 +42,32 @@ class NovoCursoActivity : AppCompatActivity() {
 
         val idCanal = FirebaseAuth.getInstance().currentUser?.uid
         val novoCurso = FirebaseDatabase.getInstance().reference.child("cursos")
-        uploadVideo = findViewById(R.id.uploadVideo)
 
-        uploadVideo.setOnClickListener {
+        imageThumb.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             if (intent.resolveActivity(applicationContext.packageManager) != null) {
                 startActivityForResult(intent, GALERIA)
             }
         }
 
-        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item)
         adapter.add(SPINNER_VAZIO)
         spinnerDisciplinas.adapter = adapter
 
         groupCurso.setOnCheckedChangeListener { group, checkedId ->
-            if(checkedId.equals(R.id.Pago)){
+            if (checkedId.equals(R.id.Pago)) {
                 editPreco.visibility = View.VISIBLE
-            }else{
+            } else {
                 editPreco.visibility = View.GONE
             }
         }
 
         val disciplinas = FirebaseDatabase.getInstance().reference.child("disciplinas")
-        disciplinas.addValueEventListener(
+        disciplinas.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (d in dataSnapshot.children) {
-                            var disc = d.getValue(Disciplina::class.java)
+                            val disc = d.getValue(Disciplina::class.java)
                             adapter.add(disc?.nome.toString())
                         }
 
@@ -89,7 +85,7 @@ class NovoCursoActivity : AppCompatActivity() {
 
             val disciplinaSelecionada = spinnerDisciplinas.selectedItem as String
             var preco = 0.0
-            if(editPreco.text.isNotEmpty()){
+            if (editPreco.text.isNotEmpty()) {
                 preco = editPreco.text.toString().toDouble()
             }
 
@@ -100,7 +96,6 @@ class NovoCursoActivity : AppCompatActivity() {
                 disciplinaSelecionada == SPINNER_VAZIO -> toast("Você não selecionou a disciplina")
 
                 else -> {
-                    val viewDialog = ViewDialog(this)
                     viewDialog.showDialog("Carregando", "Aguarde, estamos preparando as coisas por aqui")
 
                     val cursoId = UUID.randomUUID().toString()
@@ -112,10 +107,10 @@ class NovoCursoActivity : AppCompatActivity() {
                     novoCurso.child(cursoId).child("disciplina").setValue(spinnerDisciplinas.selectedItem.toString())
                     novoCurso.child(cursoId).child("preco").setValue(preco)
 
-                    /*val bitmap = (uploadVideo.drawable as BitmapDrawable).bitmap
-                    //val outputStream = ByteArrayOutputStream()
-                    //bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
-                    //val imageBytes = outputStream.toByteArray()
+                    val bitmap = (imageThumb.drawable as BitmapDrawable).bitmap
+                    val outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream)
+                    val imageBytes = outputStream.toByteArray()
 
                     val imageRef = FirebaseStorage.getInstance().reference
                             .child("imagens")
@@ -140,7 +135,7 @@ class NovoCursoActivity : AppCompatActivity() {
                         }
 
 
-                    }*/
+                    }
                 }
             }
 
@@ -163,7 +158,7 @@ class NovoCursoActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            //if (image != null) uploadVideo.setImageBitmap(image)
+            if (image != null) imageThumb.setImageBitmap(image)
 
         }
 
