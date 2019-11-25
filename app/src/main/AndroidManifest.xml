@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.CanalAlheioActivity"></activity>
         <activity android:name=".activity.CuponsActivity" />
+        <activity android:name=".activity.MeuEasyCashActivity"/>
         <activity android:name=".activity.SubscricoesActivity" />
         <activity android:name=".activity.ListarAulasActivity" />
         <activity android:name=".activity.EditarPerfilActivity" />
