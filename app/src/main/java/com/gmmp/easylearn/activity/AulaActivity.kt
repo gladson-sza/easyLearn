@@ -101,6 +101,8 @@ class AulaActivity : AppCompatActivity() {
 
         })
 
+        iniciar()
+
     }
 
     @SuppressLint("ResourceAsColor")
