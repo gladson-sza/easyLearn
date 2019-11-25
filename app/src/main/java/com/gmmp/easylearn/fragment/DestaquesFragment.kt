@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.gmmp.easylearn.R
 import com.gmmp.easylearn.activity.TodosCursosActivity
 import com.gmmp.easylearn.adapter.CanaisAdapter
@@ -24,7 +23,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_destaques.*
 import kotlinx.android.synthetic.main.fragment_destaques.view.*
 
 
@@ -53,32 +51,28 @@ class DestaquesFragment : Fragment() {
             startActivity(Intent(activity, TodosCursosActivity::class.java))
         }
 
-        val recyclerViewEmAlta = view.findViewById<RecyclerView>(R.id.recyclerViewEmAlta)
-        val recyclerViewPrincipais = view.findViewById<RecyclerView>(R.id.recyclerViewPrincipais)
-        val recyclerViewRecomendados = view.findViewById<RecyclerView>(R.id.recyclerViewRecomendados)
-
         //Inicializa Canais Recomendados
-        val adapterRecomendados = HorizontalCursosAdapter(context!!, listRecomendados)
-        recyclerViewRecomendados.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewRecomendados.adapter = adapterRecomendados
-        encherRecomendados(adapterRecomendados)
+        val adapterRecomendados = HorizontalCursosAdapter(activity!!, listRecomendados)
+        view.recyclerViewRecomendados.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        view.recyclerViewRecomendados.adapter = adapterRecomendados
+        encherRecomendados(adapterRecomendados, view)
 
         //Inicializa Canais Principais
-        val adapter = VerticalAdapter(context!!, listPrincipais)
-        recyclerViewPrincipais.layoutManager = LinearLayoutManager(context!!)
-        recyclerViewPrincipais.adapter = adapter
-        encherPrincipais(adapter)
+        val adapter = VerticalAdapter(activity!!, listPrincipais)
+        view.recyclerViewPrincipais.layoutManager = LinearLayoutManager(activity!!)
+        view.recyclerViewPrincipais.adapter = adapter
+        encherPrincipais(adapter, view)
 
         //Inicializa Aulas em Alta
-        val adapterEmAlta = CanaisAdapter(context!!, listEmAlta)
-        recyclerViewEmAlta.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerViewEmAlta.adapter = adapterEmAlta
+        val adapterEmAlta = CanaisAdapter(activity!!, listEmAlta)
+        view.recyclerViewEmAlta.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        view.recyclerViewEmAlta.adapter = adapterEmAlta
         encherEmAlta(adapterEmAlta, view)
     }
 
     fun encherEmAlta(adapter: CanaisAdapter, view: View) {
         val usuarios = FirebaseDatabase.getInstance().reference.child("usuarios")
-        usuarios.addValueEventListener(object : ValueEventListener {
+        usuarios.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listEmAlta.clear()
                 for (d in dataSnapshot.children) {
@@ -86,7 +80,7 @@ class DestaquesFragment : Fragment() {
 
                     if (u != null) {
                         if (u.id != FirebaseAuth.getInstance().currentUser?.uid.toString())
-                        listEmAlta.add(u)
+                            listEmAlta.add(u)
                     }
 
                 }
@@ -100,7 +94,7 @@ class DestaquesFragment : Fragment() {
         })
     }
 
-    fun encherRecomendados(adapter: HorizontalCursosAdapter) {
+    fun encherRecomendados(adapter: HorizontalCursosAdapter, view: View) {
         // Firebase
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
@@ -110,7 +104,7 @@ class DestaquesFragment : Fragment() {
         listarPor = "todos"
 
 
-        cursos.addValueEventListener(
+        cursos.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         listRecomendados.clear()
@@ -128,7 +122,7 @@ class DestaquesFragment : Fragment() {
 
                         }
 
-                        matriculados.addValueEventListener(object : ValueEventListener {
+                        matriculados.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                                 if (dataSnapshot.exists()) {
@@ -144,8 +138,8 @@ class DestaquesFragment : Fragment() {
                                 }
 
                                 adapter.notifyDataSetChanged()
-                                progress_recomendados.visibility = View.GONE
-                                recyclerViewRecomendados.visibility = View.VISIBLE
+                                view.progress_recomendados.visibility = View.GONE
+                                view.recyclerViewRecomendados.visibility = View.VISIBLE
                             }
 
 
@@ -162,7 +156,7 @@ class DestaquesFragment : Fragment() {
                 })
     }
 
-    fun encherPrincipais(adapter: VerticalAdapter) {
+    fun encherPrincipais(adapter: VerticalAdapter, view: View) {
         // Firebase
         val auth = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
@@ -172,7 +166,7 @@ class DestaquesFragment : Fragment() {
         listarPor = "todos"
 
 
-        cursos.addValueEventListener(
+        cursos.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         listPrincipais.clear()
@@ -190,7 +184,7 @@ class DestaquesFragment : Fragment() {
 
                         }
 
-                        matriculados.addValueEventListener(object : ValueEventListener {
+                        matriculados.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                                 if (dataSnapshot.exists()) {
@@ -204,9 +198,8 @@ class DestaquesFragment : Fragment() {
                                 }
 
                                 adapter.notifyDataSetChanged()
-                                progress_circular.visibility = View.GONE
-
-                                recyclerViewPrincipais.visibility = View.VISIBLE
+                                view.progress_circular.visibility = View.GONE
+                                view.recyclerViewPrincipais.visibility = View.VISIBLE
                             }
 
 

@@ -36,7 +36,10 @@ class CuponsActivity : AppCompatActivity() {
 
 
         btn_confirmar.setOnClickListener {
-            toast(txt_cupomDesconto.text.toString())
+
+            val desconto = txt_cupomDesconto.text.toString()
+
+            toast(desconto)
         }
 
         usuariosReferencia().child(usuarioId).addValueEventListener(object : ValueEventListener {

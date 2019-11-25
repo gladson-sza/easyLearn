@@ -51,7 +51,7 @@ class MeuCanalFragment : Fragment() {
         val usuario = FirebaseDatabase.getInstance().reference.child("usuarios").child(auth!!.uid)
         val cursos = FirebaseDatabase.getInstance().reference.child("cursos")
 
-        usuario.addValueEventListener(object : ValueEventListener {
+        usuario.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val u = dataSnapshot.getValue(Usuario::class.java)
 
@@ -60,19 +60,22 @@ class MeuCanalFragment : Fragment() {
                     v.textNomeCanal.text = u.nome
                     v.textDescricao.text = u.descricao
 
-                    if (u.urlPerfil.isNotEmpty()) {
-                        Glide.with(activity!!)
-                                .load(u.urlPerfil)
-                                .centerCrop()
-                                .into(v.imageProfile)
+                    if (activity != null) {
+                        if (u.urlPerfil.isNotEmpty()) {
+                            Glide.with(activity!!)
+                                    .load(u.urlPerfil)
+                                    .centerCrop()
+                                    .into(v.imageProfile)
+                        }
+
+                        if (u.urlWallpaper.isNotEmpty()) {
+                            Glide.with(activity!!)
+                                    .load(u.urlWallpaper)
+                                    .centerCrop()
+                                    .into(v.imageThumb)
+                        }
                     }
 
-                    if (u.urlWallpaper.isNotEmpty()) {
-                        Glide.with(activity!!)
-                                .load(u.urlWallpaper)
-                                .centerCrop()
-                                .into(v.imageThumb)
-                    }
                 }
 
 
