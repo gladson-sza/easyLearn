@@ -24,8 +24,7 @@ class TodosCursosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todos_cursos)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Mostrar o botão
-        supportActionBar?.setHomeButtonEnabled(true)      //Ativar o botão
+        supportActionBar?.hide()
 
         if (listarPor.equals("todos")) {
             supportActionBar?.title = "Todos os cursos"

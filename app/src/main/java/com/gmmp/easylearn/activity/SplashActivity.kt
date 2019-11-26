@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        // setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_splash)
       
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 

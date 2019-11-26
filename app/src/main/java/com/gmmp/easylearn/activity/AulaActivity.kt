@@ -65,6 +65,7 @@ class AulaActivity : AppCompatActivity() {
         recyclerComentario = findViewById(R.id.recyclerComentarios)
         recyclerComentario.layoutManager = LinearLayoutManager(this@AulaActivity, LinearLayoutManager.VERTICAL, false)
         adapterComentario = ComentarioAdapter(this@AulaActivity, listaComentarios)
+        adapter = ComentarioAdapter(this@AulaActivity, listaComentarios)
         recyclerComentario.adapter = adapterComentario
 
         carregarComentarios()
